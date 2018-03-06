@@ -11,6 +11,7 @@
 #include <string>
 #include <dlfcn.h>
 #include <iostream>
+#include "IGames.hpp"
 #include "IGraphicalLib.hpp"
 
 template<typename T>
@@ -18,8 +19,9 @@ class DLLoader {
 public :
 
 	DLLoader() = delete;
-	explicit DLLoader(std::string &filepath) : _filePath(
-		"./lib/" + filepath)
+
+	explicit DLLoader(std::string &filepath, std::string &&folder)
+		: _filePath(folder + filepath)
 	{
 		ptr = dlopen(_filePath.c_str(), RTLD_LAZY);
 		if (!ptr)

@@ -6,7 +6,7 @@
 #define IGRAPHICALLIB_HPP
 
 class IGraphicalLib {
-public :
+public:
 	virtual ~IGraphicalLib() = default;
 
 public:
