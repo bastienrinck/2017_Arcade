@@ -21,4 +21,8 @@ private:
 	std::string _name = "SFML";
 };
 
+extern "C" IGraphicalLib *entryPoint(void){
+	return  new SFML();
+}
+
 #endif

@@ -5,27 +5,19 @@
 ** Created by rectoria
 */
 
-#include <map>
-#include <memory>
 #include <iostream>
-#include "IGraphicalLib.hpp"
-#include "DLLoader/DLLoader.hpp"
+#include "core/core.hpp"
 
 int main(int ac, char **av)
 {
-	static std::map<std::string, DLLoader<IGraphicalLib> *> libs = {
-		{"nCurses", new DLLoader<IGraphicalLib>("lib_nCurses.so")},
-		{"SFML", new DLLoader<IGraphicalLib>("lib_SFML.so")},
-		{"OpenGL", new DLLoader<IGraphicalLib>("lib_OpenGL.so")}};
-
-	if (ac == 2 && libs.count(av[1])) {
-		std::unique_ptr<IGraphicalLib> currentLib(
-			libs[av[1]]->getInstance());
-		std::cout << "Lib [" + currentLib->getName() + "] Loaded !"
-			<< std::endl;
-	} else if (ac == 2)
-		std::cerr << "Invalid library name" << std::endl;
-	else
+	unsigned ret = 0;
+	if (ac != 2) {
 		std::cerr << "Wrong parameters" << std::endl;
-	return 0;
+		ret = 84;
+	} else {
+		Core core(av[1]);
+		if (!core.start())
+			ret = 84;
+	}
+	return ret;
 }

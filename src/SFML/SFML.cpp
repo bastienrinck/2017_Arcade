@@ -14,7 +14,3 @@ const std::string &SFML::getName() const
 {
 	return _name;
 }
-
-extern "C" IGraphicalLib *entryPoint(void){
-	return  new SFML();
-}

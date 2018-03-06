@@ -4,12 +4,14 @@ CC	= g++
 
 RM	= rm -f
 
-SRCS	= 	./src/main.cpp \
-		./src/DLLoader/DLLoader.cpp
+SRCS	= ./src/main.cpp \
+	  ./src/core/core.cpp
 
 OBJS	= $(SRCS:.cpp=.o)
 
-CPPFLAGS = -I ./interfaces
+
+LDFLAGS = -ldl
+CPPFLAGS = -I./interfaces -I./templates
 CPPFLAGS += -W -Wall -Wextra
 
 all: $(NAME)

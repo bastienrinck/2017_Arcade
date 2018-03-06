@@ -7,7 +7,7 @@
 
 class IGraphicalLib {
 public :
-	virtual ~ IGraphicalLib() = default;
+	virtual ~IGraphicalLib() = default;
 
 public:
 	virtual void putPixel() = 0;

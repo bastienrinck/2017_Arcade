@@ -21,4 +21,8 @@ private:
 	std::string _name = "lib_nCurses";
 };
 
+extern "C" IGraphicalLib *entryPoint(void){
+	return  new lib_nCurses();
+}
+
 #endif
