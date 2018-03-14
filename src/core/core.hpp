@@ -6,32 +6,36 @@
 #define CORE_HPP
 
 #include <string>
-#include <vector>
 #include <climits>
 #include <memory>
+#include <vector>
 #include "DLLoader.hpp"
 
-class Core {
-public:
-	Core() = delete;
-	explicit Core(std::string);
-	~Core() = default;
+namespace Arcade {
+	class Core {
+	public:
+		explicit Core(std::string);
 
-public:
-	bool start();
-private:
-	bool load_game(unsigned);
-	bool load_lib();
+		~Core();
 
-	IGames *_currentGame;
-	IGraphicalLib *_currentLib;
-	std::vector<std::string> libsNames = {"nCurses", "SFML",
-		"OpenGL"};
-	std::vector<std::string> libs = {"lib_nCurses.so", "lib_SFML.so",
-		"lib_OpenGL.so"};
-	std::vector<std::string> gamesNames = {"Pacman"};
-	std::vector<std::string> games = {"pacman.so"};
-	unsigned _lidx = UINT_MAX;
-};
+	public:
+		bool start();
 
+	private:
+		bool inspectDirectory(std::string &&,
+			std::vector<std::string> &
+		);
+
+		bool loadGame();
+
+		bool loadLib();
+
+		Arcade::IGameModule *_currentGame;
+		Arcade::IGraphicLib *_currentLib;
+		std::vector<std::string> _libs;
+		std::vector<std::string> _games;
+		unsigned _lidx = UINT_MAX;
+		unsigned _gidx = UINT_MAX;
+	};
+}
 #endif

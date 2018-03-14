@@ -11,8 +11,8 @@
 #include <string>
 #include <dlfcn.h>
 #include <iostream>
-#include "IGames.hpp"
-#include "IGraphicalLib.hpp"
+#include "IGameModule.hpp"
+#include "IGraphicLib.hpp"
 
 template<typename T>
 class DLLoader {
