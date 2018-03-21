@@ -4,7 +4,10 @@ CC	= g++
 
 RM	= rm -f
 
-SRCS	= ./SFML.cpp 
+SRCS	= ./SFML.cpp \
+	  ../../include/Color.cpp \
+	  ../../include/TextBox.cpp \
+	  ../../include/PixelBox.cpp
 
 CPPFLAGS = -I../../include -I../../interfaces
 CPPFLAGS += -W -Wall -Wextra

@@ -5,7 +5,10 @@ CC	= g++
 RM	= rm -f
 
 SRCS	= ./src/main.cpp \
-	  ./src/core/core.cpp
+	  ./src/core/core.cpp \
+	  ./include/TextBox.cpp	\
+	  ./include/PixelBox.cpp \
+	  ./include/Color.cpp
 
 OBJS	= $(SRCS:.cpp=.o)
 

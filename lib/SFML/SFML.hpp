@@ -20,15 +20,14 @@ public:
 
 	/* Module info: Used to optimize initialization */
 	bool supportSprite() const final;
-
 	bool supportSound() const final;
-
 	bool needFont() const final;
 
 
 	/* Window handling */
 	// Main loop condition
 	bool isOpen() const final;
+
 
 	// Closes the window => stop loop (go menu)
 	bool closeRendering() final;
@@ -39,6 +38,8 @@ public:
 	// Clears the screen
 	void clearWindow() final;
 
+	// Displays the buffered frame to the screen
+	void refreshWindow() final;
 
 	/* Resources handling */
 	// Initializes the library
@@ -86,7 +87,7 @@ public:
 	Arcade::Keys getLastEvent() final;
 
 	// Saves the event in the Graphics library
-	void pollEvent() final;
+	bool pollEvent() final;
 
 	// Deletes the last event
 	void cleanEvent() final;

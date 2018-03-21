@@ -41,7 +41,9 @@ namespace Arcade {
 		
 		// Clears the screen
 		virtual void clearWindow() = 0;
-
+		
+		// Displays the buffered frame to the screen
+		virtual void refreshWindow() = 0;
 		
 		/* Resources handling */
 		// Initializes the library
@@ -89,7 +91,7 @@ namespace Arcade {
 		virtual Keys getLastEvent() = 0;
 		
 		// Saves the event in the Graphics library
-		virtual void pollEvent() = 0;
+		virtual bool pollEvent() = 0;
 		
 		// Deletes the last event
 		virtual void cleanEvent() = 0;

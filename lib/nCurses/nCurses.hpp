@@ -5,6 +5,8 @@
 #ifndef NCURSES_HPP
 #define NCURSES_HPP
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 #include <string>
 #include "IGraphicLib.hpp"
 
@@ -12,7 +14,7 @@ class lib_nCurses : public Arcade::IGraphicLib {
 public:
 	lib_nCurses();
 
-	~lib_nCurses() override;
+	~lib_nCurses() final;
 
 public:
 	/* Get the name of the library */
@@ -39,6 +41,8 @@ public:
 	// Clears the screen
 	void clearWindow() final;
 
+	// Displays the buffered frame to the screen
+	void refreshWindow() final;
 
 	/* Resources handling */
 	// Initializes the library
@@ -86,7 +90,7 @@ public:
 	Arcade::Keys getLastEvent() final;
 
 	// Saves the event in the Graphics library
-	void pollEvent() final;
+	bool pollEvent() final;
 
 	// Deletes the last event
 	void cleanEvent() final;
@@ -104,6 +108,10 @@ public:
 
 private:
 	std::string _name = "lib_nCurses";
+	Arcade::Keys _lastEvent = Arcade::NONE;
+	int _lastKey = 0;
+	WINDOW *_win = nullptr;
+	bool _isOpen = false;
 };
 
 extern "C" Arcade::IGraphicLib *entryPoint(void)

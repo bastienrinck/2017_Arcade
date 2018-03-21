@@ -39,13 +39,16 @@ public:
 	{
 		void *temp = nullptr;
 
-		if (ptr)
+		if (ptr && !_instance){
 			temp = dlsym(ptr, _fctName.c_str());
-		return reinterpret_cast<T *(*)()>(temp)();
+			_instance = reinterpret_cast<T *(*)()>(temp)();
+		}
+		return _instance;
 	};
 
 private:
 	void *ptr;
+	T *_instance = nullptr;
 	std::string _filePath;
 	std::string _fctName = "entryPoint";
 };

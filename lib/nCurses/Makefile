@@ -4,7 +4,10 @@ CC	= g++
 
 RM	= rm -f
 
-SRCS	= ./nCurses.cpp 
+SRCS	= ./nCurses.cpp \
+	  ../../include/Color.cpp \
+	  ../../include/PixelBox.cpp \
+	  ../../include/TextBox.cpp
 
 CPPFLAGS = -I../../include -I../../interfaces
 CPPFLAGS += -W -Wall -Wextra
@@ -12,7 +15,7 @@ CPPFLAGS += -W -Wall -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(CC) -shared -o $(NAME) -fPIC $(SRCS) $(CPPFLAGS)
+	 $(CC) -shared -o $(NAME) -fPIC $(SRCS) $(CPPFLAGS) -lncurses
 
 clean:
 	$(RM)

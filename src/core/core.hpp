@@ -30,12 +30,12 @@ namespace Arcade {
 
 		bool loadLib();
 
-		Arcade::IGameModule *_currentGame;
-		Arcade::IGraphicLib *_currentLib;
+		DLLoader<Arcade::IGameModule> *_currentGame = nullptr;
+		DLLoader<Arcade::IGraphicLib> *_currentLib = nullptr;
 		std::vector<std::string> _libs;
 		std::vector<std::string> _games;
 		unsigned _lidx = UINT_MAX;
-		unsigned _gidx = UINT_MAX;
+		unsigned _gidx = 0;
 	};
 }
 #endif

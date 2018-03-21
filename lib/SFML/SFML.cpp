@@ -49,6 +49,10 @@ void SFML::clearWindow()
 {
 }
 
+void SFML::refreshWindow()
+{
+}
+
 bool SFML::initRenderer()
 {
 	return false;
@@ -79,17 +83,17 @@ void SFML::stopSound(void *)
 {
 }
 
-void *SFML::loadTextFont(std::string path)
+void *SFML::loadTextFont(std::string)
 {
 	return nullptr;
 }
 
-void *SFML::loadSprite(std::string path)
+void *SFML::loadSprite(std::string)
 {
 	return nullptr;
 }
 
-void *SFML::loadSound(std::string path)
+void *SFML::loadSound(std::string)
 {
 	return nullptr;
 }
@@ -99,8 +103,9 @@ Arcade::Keys SFML::getLastEvent()
 	return {};
 }
 
-void SFML::pollEvent()
+bool SFML::pollEvent()
 {
+	return false;
 }
 
 void SFML::cleanEvent()

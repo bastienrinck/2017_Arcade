@@ -10,7 +10,7 @@
 namespace Arcade {
 	class Color {
 	public:
-		explicit Color(unsigned char red = 0, unsigned char green = 0,
+		Color(unsigned char red = 0, unsigned char green = 0,
 			unsigned char blue = 0, unsigned char alpha = 0);
 		void setColor(unsigned char red = 0, unsigned char green = 0,
 			unsigned char blue = 0, unsigned char alpha = 0);

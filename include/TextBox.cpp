@@ -7,16 +7,15 @@
 
 #include "TextBox.hpp"
 
-Arcade::TextBox::TextBox(const std::string &text, size_t h, size_t w,
+Arcade::TextBox::TextBox(std::string const &text, size_t h, size_t w,
 	size_t posH, size_t posW
-)
+) : _value(text)
 {
-	_value = text;
 	_size.setXY(w, h);
 	_pos.setXY(posW, posH);
 }
 
-std::__cxx11::basic_string<char> Arcade::TextBox::getValue() const
+std::string Arcade::TextBox::getValue() const
 {
 	return _value;
 }
