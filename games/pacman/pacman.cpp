@@ -8,23 +8,36 @@
 #include <string>
 #include "pacman.hpp"
 
-std::string Pacman::getName()
+Pacman::Pacman() = default;
+
+Pacman::~Pacman() = default;
+
+const std::string &Pacman::getName() const
 {
 	return _name;
 }
 
-void Pacman::loadRessource(Arcade::IGraphicLib *graphicsLib)
+bool Pacman::init()
 {
+	return false;
 }
 
-void Pacman::freeRessource(Arcade::IGraphicLib *graphicsLib)
+bool Pacman::stop()
 {
+	return false;
 }
 
-void Pacman::update(Arcade::IGraphicLib *graphicsLib)
+bool Pacman::close()
 {
+	return false;
 }
 
-void Pacman::render(Arcade::IGraphicLib *graphicsLib)
+bool Pacman::open()
 {
+	return false;
+}
+
+bool Pacman::loop(Arcade::IGraphicLib *graphicsLib)
+{
+	return false;
 }

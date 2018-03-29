@@ -60,3 +60,8 @@ void Arcade::Color::setAlpha(unsigned char alpha)
 {
 	_alpha = alpha;
 }
+
+Arcade::Color::operator unsigned char *()
+{
+	return &_red;
+}

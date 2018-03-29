@@ -12,24 +12,9 @@ lib_nCurses::lib_nCurses() = default;
 
 lib_nCurses::~lib_nCurses() = default;
 
-std::string lib_nCurses::getName()
+std::string lib_nCurses::getName() const
 {
 	return _name;
-}
-
-bool lib_nCurses::supportSprite() const
-{
-	return false;
-}
-
-bool lib_nCurses::supportSound() const
-{
-	return false;
-}
-
-bool lib_nCurses::needFont() const
-{
-	return false;
 }
 
 bool lib_nCurses::isOpen() const
@@ -60,7 +45,7 @@ bool lib_nCurses::openRendering()
 
 void lib_nCurses::clearWindow()
 {
-	clear();
+	wclear(_win);
 }
 
 void lib_nCurses::refreshWindow()
@@ -78,55 +63,33 @@ bool lib_nCurses::stopRenderer()
 	return true;
 }
 
-void lib_nCurses::drawPixelBox(Arcade::PixelBox *pB)
+void lib_nCurses::drawPixelBox(Arcade::PixelBox &pB)
 {
-	for (size_t i = 0; i < pB->getHeight(); i++) {
-		for (size_t j = 0; j < pB->getWidth(); j++) {
+	for (size_t i = 0; i < pB.getHeight(); i++) {
+		for (size_t j = 0; j < pB.getWidth(); j++) {
 			Arcade::Vect<size_t> pos(j, i);
-			auto pp = pB->getPixel(pos);
+			auto pp = pB.getPixel(pos);
+			start_color();
+			init_color(1001, static_cast<short>(pp.getRed() * 3.9),
+				static_cast<short>(pp.getGreen() * 3.9),
+				static_cast<short>(pp.getBlue() * 3.9));
+			attron(COLOR_PAIR(1001));
 			mvwprintw(_win, static_cast<int>(pos.getY()),
-				static_cast<int>(pos.getY()),
-				"\\033[48;2;%d;%d;%dm%c\\033[0m", pp.getRed(),
-				pp.getGreen(), pp.getBlue(), ' ');
+				static_cast<int>(pos.getX()), " ");
+			attroff(COLOR_PAIR(1001));
 		}
 	}
 }
 
-void lib_nCurses::drawText(Arcade::TextBox *tB)
+void lib_nCurses::drawText(Arcade::TextBox &tB)
 {
-	mvwprintw(_win, static_cast<int>(tB->getPosH()),
-		static_cast<int>(tB->getPosW()), "%s", tB->getValue());
-}
-
-void lib_nCurses::playSound(void *)
-{
-}
-
-void lib_nCurses::pauseSound(void *)
-{
-}
-
-void lib_nCurses::stopSound(void *)
-{
-}
-
-void *lib_nCurses::loadTextFont(std::string)
-{
-	return nullptr;
-}
-
-void *lib_nCurses::loadSprite(std::string)
-{
-	return nullptr;
-}
-
-void *lib_nCurses::loadSound(std::string)
-{
-	return nullptr;
+	mvwprintw(_win, static_cast<int>(tB.getY()),
+		static_cast<int>(tB.getX()), "%s", tB.getValue());
 }
 
 Arcade::Keys lib_nCurses::getLastEvent()
 {
+	//TODO LAST EVENT
 	return _lastEvent;
 }
 

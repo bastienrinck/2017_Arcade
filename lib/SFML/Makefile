@@ -15,7 +15,7 @@ CPPFLAGS += -W -Wall -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(CC) -shared -o $(NAME) -fPIC $(SRCS) $(CPPFLAGS)
+	 $(CC) -shared -o $(NAME) -fPIC $(SRCS) $(CPPFLAGS) -lsfml-graphics
 
 clean:
 	$(RM)

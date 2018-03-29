@@ -6,8 +6,8 @@ RM	= rm -f
 
 SRCS	= ./nCurses.cpp \
 	  ../../include/Color.cpp \
-	  ../../include/PixelBox.cpp \
-	  ../../include/TextBox.cpp
+	  ../../include/TextBox.cpp \
+	  ../../include/PixelBox.cpp
 
 CPPFLAGS = -I../../include -I../../interfaces
 CPPFLAGS += -W -Wall -Wextra

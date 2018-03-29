@@ -4,125 +4,139 @@
 ** File description:
 ** Created by rectoria
 */
+
+#include <SFML/Graphics.hpp>
 #include "SFML.hpp"
 
-SFML::SFML() = default;
+Arcade::IGraphicLib *lib = nullptr;
 
-SFML::~SFML() = default;
+__attribute__((constructor)) void init()
+{
+	lib = new Arcade::sfml;
+}
 
-std::string SFML::getName()
+__attribute__((destructor)) void killNicolasPolomack()
+{
+	delete lib;
+}
+
+extern "C" Arcade::IGraphicLib *entryPoint(void)
+{
+	return lib;
+}
+
+Arcade::sfml::sfml()
+{
+	_texture.create(1920, 1080);
+	_font.loadFromFile("ressources/fonts/Times New Roman.ttf");
+};
+
+Arcade::sfml::~sfml() = default;
+
+std::string Arcade::sfml::getName() const
 {
 	return _name;
 }
 
-bool SFML::supportSprite() const
+bool Arcade::sfml::isOpen() const
 {
-	return false;
+	return _window.isOpen();
 }
 
-bool SFML::supportSound() const
+void Arcade::sfml::closeRenderer()
 {
-	return false;
+	_window.close();
 }
 
-bool SFML::needFont() const
+void Arcade::sfml::openRenderer()
 {
-	return false;
+
+	_window.create(sf::VideoMode(1920, 1080), "Arcade");
 }
 
-bool SFML::isOpen() const
+void Arcade::sfml::clearWindow()
 {
-	return false;
+	_window.clear();
 }
 
-bool SFML::closeRendering()
+void Arcade::sfml::refreshWindow()
 {
-	return false;
+	_sprite.setTexture(_texture);
+	_window.draw(_sprite);
+	_window.draw(_text);
+	_window.display();
 }
 
-bool SFML::openRendering()
+void Arcade::sfml::drawPixelBox(Arcade::PixelBox &pB)
 {
-	return false;
+	_texture.update((unsigned char *)&pB.getPixelArray()[0],
+		static_cast<unsigned int>(pB.getWidth()),
+		static_cast<unsigned int>(pB.getHeight()),
+		static_cast<unsigned int>(pB.getX()),
+		static_cast<unsigned int>(pB.getY()));
 }
 
-void SFML::clearWindow()
+void Arcade::sfml::drawText(Arcade::TextBox &tB)
 {
+	Arcade::Color color(tB.getBackgroundColor());
+	sf::Color sfColor(color.getRed(), color.getGreen(), color.getBlue(),
+		color.getAlpha());
+
+	_text.setFont(_font);
+	_text.setString(tB.getValue());
+	_text.setCharacterSize(static_cast<unsigned int>(tB.getFontSize()));
+	_text.setFillColor(
+		sf::Color(tB.getColor().getRed(), tB.getColor().getGreen(),
+			tB.getColor().getBlue(), tB.getColor().getAlpha()));
+	_text.setOutlineThickness(0.1);
+	_text.setOutlineColor(sf::Color(tB.getBackgroundColor().getRed(),
+			tB.getBackgroundColor().getGreen(),
+			tB.getBackgroundColor().getBlue(),
+			tB.getBackgroundColor().getAlpha()));
+	_text.setPosition(tB.getPos().getX(), tB.getPos().getY());
 }
 
-void SFML::refreshWindow()
+Arcade::Keys Arcade::sfml::getLastEvent()
 {
+	Arcade::Keys key = Arcade::Keys::NONE;
+
+	if (!_events.empty()) {
+		key = _events.front();
+		_events.pop_front();
+	}
+	return key;
 }
 
-bool SFML::initRenderer()
+bool Arcade::sfml::pollEvents()
 {
-	return false;
+	auto event = sf::Event();
+	bool ret = false;
+
+	while (_window.pollEvent(event)) {
+		_events.push_back(_keyMap.at(event.key.code));
+		ret = true;
+	}
+	return ret;
 }
 
-bool SFML::stopRenderer()
+void Arcade::sfml::clearEvents()
 {
-	return false;
+	_events.clear();
 }
 
-void SFML::drawPixelBox(Arcade::PixelBox *)
+Arcade::Vect<size_t> Arcade::sfml::getScreenSize() const
 {
+	auto mode = sf::VideoMode::getDesktopMode();
+
+	return {mode.width, mode.height};
 }
 
-void SFML::drawText(Arcade::TextBox *)
+int Arcade::sfml::getMaxY() const
 {
+	return sf::VideoMode::getDesktopMode().height;
 }
 
-void SFML::playSound(void *)
+int Arcade::sfml::getMaxX() const
 {
-}
-
-void SFML::pauseSound(void *)
-{
-}
-
-void SFML::stopSound(void *)
-{
-}
-
-void *SFML::loadTextFont(std::string)
-{
-	return nullptr;
-}
-
-void *SFML::loadSprite(std::string)
-{
-	return nullptr;
-}
-
-void *SFML::loadSound(std::string)
-{
-	return nullptr;
-}
-
-Arcade::Keys SFML::getLastEvent()
-{
-	return {};
-}
-
-bool SFML::pollEvent()
-{
-	return false;
-}
-
-void SFML::cleanEvent()
-{
-}
-
-Arcade::Vect<size_t> SFML::getScreenSize() const
-{
-	return {};
-}
-
-int SFML::getMaxY() const
-{
-	return 0;
-}
-
-int SFML::getMaxX() const
-{
-	return 0;
+	return sf::VideoMode::getDesktopMode().width;
 }

@@ -7,70 +7,83 @@
 
 #include "TextBox.hpp"
 
-Arcade::TextBox::TextBox(std::string const &text, size_t h, size_t w,
-	size_t posH, size_t posW
-) : _value(text)
+Arcade::TextBox::TextBox(std::string const &text, Arcade::Vect<size_t> pos,
+	size_t fontSize, Arcade::Color color, Arcade::Color backgroundColor
+) :
+	_value(text)
+	, _pos(pos)
+	, _size(fontSize)
+	, _color(color)
+	, _bgColor(backgroundColor)
 {
-	_size.setXY(w, h);
-	_pos.setXY(posW, posH);
 }
 
-std::string Arcade::TextBox::getValue() const
+const std::string &Arcade::TextBox::getValue() const
 {
 	return _value;
 }
 
-void Arcade::TextBox::setValue(const std::string &text)
+void Arcade::TextBox::setValue(std::string const &text)
 {
 	_value = text;
 }
 
-void *Arcade::TextBox::getFont() const
+Arcade::Vect<size_t> Arcade::TextBox::getPos() const
 {
-	return _font;
+	return _pos;
 }
 
-void Arcade::TextBox::setFont(void *font)
+void Arcade::TextBox::setPos(Arcade::Vect<size_t> pos)
 {
-	_font = font;
+	_pos = pos;
 }
 
-unsigned long Arcade::TextBox::getH() const
-{
-	return _size.getY();
-}
-
-unsigned long Arcade::TextBox::getPosH() const
-{
-	return _pos.getY();
-}
-
-void Arcade::TextBox::setH(size_t heigh)
-{
-	_size.setY(heigh);
-}
-
-void Arcade::TextBox::setPosH(size_t posH)
-{
-	_pos.setY(posH);
-}
-
-unsigned long Arcade::TextBox::getW() const
-{
-	return _size.getX();
-}
-
-unsigned long Arcade::TextBox::getPosW() const
+size_t Arcade::TextBox::getX() const
 {
 	return _pos.getX();
 }
 
-void Arcade::TextBox::setW(size_t width)
+size_t Arcade::TextBox::getY() const
 {
-	_size.setX(width);
+	return _pos.getY();
 }
 
-void Arcade::TextBox::setPosW(size_t posW)
+void Arcade::TextBox::setX(size_t x)
 {
-	_pos.setX(posW);
+	_pos.setX(x);
+}
+
+void Arcade::TextBox::setY(size_t y)
+{
+	_pos.setY(y);
+}
+
+size_t Arcade::TextBox::getFontSize() const
+{
+	return _size;
+}
+
+void Arcade::TextBox::setFontSize(size_t size)
+{
+	_size = size;
+}
+
+Arcade::Color Arcade::TextBox::getColor() const
+{
+	return _color;
+}
+
+void Arcade::TextBox::setColor(Arcade::Color color)
+{
+	_color = color;
+}
+
+Arcade::Color Arcade::TextBox::getBackgroundColor() const
+{
+	return _bgColor;
+}
+
+void Arcade::TextBox::setBackgroundColor(Arcade::Color color)
+{
+	_bgColor = color;
 }

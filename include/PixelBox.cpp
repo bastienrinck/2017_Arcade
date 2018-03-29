@@ -10,12 +10,12 @@
 
 #include "PixelBox.hpp"
 
-Arcade::PixelBox::PixelBox(size_t height, size_t width, size_t posW,
-	size_t posH
-)
+Arcade::PixelBox::PixelBox(Arcade::Vect<size_t> size, Arcade::Vect<size_t> pos,
+	Arcade::Color col
+) : _size(size), _pos(pos)
 {
-	_size.setXY(width, height);
-	_pos.setXY(posW, posH);
+	for (unsigned	 i = 0; i < size.getY() * size.getX(); ++i)
+		_colorFrame.push_back(col);
 }
 
 size_t Arcade::PixelBox::getHeight() const
@@ -58,30 +58,48 @@ void Arcade::PixelBox::setX(size_t x)
 	_pos.setX(x);
 }
 
+Arcade::Vect<size_t> Arcade::PixelBox::getSize() const
+{
+	return _size;
+}
+
+void Arcade::PixelBox::setSize(Arcade::Vect<size_t> size)
+{
+	_size = size;
+}
+
+Arcade::Vect<size_t> Arcade::PixelBox::getPos() const
+{
+	return _pos;
+}
+
+void Arcade::PixelBox::setPos(Arcade::Vect<size_t> pos)
+{
+	_pos = pos;
+}
+
 void Arcade::PixelBox::putPixel(Arcade::Vect<size_t> pos, Arcade::Color col)
 {
-	_colorTab[pos] = col;
+	_colorFrame[pos.getY() * _size.getX() + pos.getX()] = col;
 }
 
-Arcade::Color Arcade::PixelBox::getPixel(Arcade::Vect<size_t> pos)
+Arcade::Color Arcade::PixelBox::getPixel(Arcade::Vect<size_t> pos) const
 {
-	return _colorTab[pos];
+	return _colorFrame[pos.getY() * _size.getX() + pos.getX()];
 }
 
-std::vector<Arcade::Color> Arcade::PixelBox::getPixelArray()
+void Arcade::PixelBox::putRect(Arcade::Vect<size_t> pos,
+	Arcade::Vect<size_t> size, Arcade::Color col
+)
 {
-	std::vector<Arcade::Color> pixelArray;
-	Arcade::Vect<size_t> pos;
-
-	for(size_t i = 0; i < getHeight(); i++)
-		for(size_t j = 0; j < getWidth(); j++){
-			pos.setXY(j, i);
-			pixelArray.push_back(_colorTab[pos]);
-		}
-	return pixelArray;
+	for (unsigned i = 0; i < size.getY() && pos.getY() + i < _size.getY(); ++i)
+		for (unsigned j = 0;
+			j < size.getX() && pos.getX() + j < size.getX(); ++j)
+			_colorFrame[(pos.getY() + i) * _size.getY() +
+				(pos.getX() + j)] = col;
 }
 
-std::unordered_map<Arcade::Vect<size_t>, Arcade::Color> &Arcade::PixelBox::getPixelMap()
+std::vector<Arcade::Color> &Arcade::PixelBox::getPixelArray()
 {
-	return _colorTab;
+	return _colorFrame;
 }

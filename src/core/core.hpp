@@ -30,7 +30,7 @@ namespace Arcade {
 
 		bool loadLib();
 
-		DLLoader<Arcade::IGameModule> *_currentGame = nullptr;
+		DLLoader<Arcade::IGameLib> *_currentGame = nullptr;
 		DLLoader<Arcade::IGraphicLib> *_currentLib = nullptr;
 		std::vector<std::string> _libs;
 		std::vector<std::string> _games;

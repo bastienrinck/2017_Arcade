@@ -11,7 +11,7 @@
 #include <string>
 #include <dlfcn.h>
 #include <iostream>
-#include "IGameModule.hpp"
+#include "IGameLib.hpp"
 #include "IGraphicLib.hpp"
 
 template<typename T>

@@ -17,20 +17,14 @@ public:
 	~lib_nCurses() final;
 
 public:
+
 	/* Get the name of the library */
-	std::string getName() final;
-
-	/* Module info: Used to optimize initialization */
-	bool supportSprite() const final;
-
-	bool supportSound() const final;
-
-	bool needFont() const final;
-
+	std::string getName() const final;
 
 	/* Window handling */
 	// Main loop condition
 	bool isOpen() const final;
+
 
 	// Closes the window => stop loop (go menu)
 	bool closeRendering() final;
@@ -54,35 +48,10 @@ public:
 
 	/* Rendering functions */
 	// Draws a PixelBox or the sprite if supported
-	void drawPixelBox(Arcade::PixelBox *) final;
+	void drawPixelBox(Arcade::PixelBox &) final;
 
 	// Draws a TextBox
-	void drawText(Arcade::TextBox *) final;
-
-
-	/* Sound functions */
-	// Plays sound passed in arg
-	void playSound(void *) final;
-
-	// Pauses sound passed in arg
-	void pauseSound(void *) final;
-
-	// Stops sound passed in arg
-	void stopSound(void *) final;
-
-
-	/* Loading functions */
-	// Returns a text font in the Graphics library format
-	// or NULL if not supported
-	void *loadTextFont(std::string path) final;
-
-	// Returns a sprite in the Graphics library format
-	// or NULL if not supported
-	void *loadSprite(std::string path) final;
-
-	// Returns a sound in the Graphics library format
-	// or NULL if not supported
-	void *loadSound(std::string path) final;
+	void drawText(Arcade::TextBox &) final;
 
 
 	/* Events handling */
@@ -109,7 +78,6 @@ public:
 private:
 	std::string _name = "lib_nCurses";
 	Arcade::Keys _lastEvent = Arcade::NONE;
-	int _lastKey = 0;
 	WINDOW *_win = nullptr;
 	bool _isOpen = false;
 };

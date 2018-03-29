@@ -10,7 +10,7 @@
 namespace Arcade {
 	class Color {
 	public:
-		Color(unsigned char red = 0, unsigned char green = 0,
+		explicit Color(unsigned char red = 0, unsigned char green = 0,
 			unsigned char blue = 0, unsigned char alpha = 0);
 		void setColor(unsigned char red = 0, unsigned char green = 0,
 			unsigned char blue = 0, unsigned char alpha = 0);
@@ -22,6 +22,7 @@ namespace Arcade {
 		void setGreen(unsigned char green);
 		void setBlue(unsigned char blue);
 		void setAlpha(unsigned char alpha);
+		explicit operator unsigned char *();
 
 	private:
 		unsigned char _red;

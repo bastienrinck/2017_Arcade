@@ -5,32 +5,39 @@
 #ifndef PACMAN_HPP
 #define PACMAN_HPP
 
-#include "IGameModule.hpp"
+#include "IGameLib.hpp"
 
-class Pacman : public Arcade::IGameModule{
+class Pacman : public Arcade::IGameLib{
+public:
+	Pacman();
+	~Pacman();
+
 public:
 	/* Get the name of the game */
-	std::string getName() final;
-
-	/* Resource Handling */
-	// Initializes the Graphics library for this game
-	void loadRessource(Arcade::IGraphicLib *graphicsLib) final;
-
-	// Unloads the Graphics library for this game
-	void freeRessource(Arcade::IGraphicLib *graphicsLib) final;
+	const std::string &getName() const final;
 
 
-	/* Rendering functions */
-	// Updates the game state according to the player inputs
-	void update(Arcade::IGraphicLib *graphicsLib) final;
+	/* Resources handling */
+	// Initializes the library
+	bool init() final;
 
-	// Renders the game state to the screen
-	void render(Arcade::IGraphicLib *graphicsLib) final;
+	// Unloads the library
+	bool stop() final;
+
+	// Closes the game => stop loop (go menu)
+	bool close() final;
+
+	// Opens the game => start loop
+	bool open() final;
+
+	// Main loop of the game, called by a while in the core
+	// Returns false if the game has to be ended
+	bool loop(Arcade::IGraphicLib *graphicsLib) final;
 private:
-	std::string _name = "pacman";
+	std::string _name = "Pacman";
 };
 
-extern "C" Arcade::IGameModule *entryPoint(void){
+extern "C" Arcade::IGameLib *entryPoint(void){
 	return  new Pacman();
 }
 

@@ -40,29 +40,30 @@ bool Arcade::Core::start()
 	if (!loadLib() || !loadGame())
 		ret = false;
 
-	auto *pixel = new Arcade::PixelBox(10, 10, 10, 10);
-	auto *text = new Arcade::TextBox("Salut les copains\n", 10, 10, 10, 10);
-	Arcade::Color color(100, 100, 100, 0);
-	for (size_t i = 0; i < 10; i++)
-		for (size_t k = 0; k < 10; k++) {
-			Arcade::Vect<size_t> pos(i, k);
-			pixel->putPixel(pos, color);
-		}
-	_currentLib->getInstance()->openRendering();
-	_currentLib->getInstance()->drawText(text);
+	Arcade::PixelBox box(Vect<size_t>(300, 200), Vect<size_t>(100, 100),
+		Color(0, 100, 100, 255));
+	Arcade::PixelBox box2(Vect<size_t>(300, 200), Vect<size_t>(150, 150),
+		Color(0, 100, 0, 255));
+	Arcade::TextBox txt("Test, Bonsoir les amis !!", Vect<size_t>(400, 300),
+		45, Color(255, 255, 255, 100), Color(200, 200, 200, 255));
+
+	_currentLib->getInstance()->openRenderer();
+	_currentLib->getInstance()->drawPixelBox(box);
+	_currentLib->getInstance()->drawPixelBox(box2);
+	_currentLib->getInstance()->drawText(txt);
 	_currentLib->getInstance()->refreshWindow();
-	usleep(1000000);
-	_currentLib->getInstance()->clearWindow();
-	_currentLib->getInstance()->drawPixelBox(pixel);
-	_currentLib->getInstance()->refreshWindow();
-	usleep(10000000);
-	_currentLib->getInstance()->closeRendering();
+	sleep(5);
+	_currentLib->getInstance()->closeRenderer();
+	sleep(2);
+	_currentLib->getInstance()->openRenderer();
+	sleep(2);
+	_currentLib->getInstance()->closeRenderer();
 	return ret;
 }
 
 bool Arcade::Core::loadGame()
 {
-	_currentGame = new DLLoader<IGameModule>(_games[_gidx], "./games/");
+	_currentGame = new DLLoader<IGameLib>(_games[_gidx], "./games/");
 	if (_currentGame->getInstance())
 		std::cout << "Game [" << _currentGame->getInstance()->getName()
 			<< "] loaded !" << std::endl;
