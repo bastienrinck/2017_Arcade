@@ -8,36 +8,61 @@
 #include <string>
 #include "pacman.hpp"
 
-Pacman::Pacman() = default;
+Arcade::IGameLib *lib = nullptr;
 
-Pacman::~Pacman() = default;
+__attribute__((constructor)) void init()
+{
+	lib = new Arcade::Pacman;
+}
 
-const std::string &Pacman::getName() const
+__attribute__((destructor)) void destruct()
+{
+	delete lib;
+}
+
+extern "C" Arcade::IGameLib *entryPoint(void)
+{
+	return lib;
+}
+
+const std::string &Arcade::Pacman::getName() const
 {
 	return _name;
 }
 
-bool Pacman::init()
+bool Arcade::Pacman::init()
 {
-	return false;
+	return true;
 }
 
-bool Pacman::stop()
+bool Arcade::Pacman::stop()
 {
-	return false;
+	return true;
 }
 
-bool Pacman::close()
+bool Arcade::Pacman::close()
 {
-	return false;
+	return true;
 }
 
-bool Pacman::open()
+bool Arcade::Pacman::open()
 {
-	return false;
+	return true;
 }
 
-bool Pacman::loop(Arcade::IGraphicLib *graphicsLib)
+void Arcade::Pacman::applyEvent(Arcade::Keys)
 {
-	return false;
+}
+
+void Arcade::Pacman::update()
+{
+}
+
+void Arcade::Pacman::refresh(Arcade::IGraphicLib *gl)
+{
+	auto tB = Arcade::TextBox(_name, Arcade::Vect<size_t>(0, 0));
+
+	gl->drawText(tB);
+	gl->clearWindow();
+	gl->refreshWindow();
 }

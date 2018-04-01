@@ -9,33 +9,63 @@
 #include <climits>
 #include <memory>
 #include <vector>
+#include <regex>
+#include <dirent.h>
+#include <unordered_map>
 #include "DLLoader.hpp"
 
 namespace Arcade {
+	class Menu {
+	public:
+		Menu() = default;
+		~Menu() = default;
+
+		void setList(std::vector<DLLoader<Arcade::IGameLib> *> *);
+		void refresh(IGraphicLib *);
+		unsigned applyEvent(Keys);
+
+	private:
+
+		std::vector<DLLoader<Arcade::IGameLib> *> *_list = nullptr;
+		unsigned _idx = 0;
+	};
+
 	class Core {
 	public:
 		explicit Core(std::string);
-
 		~Core();
 
 	public:
 		bool start();
 
 	private:
-		bool inspectDirectory(std::string &&,
-			std::vector<std::string> &
-		);
+		template<typename T>
+		bool loadLib(std::string &, std::string &, std::vector<DLLoader<T> *> &);
 
-		bool loadGame();
+		template<typename T>
+		bool inspectDirectory(std::string &&, std::vector<DLLoader<T> *> &);
 
-		bool loadLib();
+		bool applyKeys(std::unordered_map<Arcade::Keys, bool (Core::*)()> &);
 
-		DLLoader<Arcade::IGameLib> *_currentGame = nullptr;
-		DLLoader<Arcade::IGraphicLib> *_currentLib = nullptr;
-		std::vector<std::string> _libs;
-		std::vector<std::string> _games;
+		bool prevLibG();
+
+		bool nextLibG();
+
+		bool prevGame();
+
+		bool nextGame();
+
+		bool restartGame();
+
+		bool backMenu();
+
+		bool exit();
+
+		Menu _menu;
+		std::vector<DLLoader<Arcade::IGraphicLib> *> _libs;
+		std::vector<DLLoader<Arcade::IGameLib> *> _games;
 		unsigned _lidx = UINT_MAX;
-		unsigned _gidx = 0;
+		unsigned _gidx = UINT_MAX;
 	};
 }
 #endif

@@ -66,10 +66,10 @@ namespace Arcade {
 		Vect<size_t> getScreenSize() const final;
 
 		// get the Y max of the windows
-		int getMaxY() const final;
+		size_t getMaxY() const final;
 
 		// get the X max of the windows
-		int getMaxX() const final;
+		size_t getMaxX() const final;
 
 	private:
 		std::string _name = "sfml";

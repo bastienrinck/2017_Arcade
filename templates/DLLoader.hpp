@@ -20,12 +20,14 @@ public :
 
 	DLLoader() = delete;
 
-	explicit DLLoader(std::string &filepath, std::string &&folder)
+	explicit DLLoader(std::string &filepath, std::string &folder)
 		: _filePath(folder + filepath)
 	{
 		ptr = dlopen(_filePath.c_str(), RTLD_LAZY);
 		if (!ptr)
 			std::cerr << dlerror() << std::endl;
+		_filePath = folder + "./" + filepath;
+		std::cout << "Saved path :" << _filePath << std::endl;
 	}
 
 	~DLLoader()
@@ -39,12 +41,17 @@ public:
 	{
 		void *temp = nullptr;
 
-		if (ptr && !_instance){
+		if (ptr && !_instance) {
 			temp = dlsym(ptr, _fctName.c_str());
 			_instance = reinterpret_cast<T *(*)()>(temp)();
 		}
 		return _instance;
 	};
+
+	std::string getFilePath() const
+	{
+		return _filePath;
+	}
 
 private:
 	void *ptr;

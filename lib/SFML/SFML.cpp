@@ -15,7 +15,7 @@ __attribute__((constructor)) void init()
 	lib = new Arcade::sfml;
 }
 
-__attribute__((destructor)) void killNicolasPolomack()
+__attribute__((destructor)) void destruct()
 {
 	delete lib;
 }
@@ -27,7 +27,9 @@ extern "C" Arcade::IGraphicLib *entryPoint(void)
 
 Arcade::sfml::sfml()
 {
+	_window.setFramerateLimit(30);
 	_texture.create(1920, 1080);
+	_sprite.setTexture(_texture);
 	_font.loadFromFile("ressources/fonts/Times New Roman.ttf");
 };
 
@@ -61,9 +63,6 @@ void Arcade::sfml::clearWindow()
 
 void Arcade::sfml::refreshWindow()
 {
-	_sprite.setTexture(_texture);
-	_window.draw(_sprite);
-	_window.draw(_text);
 	_window.display();
 }
 
@@ -74,26 +73,23 @@ void Arcade::sfml::drawPixelBox(Arcade::PixelBox &pB)
 		static_cast<unsigned int>(pB.getHeight()),
 		static_cast<unsigned int>(pB.getX()),
 		static_cast<unsigned int>(pB.getY()));
+	_sprite.setTextureRect(sf::Rect<int>(static_cast<int>(pB.getX()),
+		static_cast<int>(pB.getY()), static_cast<int>(pB.getWidth()),
+		static_cast<int>(pB.getHeight())));
+	_window.draw(_sprite);
 }
 
 void Arcade::sfml::drawText(Arcade::TextBox &tB)
 {
-	Arcade::Color color(tB.getBackgroundColor());
-	sf::Color sfColor(color.getRed(), color.getGreen(), color.getBlue(),
-		color.getAlpha());
-
 	_text.setFont(_font);
 	_text.setString(tB.getValue());
 	_text.setCharacterSize(static_cast<unsigned int>(tB.getFontSize()));
-	_text.setFillColor(
-		sf::Color(tB.getColor().getRed(), tB.getColor().getGreen(),
-			tB.getColor().getBlue(), tB.getColor().getAlpha()));
-	_text.setOutlineThickness(0.1);
-	_text.setOutlineColor(sf::Color(tB.getBackgroundColor().getRed(),
-			tB.getBackgroundColor().getGreen(),
-			tB.getBackgroundColor().getBlue(),
-			tB.getBackgroundColor().getAlpha()));
+	_text.setFillColor(*(sf::Color *)((unsigned char *)tB.getColor()));
+	_text.setOutlineThickness(0.2);
+	_text.setOutlineColor(
+		*(sf::Color *)((unsigned char *)tB.getBackgroundColor()));
 	_text.setPosition(tB.getPos().getX(), tB.getPos().getY());
+	_window.draw(_text);
 }
 
 Arcade::Keys Arcade::sfml::getLastEvent()
@@ -113,8 +109,10 @@ bool Arcade::sfml::pollEvents()
 	bool ret = false;
 
 	while (_window.pollEvent(event)) {
-		_events.push_back(_keyMap.at(event.key.code));
-		ret = true;
+		if (_keyMap.count(event.key.code)) {
+			_events.push_back(_keyMap.at(event.key.code));
+			ret = true;
+		}
 	}
 	return ret;
 }
@@ -131,12 +129,12 @@ Arcade::Vect<size_t> Arcade::sfml::getScreenSize() const
 	return {mode.width, mode.height};
 }
 
-int Arcade::sfml::getMaxY() const
+size_t Arcade::sfml::getMaxY() const
 {
 	return sf::VideoMode::getDesktopMode().height;
 }
 
-int Arcade::sfml::getMaxX() const
+size_t Arcade::sfml::getMaxX() const
 {
 	return sf::VideoMode::getDesktopMode().width;
 }

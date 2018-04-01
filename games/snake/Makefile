@@ -1,10 +1,10 @@
-NAME	= lib_arcade_pacman.so
+NAME	= lib_arcade_snake.so
 
 CC	= g++
 
 RM	= rm -f
 
-SRCS	= ./pacman.cpp \
+SRCS	= ./snake.cpp \
 	  ../../include/Color.cpp \
 	  ../../include/TextBox.cpp \
 	  ../../include/PixelBox.cpp
