@@ -9,7 +9,9 @@
 
 Arcade::Color::Color(unsigned char red, unsigned char green, unsigned char blue,
 	unsigned char alpha
-) : _red(red), _green(green), _blue(blue), _alpha(alpha){}
+) : _red(red), _green(green), _blue(blue), _alpha(alpha)
+{
+}
 
 void Arcade::Color::setColor(unsigned char red, unsigned char green,
 	unsigned char blue, unsigned char alpha
@@ -64,4 +66,10 @@ void Arcade::Color::setAlpha(unsigned char alpha)
 Arcade::Color::operator unsigned char *()
 {
 	return &_red;
+}
+
+bool Arcade::Color::operator==(const Arcade::Color &other) const
+{
+	return _red == other.getRed() && _green == other.getGreen() &&
+		_blue == other.getBlue() && _alpha == other.getAlpha();
 }

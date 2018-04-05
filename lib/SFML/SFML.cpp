@@ -6,6 +6,7 @@
 */
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "SFML.hpp"
 
 Arcade::IGraphicLib *lib = nullptr;
@@ -50,7 +51,7 @@ void Arcade::sfml::closeRenderer()
 	_window.close();
 }
 
-void Arcade::sfml::openRenderer()
+void Arcade::sfml::openRenderer(std::string const &title)
 {
 
 	_window.create(sf::VideoMode(1920, 1080), "Arcade");
@@ -76,6 +77,7 @@ void Arcade::sfml::drawPixelBox(Arcade::PixelBox &pB)
 	_sprite.setTextureRect(sf::Rect<int>(static_cast<int>(pB.getX()),
 		static_cast<int>(pB.getY()), static_cast<int>(pB.getWidth()),
 		static_cast<int>(pB.getHeight())));
+	_sprite.setPosition(pB.getX(), pB.getY());
 	_window.draw(_sprite);
 }
 

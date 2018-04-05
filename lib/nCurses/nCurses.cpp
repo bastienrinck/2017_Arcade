@@ -6,137 +6,166 @@
 */
 
 #include <ncurses.h>
+#include <algorithm>
+#include <iostream>
 #include "nCurses.hpp"
 
-lib_nCurses::lib_nCurses() = default;
+Arcade::IGraphicLib *lib = nullptr;
 
-lib_nCurses::~lib_nCurses() = default;
+__attribute__((constructor)) void init()
+{
+	lib = new Arcade::nCurses;
+}
 
-std::string lib_nCurses::getName() const
+__attribute__((destructor)) void destruct()
+{
+	delete lib;
+}
+
+extern "C" Arcade::IGraphicLib *entryPoint(void)
+{
+	return lib;
+}
+
+Arcade::nCurses::~nCurses()
+{
+	endwin();
+}
+
+std::string Arcade::nCurses::getName() const
 {
 	return _name;
 }
 
-bool lib_nCurses::isOpen() const
+bool Arcade::nCurses::isOpen() const
 {
 	return _isOpen;
 }
 
-bool lib_nCurses::closeRendering()
+void Arcade::nCurses::closeRenderer()
 {
 	delwin(_win);
 	endwin();
-	return true;
 }
 
-bool lib_nCurses::openRendering()
+void Arcade::nCurses::openRenderer(std::string const &title)
 {
 	int h, w;
 
 	initscr();
+	start_color();
 	cbreak();
 	noecho();
 	curs_set(0);
 	keypad(stdscr, true);
 	getmaxyx(stdscr, h, w);
 	_win = newwin(h, w, 0, 0);
-	return true;
 }
 
-void lib_nCurses::clearWindow()
+void Arcade::nCurses::clearWindow()
 {
 	wclear(_win);
 }
 
-void lib_nCurses::refreshWindow()
+void Arcade::nCurses::refreshWindow()
 {
 	wrefresh(_win);
 }
 
-bool lib_nCurses::initRenderer()
+int Arcade::nCurses::getPairIndex(int i)
 {
-	return true;
+	std::pair<int, int> pair(i, 0);
+	auto iter = std::find(_pairedColor.begin(), _pairedColor.end(), pair);
+	auto idx = static_cast<int>(_pairedColor.size() + 1);
+
+	if (iter == _pairedColor.end()) {
+		init_pair(static_cast<short>(idx),
+			static_cast<short>(i), 0);
+		_pairedColor.push_back(pair);
+	} else
+		idx = static_cast<int>(iter - _pairedColor.begin() + 1);
+	std::cerr << "Returning : " << idx << std::endl;
+	return idx;
 }
 
-bool lib_nCurses::stopRenderer()
+int Arcade::nCurses::getColorIndex(Arcade::Color &color)
 {
-	return true;
+	auto raw = (unsigned char *)color;
+	auto iter = std::find(_savedColor.begin(), _savedColor.end(), color);
+	auto idx = static_cast<int>(_savedColor.size() + 1);
+
+	if (iter == _savedColor.end()) {
+		init_color(static_cast<short>(_savedColor.size() + 1), raw[0],
+			raw[1], raw[2]);
+		_savedColor.push_back(color);;
+	} else
+		idx = static_cast<int>(iter - _savedColor.begin() + 1);
+	return getPairIndex(idx);
 }
 
-void lib_nCurses::drawPixelBox(Arcade::PixelBox &pB)
+void Arcade::nCurses::drawPixelBox(Arcade::PixelBox &pB)
 {
+	std::cerr << getMaxY() << ", " << getMaxX() << std::endl;
+	std::cerr << pB.getHeight() << ", " << pB.getWidth() << std::endl;
+	std::cerr << pB.getPos().getY() << ", " << pB.getPos().getX() << std::endl;
 	for (size_t i = 0; i < pB.getHeight(); i++) {
 		for (size_t j = 0; j < pB.getWidth(); j++) {
-			Arcade::Vect<size_t> pos(j, i);
-			auto pp = pB.getPixel(pos);
-			start_color();
-			init_color(1001, static_cast<short>(pp.getRed() * 3.9),
-				static_cast<short>(pp.getGreen() * 3.9),
-				static_cast<short>(pp.getBlue() * 3.9));
-			attron(COLOR_PAIR(1001));
-			mvwprintw(_win, static_cast<int>(pos.getY()),
-				static_cast<int>(pos.getX()), " ");
-			attroff(COLOR_PAIR(1001));
+			auto pp = pB.getPixel(Arcade::Vect<size_t>(j, i));
+			attron(getColorIndex(pp));
+			mvwprintw(_win, static_cast<int>(pB.getY() + i),
+				static_cast<int>(pB.getX() + j), " ");
 		}
 	}
 }
 
-void lib_nCurses::drawText(Arcade::TextBox &tB)
+void Arcade::nCurses::drawText(Arcade::TextBox &tB)
 {
 	mvwprintw(_win, static_cast<int>(tB.getY()),
-		static_cast<int>(tB.getX()), "%s", tB.getValue());
+		static_cast<int>(tB.getX()), "%s", tB.getValue().c_str());
 }
 
-Arcade::Keys lib_nCurses::getLastEvent()
+bool Arcade::nCurses::pollEvents()
 {
-	//TODO LAST EVENT
-	return _lastEvent;
+	bool ret = false;
+	int c;
+
+	if ((c = getch()) != ERR && _keyMap.count(c)) {
+		_events.push_back(_keyMap[c]);
+		ret = true;
+	}
+	return ret;
 }
 
-bool lib_nCurses::pollEvent()
+Arcade::Keys Arcade::nCurses::getLastEvent()
 {
-	const Arcade::Keys _keyNames[] = {Arcade::NONE, Arcade::A, Arcade::B,
-		Arcade::C, Arcade::D, Arcade::E, Arcade::F, Arcade::G,
-		Arcade::H, Arcade::I, Arcade::J, Arcade::K, Arcade::L,
-		Arcade::M, Arcade::N, Arcade::O, Arcade::P, Arcade::Q,
-		Arcade::R, Arcade::S, Arcade::T, Arcade::U, Arcade::V,
-		Arcade::W, Arcade::X, Arcade::Y, Arcade::Z, Arcade::LEFT,
-		Arcade::RIGHT, Arcade::UP, Arcade::DOWN, Arcade::ENTER,
-		Arcade::SPACE, Arcade::DELETE, Arcade::BACKSPACE, Arcade::TAB,
-		Arcade::ESC};
-	const int keys[] = {ERR, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-		'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-		'w', 'x', 'y', 'z', KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN,
-		KEY_ENTER, ' ', KEY_BACKSPACE, '\t', 27};
+	Arcade::Keys key = Arcade::Keys::NONE;
 
-	_lastEvent = Arcade::Keys::NONE;
-	for (auto i : keys)
-		if (i) {
-			_lastEvent = _keyNames[i];
-			break;
-		}
-	return true;
+	if (!_events.empty()) {
+		key = _events.front();
+		_events.pop_front();
+	}
+	return key;
 }
 
-void lib_nCurses::cleanEvent()
+void Arcade::nCurses::clearEvents()
 {
-	_lastEvent = Arcade::NONE;
+	_events.clear();
 }
 
-Arcade::Vect<size_t> lib_nCurses::getScreenSize() const
+Arcade::Vect<size_t> Arcade::nCurses::getScreenSize() const
 {
-	Arcade::Vect<size_t> resolution;
+	int x, y;
 
-	resolution.setXY(static_cast<size_t>(LINES), static_cast<size_t>(COLS));
-	return resolution;
+	getmaxyx(_win, y, x);
+	return {static_cast<size_t>(x), static_cast<size_t>(y)};
 }
 
-int lib_nCurses::getMaxY() const
+size_t Arcade::nCurses::getMaxY() const
 {
-	return COLS;
+	return static_cast<size_t>(getmaxy(_win));
 }
 
-int lib_nCurses::getMaxX() const
+size_t Arcade::nCurses::getMaxX() const
 {
-	return LINES;
+	return static_cast<size_t>(getmaxx(_win));
 }

@@ -36,10 +36,8 @@ Arcade::Core::~Core()
 			_lib->getInstance()->closeRenderer();
 		delete _lib;
 	}
-	for (auto &_game : _games) {
-		_game->getInstance()->close();
+	for (auto &_game : _games)
 		delete _game;
-	}
 }
 
 template<typename T>
@@ -50,8 +48,8 @@ bool Arcade::Core::loadLib(std::string &name, std::string &dir,
 	auto library = new DLLoader<T>(name, dir);
 
 	if (library->getInstance()) {
-		std::cout << "Lib [" << library->getInstance()->getName()
-			<< "] loaded !" << std::endl;
+		std::string libname(library->getInstance()->getName());
+		std::cout << "Lib [" << libname << "] loaded !" << std::endl;
 		list.push_back(library);
 	} else
 		throw std::runtime_error(
@@ -92,9 +90,12 @@ bool Arcade::Core::applyKeys(
 		_libs[_lidx]->getInstance()->clearEvents();
 		if (actions.count(key)) {
 			return (this->*actions[key])();
-		} else if (_gidx == UINT_MAX)
-			_gidx = _menu.applyEvent(key);
-		else
+		} else if (_gidx == UINT_MAX) {
+			if ((_gidx = _menu.applyEvent(key)) != UINT_MAX) {
+				_games[_gidx]->getInstance()->init();
+				_libs[_lidx]->getInstance()->clearWindow();
+			}
+		} else
 			_games[_gidx]->getInstance()->applyEvent(key);
 	}
 	return true;
@@ -112,14 +113,14 @@ bool Arcade::Core::start()
 		{Arcade::Keys::BACKSPACE, &Core::backMenu},
 		{Arcade::Keys::ESC, &Core::exit}};
 
-	_libs[_lidx]->getInstance()->openRenderer();
+	_libs[_lidx]->getInstance()->openRenderer("Arcade");
 	while (ret) {
 		if (_libs[_lidx]->getInstance()->pollEvents())
 			ret = applyKeys(actions);
 		if (_gidx != UINT_MAX) {
 			_games[_gidx]->getInstance()->update();
 			_games[_gidx]->getInstance()->refresh(
-				_libs[_lidx]->getInstance());
+				*_libs[_lidx]->getInstance());
 		} else
 			_menu.refresh(_libs[_lidx]->getInstance());
 	}
@@ -127,23 +128,18 @@ bool Arcade::Core::start()
 
 bool Arcade::Core::prevLibG()
 {
-	/*_currentLib->getInstance()->closeRenderer();
-	delete _currentLib;
-	_lidx = (!_lidx) ? static_cast<unsigned int>(_libs.size() - 1) : _lidx - 1;
-	loadLib();
-	_currentLib->getInstance()->openRenderer();
-	 */
+	_libs[_lidx]->getInstance()->closeRenderer();
+	_lidx = (!_lidx) ? static_cast<unsigned int>(_libs.size() - 1) :
+		_lidx - 1;
+	_libs[_lidx]->getInstance()->openRenderer("Arcade");
 	return true;
 }
 
 bool Arcade::Core::nextLibG()
 {
-	/*_currentLib->getInstance()->closeRenderer();
-	delete _currentLib;
+	_libs[_lidx]->getInstance()->closeRenderer();
 	_lidx = (_lidx == _libs.size() - 1) ? 0 : _lidx + 1;
-	loadLib();
-	_currentLib->getInstance()->openRenderer();
-	return true;*/
+	_libs[_lidx]->getInstance()->openRenderer("Arcade");
 	return true;
 }
 
@@ -151,9 +147,10 @@ bool Arcade::Core::prevGame()
 {
 	_libs[_lidx]->getInstance()->closeRenderer();
 	_games[_gidx]->getInstance()->stop();
-	_gidx = (!_gidx) ? static_cast<unsigned int>(_games.size() - 1) : _gidx - 1;
+	_gidx = (!_gidx) ? static_cast<unsigned int>(_games.size() - 1) :
+		_gidx - 1;
 	_games[_gidx]->getInstance()->init();
-	_libs[_lidx]->getInstance()->openRenderer();
+	_libs[_lidx]->getInstance()->openRenderer("Arcade");
 	return true;
 }
 
@@ -163,7 +160,7 @@ bool Arcade::Core::nextGame()
 	_games[_gidx]->getInstance()->stop();
 	_gidx = (_gidx == _games.size() - 1) ? 0 : _gidx + 1;
 	_games[_gidx]->getInstance()->init();
-	_libs[_lidx]->getInstance()->openRenderer();
+	_libs[_lidx]->getInstance()->openRenderer("Arcade");
 	return true;
 }
 
@@ -171,7 +168,8 @@ bool Arcade::Core::restartGame()
 {
 	if (_gidx != UINT_MAX) {
 		_games[_gidx]->getInstance()->init();
-		_games[_gidx]->getInstance()->refresh(_libs[_lidx]->getInstance());
+		_games[_gidx]->getInstance()->refresh(
+			*_libs[_lidx]->getInstance());
 	}
 	return true;
 }

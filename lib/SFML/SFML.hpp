@@ -29,7 +29,7 @@ namespace Arcade {
 		void closeRenderer() final;
 
 		// Opens the window => start loop
-		void openRenderer() final;
+		void openRenderer(std::string const &) final;
 
 		// Clears the screen
 		void clearWindow() final;

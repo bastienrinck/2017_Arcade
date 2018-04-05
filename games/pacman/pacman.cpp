@@ -25,7 +25,7 @@ extern "C" Arcade::IGameLib *entryPoint(void)
 	return lib;
 }
 
-const std::string &Arcade::Pacman::getName() const
+const std::string Arcade::Pacman::getName() const
 {
 	return _name;
 }
@@ -40,29 +40,24 @@ bool Arcade::Pacman::stop()
 	return true;
 }
 
-bool Arcade::Pacman::close()
+bool Arcade::Pacman::applyEvent(Arcade::Keys)
 {
 	return true;
 }
 
-bool Arcade::Pacman::open()
+bool Arcade::Pacman::update()
 {
 	return true;
 }
 
-void Arcade::Pacman::applyEvent(Arcade::Keys)
+void Arcade::Pacman::refresh(Arcade::IGraphicLib &gl)
 {
+	gl.clearWindow();
+	gl.drawText(_tB);
+	gl.refreshWindow();
 }
 
-void Arcade::Pacman::update()
+size_t Arcade::Pacman::getScore()
 {
-}
-
-void Arcade::Pacman::refresh(Arcade::IGraphicLib *gl)
-{
-	auto tB = Arcade::TextBox(_name, Arcade::Vect<size_t>(0, 0));
-
-	gl->drawText(tB);
-	gl->clearWindow();
-	gl->refreshWindow();
+	return 0;
 }

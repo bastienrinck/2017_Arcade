@@ -7,6 +7,7 @@
 #include <ctime>
 #include <unordered_map>
 #include <iostream>
+#include <SFML/Graphics/Color.hpp>
 #include "snake.hpp"
 
 #define CELL_WIDTH 10
@@ -29,15 +30,16 @@ extern "C" Arcade::IGameLib *entryPoint(void)
 	return lib;
 }
 
-const std::string &Arcade::snake::getName() const
+const std::string Arcade::snake::getName() const
 {
 	return _name;
 }
 
 bool Arcade::snake::init()
 {
-	//_timer = std::time(nullptr);
 	_map.resize(_height * _width);
+	_snake.clear();
+	_direction = 2;
 	_snake.emplace_back(Arcade::Vect<size_t>(_width / 2 - 2, _height / 2));
 	_snake.emplace_back(Arcade::Vect<size_t>(_width / 2 - 1, _height / 2));
 	_snake.emplace_back(Arcade::Vect<size_t>(_width / 2, _height / 2));
@@ -46,16 +48,6 @@ bool Arcade::snake::init()
 }
 
 bool Arcade::snake::stop()
-{
-	return true;
-}
-
-bool Arcade::snake::close()
-{
-	return true;
-}
-
-bool Arcade::snake::open()
 {
 	return true;
 }
@@ -104,23 +96,20 @@ bool Arcade::snake::moveRight()
 	return true;
 }
 
-void Arcade::snake::print_background(Arcade::IGraphicLib *graphicsLib)
+void Arcade::snake::print_background(Arcade::IGraphicLib &graphicsLib
+)
 {
-	Arcade::PixelBox pB;
-	Arcade::Vect<size_t> dimension = graphicsLib->getScreenSize();
+	Arcade::Vect<size_t> dimension = graphicsLib.getScreenSize();
 
-	pB.setHeight(_height * CELL_HEIGHT);
-	pB.setWidth(_width * CELL_WIDTH);
-	pB.setX((dimension.getX() / 2) - (pB.getWidth() / 2));
-	pB.setY((dimension.getY() / 2) - (pB.getHeight() / 2));
-	graphicsLib->drawPixelBox(pB);
-	std::cout << "sizeX :" << pB.getWidth() << std::endl;
-	std::cout << "offsetX :" << pB.getX() << std::endl;
-	std::cout << "sizeY :" << pB.getHeight() << std::endl;
-	std::cout << "offsetY :" << pB.getY() << std::endl;
+	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(_width * CELL_WIDTH,
+		_height * CELL_HEIGHT), Arcade::Vect<size_t>(
+		(dimension.getX() / 2) - (_width * CELL_WIDTH / 2),
+		(dimension.getY() / 2) - (_height * CELL_HEIGHT / 2)),
+		Arcade::Color(255, 255, 255, 255));
+	graphicsLib.drawPixelBox(_pB);
 }
 
-void Arcade::snake::applyEvent(Arcade::Keys key)
+bool Arcade::snake::applyEvent(Arcade::Keys key)
 {
 	std::unordered_map<Arcade::Keys, size_t> action = {
 		{Arcade::Keys::UP, 0}, {Arcade::Keys::DOWN, 1},
@@ -131,9 +120,10 @@ void Arcade::snake::applyEvent(Arcade::Keys key)
 
 	if (action.count(key))
 		(this->*moveArr[action.at(key)])();
+	return true;
 }
 
-void Arcade::snake::update()
+bool Arcade::snake::update()
 {
 	static auto timer = std::time(nullptr);
 	auto currentTimer = std::time(nullptr);
@@ -145,26 +135,30 @@ void Arcade::snake::update()
 		timer = currentTimer;
 		(this->*moveArr[_direction])();
 	}
+	return true;
 }
 
-void Arcade::snake::refresh(Arcade::IGraphicLib *graphicsLib)
+void Arcade::snake::refresh(Arcade::IGraphicLib &graphicsLib)
 {
-	Arcade::PixelBox pB(Arcade::Vect<size_t>(CELL_WIDTH, CELL_HEIGHT),
-		Arcade::Vect<size_t>(), Arcade::Color());
-	size_t pWith = _width * CELL_WIDTH;
+
+	size_t pWidth = _width * CELL_WIDTH;
 	size_t pHeight = _height * CELL_HEIGHT;
 
-	std::cout << "[calc] : start" << std::endl;
-	graphicsLib->clearWindow();
+	graphicsLib.clearWindow();
 	print_background(graphicsLib);
-	std::cout << "[calc] : BG done" << std::endl;
+	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(CELL_WIDTH, CELL_HEIGHT),
+		Arcade::Vect<size_t>(), Arcade::Color(255, 0, 0, 255));
 	for (auto cell : _snake) {
-		pB.setX(graphicsLib->getMaxX() / 2 - pWith / 2 +
-			cell.getX() * CELL_WIDTH);
-		pB.setY(graphicsLib->getMaxY() / 2 - pHeight / 2 +
-			cell.getY() * CELL_HEIGHT);
-		graphicsLib->drawPixelBox(pB);
+		_pB.setX((graphicsLib.getMaxX() / 2) - (pWidth / 2) +
+			(cell.getX() * CELL_WIDTH));
+		_pB.setY((graphicsLib.getMaxY() / 2) - (pHeight / 2) +
+			(cell.getY() * CELL_HEIGHT));
+		graphicsLib.drawPixelBox(_pB);
 	}
-	graphicsLib->refreshWindow();
-	std::cout << "[calc] : done" << std::endl;
+	graphicsLib.refreshWindow();
+}
+
+size_t Arcade::snake::getScore()
+{
+	return 0;
 }

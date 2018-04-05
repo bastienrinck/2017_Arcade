@@ -15,7 +15,7 @@
 namespace Arcade {
 	class PixelBox {
 	public:
-		PixelBox(Vect<size_t> size = Vect<size_t>(),
+		explicit PixelBox(Vect<size_t> size = Vect<size_t>(),
 			Vect<size_t> pos = Vect<size_t>(),
 			Color col = Color(255, 255, 255, 255));
 		~PixelBox() = default;

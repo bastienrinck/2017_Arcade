@@ -1,24 +1,21 @@
 //
-// Created by rectoria on 05/03/18.
+// Created by rectoria on 03/04/18.
 //
 
-#ifndef NCURSES_HPP
-#define NCURSES_HPP
+#ifndef SDL2_HPP
+#define SDL2_HPP
 
-#include <string>
-#include <list>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <unordered_map>
+#include <list>
 #include "IGraphicLib.hpp"
 
 namespace Arcade {
-
-	class nCurses : public Arcade::IGraphicLib {
+	class Sdl : public IGraphicLib {
 	public:
-		nCurses() = default;
-
-		~nCurses() final;
-
-	public:
+		Sdl();
+		~Sdl() final;
 
 		/* Get the name of the library */
 		std::string getName() const final;
@@ -74,38 +71,52 @@ namespace Arcade {
 		size_t getMaxX() const final;
 
 	private:
-		int getColorIndex(Arcade::Color &);
-		int getPairIndex(int);
-
-		std::string _name = "nCurses";
+		std::string _name = "SDL2";
+		SDL_Window *_window = nullptr;
+		SDL_Renderer *_renderer = nullptr;
+		SDL_Texture *_texture = nullptr;
+		TTF_Font *_font = nullptr;
+		SDL_Texture *_text = nullptr;
 		std::list<Arcade::Keys> _events;
-		WINDOW *_win = nullptr;
-		bool _isOpen = false;
-		std::vector<Arcade::Color> _savedColor;
-		std::vector<std::pair<int, int>> _pairedColor;
-		std::unordered_map<int, Arcade::Keys> _keyMap = {
-			{'a', Arcade::Keys::A}, {'b', Arcade::Keys::B},
-			{'c', Arcade::Keys::C}, {'d', Arcade::Keys::D},
-			{'e', Arcade::Keys::E}, {'f', Arcade::Keys::F},
-			{'g', Arcade::Keys::G}, {'h', Arcade::Keys::H},
-			{'i', Arcade::Keys::I}, {'j', Arcade::Keys::J},
-			{'k', Arcade::Keys::K}, {'l', Arcade::Keys::L},
-			{'m', Arcade::Keys::M}, {'n', Arcade::Keys::N},
-			{'o', Arcade::Keys::O}, {'p', Arcade::Keys::P},
-			{'q', Arcade::Keys::Q}, {'r', Arcade::Keys::R},
-			{'s', Arcade::Keys::S}, {'t', Arcade::Keys::T},
-			{'u', Arcade::Keys::U}, {'v', Arcade::Keys::V},
-			{'w', Arcade::Keys::W}, {'x', Arcade::Keys::X},
-			{'y', Arcade::Keys::Y}, {'z', Arcade::Keys::Z},
-			{KEY_LEFT, Arcade::Keys::LEFT},
-			{KEY_RIGHT, Arcade::Keys::RIGHT},
-			{KEY_UP, Arcade::Keys::UP},
-			{KEY_DOWN, Arcade::Keys::DOWN},
-			{KEY_ENTER, Arcade::Keys::ENTER},
-			{' ', Arcade::Keys::SPACE},
-			{KEY_DC, Arcade::Keys::DELETE},
-			{KEY_BACKSPACE, Arcade::Keys::BACKSPACE},
-			{'\t', Arcade::Keys::TAB}, {27, Arcade::Keys::ESC}};
+		std::unordered_map<SDL_Keycode, Arcade::Keys> _keyMap = {
+			{SDLK_a, Arcade::Keys::A},
+			{SDLK_b, Arcade::Keys::B},
+			{SDLK_c, Arcade::Keys::C},
+			{SDLK_d, Arcade::Keys::D},
+			{SDLK_e, Arcade::Keys::E},
+			{SDLK_f, Arcade::Keys::F},
+			{SDLK_g, Arcade::Keys::G},
+			{SDLK_h, Arcade::Keys::H},
+			{SDLK_i, Arcade::Keys::I},
+			{SDLK_j, Arcade::Keys::J},
+			{SDLK_k, Arcade::Keys::K},
+			{SDLK_l, Arcade::Keys::L},
+			{SDLK_m, Arcade::Keys::M},
+			{SDLK_n, Arcade::Keys::N},
+			{SDLK_o, Arcade::Keys::O},
+			{SDLK_p, Arcade::Keys::P},
+			{SDLK_q, Arcade::Keys::Q},
+			{SDLK_r, Arcade::Keys::R},
+			{SDLK_s, Arcade::Keys::S},
+			{SDLK_t, Arcade::Keys::T},
+			{SDLK_u, Arcade::Keys::U},
+			{SDLK_v, Arcade::Keys::V},
+			{SDLK_w, Arcade::Keys::W},
+			{SDLK_x, Arcade::Keys::X},
+			{SDLK_y, Arcade::Keys::Y},
+			{SDLK_z, Arcade::Keys::Z},
+			{SDLK_LEFT, Arcade::Keys::LEFT},
+			{SDLK_RIGHT, Arcade::Keys::RIGHT},
+			{SDLK_UP, Arcade::Keys::UP},
+			{SDLK_DOWN, Arcade::Keys::DOWN},
+			{SDLK_RETURN, Arcade::Keys::ENTER},
+			{SDLK_SPACE, Arcade::Keys::SPACE},
+			{SDLK_DELETE, Arcade::Keys::DELETE},
+			{SDLK_BACKSPACE, Arcade::Keys::BACKSPACE},
+			{SDLK_TAB, Arcade::Keys::TAB},
+			{SDLK_ESCAPE, Arcade::Keys::ESC}};
 	};
 };
+
+
 #endif
