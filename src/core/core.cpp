@@ -273,9 +273,9 @@ unsigned Arcade::Menu::applyEvent(Arcade::Keys key)
 		'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
 		'w', 'x', 'y', 'z'};
 
-	if (key == Arcade::Keys::UP && _idx < _games->size() - 1)
+	if (key == Arcade::Keys::DOWN && _idx < _games->size() - 1)
 		_idx += 1;
-	else if (key == Arcade::Keys::DOWN && _idx > 0)
+	else if (key == Arcade::Keys::UP && _idx > 0)
 		_idx -= 1;
 	else if (key < 26)
 		_username += keysC[key - 1];
