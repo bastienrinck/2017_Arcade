@@ -71,11 +71,9 @@ void Arcade::Sdl::openRenderer(std::string const &title)
 
 void Arcade::Sdl::clearWindow()
 {
-	SDL_Renderer *renderer = SDL_CreateRenderer(_window, -1, 0);
-
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	SDL_RenderClear(renderer);
-	SDL_RenderPresent(renderer);
+	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
+	SDL_RenderClear(_renderer);
+	//SDL_RenderPresent(_renderer);
 }
 
 void Arcade::Sdl::refreshWindow()

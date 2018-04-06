@@ -20,13 +20,15 @@ namespace Arcade {
 		Menu() = default;
 		~Menu() = default;
 
-		void setList(std::vector<DLLoader<Arcade::IGameLib> *> *);
+		void setLists(std::vector<DLLoader<IGameLib> *> *,
+			std::vector<DLLoader<IGraphicLib> *> *);
 		void refresh(IGraphicLib *);
 		unsigned applyEvent(Keys);
 
 	private:
 
-		std::vector<DLLoader<Arcade::IGameLib> *> *_list = nullptr;
+		std::vector<DLLoader<Arcade::IGameLib> *> *_games = nullptr;
+		std::vector<DLLoader<Arcade::IGraphicLib> *> *_libs = nullptr;
 		unsigned _idx = 0;
 	};
 

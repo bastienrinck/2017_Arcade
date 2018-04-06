@@ -75,7 +75,8 @@ namespace Arcade {
 
 	private:
 		int getColorIndex(Arcade::Color &);
-		int getPairIndex(int);
+		int getPairIndex(int, int);
+		int getDoubleColorPair(Color, Color);
 
 		std::string _name = "nCurses";
 		std::list<Arcade::Keys> _events;

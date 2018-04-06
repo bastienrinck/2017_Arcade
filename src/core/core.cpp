@@ -15,7 +15,7 @@ Arcade::Core::Core(std::string name)
 	std::cout << "Loading libs and games:" << std::endl;
 	inspectDirectory("./lib/", _libs);
 	inspectDirectory("./games/", _games);
-	_menu.setList(&_games);
+	_menu.setLists(&_games, &_libs);
 	if (_libs.empty())
 		throw std::logic_error("No libs found in ./libs directory");
 	if (_games.empty())
@@ -105,11 +105,11 @@ bool Arcade::Core::start()
 {
 	bool ret = true;
 	std::unordered_map<Arcade::Keys, bool (Core::*)()> actions = {
-		{Arcade::Keys::Q, &Core::prevLibG},
-		{Arcade::Keys::D, &Core::nextLibG},
-		{Arcade::Keys::S, &Core::prevGame},
-		{Arcade::Keys::Z, &Core::nextGame},
-		{Arcade::Keys::R, &Core::restartGame},
+		{Arcade::Keys::LEFT, &Core::prevLibG},
+		{Arcade::Keys::RIGHT, &Core::nextLibG},
+		{Arcade::Keys::DOWN, &Core::prevGame},
+		{Arcade::Keys::UP, &Core::nextGame},
+		{Arcade::Keys::SPACE, &Core::restartGame},
 		{Arcade::Keys::BACKSPACE, &Core::backMenu},
 		{Arcade::Keys::ESC, &Core::exit}};
 
@@ -196,16 +196,24 @@ void Arcade::Menu::refresh(Arcade::IGraphicLib *gl)
 	auto other = Arcade::Color(255, 255, 255, 255);
 	auto mode = gl->getScreenSize();
 	auto background = Arcade::PixelBox(mode, Arcade::Vect<size_t>(0, 0),
-		Arcade::Color(206, 206, 206, 120));
+		Arcade::Color(255, 255, 255, 255));
 	auto text = Arcade::TextBox("", Arcade::Vect<size_t>(0, 0));
 
 	gl->clearWindow();
 	gl->drawPixelBox(background);
-	for (unsigned i = 0; i < _list->size(); ++i) {
-		text.setValue((*_list)[i]->getInstance()->getName());
+	for (unsigned i = 0; i < _games->size(); ++i) {
+		text.setValue((*_games)[i]->getInstance()->getName());
 		text.setY(
-			(mode.getY() - _list->size() * 50) / 2 + (i * 50 + 10));
+			(mode.getY() - _games->size() * 50) / 2 + (i * 50 + 10));
 		text.setColor(_idx == i ? select : other);
+		gl->drawText(text);
+	}
+	for (unsigned i = 0; i < _libs->size(); ++i) {
+		text.setValue((*_libs)[i]->getInstance()->getName());
+		text.setX(mode.getX() / 2);
+		text.setY(
+			(mode.getY() - _libs->size() * 50) / 2 + (i * 50 + 10));
+		text.setColor(other);
 		gl->drawText(text);
 	}
 	gl->refreshWindow();
@@ -213,14 +221,17 @@ void Arcade::Menu::refresh(Arcade::IGraphicLib *gl)
 
 unsigned Arcade::Menu::applyEvent(Arcade::Keys key)
 {
-	if (key == Arcade::Keys::DOWN && _idx < _list->size() - 1)
+	if (key == Arcade::Keys::S && _idx < _games->size() - 1)
 		_idx += 1;
-	else if (key == Arcade::Keys::UP && _idx > 0)
+	else if (key == Arcade::Keys::Z && _idx > 0)
 		_idx -= 1;
 	return (key == Arcade::Keys::ENTER) ? _idx : UINT_MAX;
 }
 
-void Arcade::Menu::setList(std::vector<DLLoader<Arcade::IGameLib> *> *list)
+void Arcade::Menu::setLists(std::vector<DLLoader<Arcade::IGameLib> *> *games,
+	std::vector<DLLoader<Arcade::IGraphicLib> *> *libs
+)
 {
-	_list = list;
+	_games = games;
+	_libs = libs;
 }
