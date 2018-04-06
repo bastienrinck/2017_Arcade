@@ -99,7 +99,7 @@ void Arcade::PixelBox::putRect(Arcade::Vect<size_t> pos,
 				(pos.getX() + j)] = col;
 }
 
-std::vector<Arcade::Color> &Arcade::PixelBox::getPixelArray()
+std::vector<Arcade::Color> const &Arcade::PixelBox::getPixelArray() const
 {
 	return _colorFrame;
 }

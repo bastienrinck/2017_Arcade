@@ -80,7 +80,7 @@ void Arcade::Sdl::refreshWindow()
 	SDL_RenderPresent(_renderer);
 }
 
-void Arcade::Sdl::drawPixelBox(Arcade::PixelBox &pB)
+void Arcade::Sdl::drawPixelBox(Arcade::PixelBox const &pB)
 {
 	SDL_Rect rect{};
 
@@ -93,7 +93,7 @@ void Arcade::Sdl::drawPixelBox(Arcade::PixelBox &pB)
 	SDL_RenderCopy(_renderer, _texture, &rect, &rect);
 }
 
-void Arcade::Sdl::drawText(Arcade::TextBox &tB)
+void Arcade::Sdl::drawText(Arcade::TextBox const &tB)
 {
 	auto raw = (unsigned char *)tB.getColor();
 

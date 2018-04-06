@@ -67,7 +67,7 @@ void Arcade::sfml::refreshWindow()
 	_window.display();
 }
 
-void Arcade::sfml::drawPixelBox(Arcade::PixelBox &pB)
+void Arcade::sfml::drawPixelBox(Arcade::PixelBox const &pB)
 {
 	_texture.update((unsigned char *)&pB.getPixelArray()[0],
 		static_cast<unsigned int>(pB.getWidth()),
@@ -81,7 +81,7 @@ void Arcade::sfml::drawPixelBox(Arcade::PixelBox &pB)
 	_window.draw(_sprite);
 }
 
-void Arcade::sfml::drawText(Arcade::TextBox &tB)
+void Arcade::sfml::drawText(Arcade::TextBox const &tB)
 {
 	_text.setFont(_font);
 	_text.setString(tB.getValue());

@@ -109,7 +109,7 @@ int Arcade::nCurses::getColorIndex(Arcade::Color &color)
 	return idx;
 }
 
-void Arcade::nCurses::drawPixelBox(Arcade::PixelBox &pB)
+void Arcade::nCurses::drawPixelBox(Arcade::PixelBox const &pB)
 {
 	for (size_t i = 0; i < pB.getHeight(); i++) {
 		for (size_t j = 0; j < pB.getWidth(); j++) {
@@ -132,7 +132,7 @@ int Arcade::nCurses::getDoubleColorPair(Arcade::Color fg, Arcade::Color bg)
 	return getPairIndex(fgColor, bgColor);
 }
 
-void Arcade::nCurses::drawText(Arcade::TextBox &tB)
+void Arcade::nCurses::drawText(Arcade::TextBox const &tB)
 {
 	auto pairID = getDoubleColorPair(tB.getColor(),
 		tB.getBackgroundColor());
