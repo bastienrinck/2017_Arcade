@@ -102,7 +102,7 @@ namespace Arcade {
 			{KEY_RIGHT, Arcade::Keys::RIGHT},
 			{KEY_UP, Arcade::Keys::UP},
 			{KEY_DOWN, Arcade::Keys::DOWN},
-			{KEY_ENTER, Arcade::Keys::ENTER},
+			{10, Arcade::Keys::ENTER},
 			{' ', Arcade::Keys::SPACE},
 			{KEY_DC, Arcade::Keys::DELETE},
 			{KEY_BACKSPACE, Arcade::Keys::BACKSPACE},
