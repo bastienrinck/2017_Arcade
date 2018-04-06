@@ -62,8 +62,8 @@ void Arcade::Sdl::openRenderer(std::string const &title)
 {
 	if (_window)
 		SDL_DestroyWindow(_window);
-	_window = SDL_CreateWindow("Arcade", SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_UNDEFINED, 1920, 1080, 0);
+	_window = SDL_CreateWindow(title.c_str(), 0,
+		0, 1280, 720, SDL_WINDOW_RESIZABLE);
 	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
 	_texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_RGBA32,
 		SDL_TEXTUREACCESS_STREAMING, 1920, 1080);
@@ -73,7 +73,6 @@ void Arcade::Sdl::clearWindow()
 {
 	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
 	SDL_RenderClear(_renderer);
-	//SDL_RenderPresent(_renderer);
 }
 
 void Arcade::Sdl::refreshWindow()

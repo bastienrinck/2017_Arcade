@@ -4,10 +4,7 @@ CC	= g++
 
 RM	= rm -f
 
-SRCS	= ./sdl2.cpp \
-	  ../../include/Color.cpp \
-	  ../../include/TextBox.cpp \
-	  ../../include/PixelBox.cpp
+SRCS	= ./sdl2.cpp
 
 CPPFLAGS = -I../../include -I../../interfaces
 CPPFLAGS += -W -Wall -Wextra
@@ -16,7 +13,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	 $(CC) -shared -o $(NAME) -fPIC $(SRCS) $(CPPFLAGS) -lSDL2 -lSDL2_ttf
-
+	mv $(NAME) ../
 clean:
 	$(RM)
 

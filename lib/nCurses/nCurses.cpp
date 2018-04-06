@@ -54,6 +54,7 @@ void Arcade::nCurses::openRenderer(std::string const &title)
 {
 	int h, w;
 
+	(void)title;
 	initscr();
 	start_color();
 	cbreak();
@@ -61,8 +62,7 @@ void Arcade::nCurses::openRenderer(std::string const &title)
 	curs_set(0);
 	keypad(stdscr, true);
 	getmaxyx(stdscr, h, w);
-	nodelay(_win, true);
-	fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
+	timeout(0);
 	_win = newwin(h, w, 0, 0);
 }
 
@@ -80,13 +80,11 @@ void Arcade::nCurses::refreshWindow()
 int Arcade::nCurses::getPairIndex(int i, int j)
 {
 	std::pair<int, int> pair(i, j);
-	j = (j == -1) ? i : j;
 	auto iter = std::find(_pairedColor.begin(), _pairedColor.end(), pair);
 	auto idx = static_cast<int>(_pairedColor.size() + 1);
 
 	if (iter == _pairedColor.end()) {
-		init_pair(static_cast<short>(idx),
-			static_cast<short>(i),
+		init_pair(static_cast<short>(idx), static_cast<short>(i),
 			static_cast<short>(j));
 		_pairedColor.push_back(pair);
 	} else
@@ -101,8 +99,10 @@ int Arcade::nCurses::getColorIndex(Arcade::Color &color)
 	auto idx = static_cast<int>(_savedColor.size() + 1);
 
 	if (iter == _savedColor.end()) {
-		init_color(static_cast<short>(_savedColor.size() + 1), raw[0],
-			raw[1], raw[2]);
+		init_color(static_cast<short>(_savedColor.size() + 1),
+			static_cast<short>(raw[0] * 3.92),
+			static_cast<short>(raw[1] * 3.92),
+			static_cast<short>(raw[2] * 3.92));
 		_savedColor.emplace_back(color);
 	} else
 		idx = static_cast<int>(iter - _savedColor.begin() + 1);
@@ -114,7 +114,8 @@ void Arcade::nCurses::drawPixelBox(Arcade::PixelBox &pB)
 	for (size_t i = 0; i < pB.getHeight(); i++) {
 		for (size_t j = 0; j < pB.getWidth(); j++) {
 			auto pp = pB.getPixel(Arcade::Vect<size_t>(j, i));
-			auto pairID = getPairIndex(getColorIndex(pp), -1);
+			auto pairID = getPairIndex(getColorIndex(pp),
+				getColorIndex(pp));
 			wattron(_win, COLOR_PAIR(pairID));
 			mvwprintw(_win, static_cast<int>(pB.getY() + i),
 				static_cast<int>(pB.getX() + j), " ");
@@ -133,7 +134,8 @@ int Arcade::nCurses::getDoubleColorPair(Arcade::Color fg, Arcade::Color bg)
 
 void Arcade::nCurses::drawText(Arcade::TextBox &tB)
 {
-	auto pairID = getDoubleColorPair(tB.getColor(), tB.getBackgroundColor());
+	auto pairID = getDoubleColorPair(tB.getColor(),
+		tB.getBackgroundColor());
 
 	wattron(_win, COLOR_PAIR(pairID));
 	mvwprintw(_win, static_cast<int>(tB.getY()),
@@ -146,10 +148,13 @@ bool Arcade::nCurses::pollEvents()
 	bool ret = false;
 	int c;
 
-	if ((c = getchar()) != EAGAIN && _keyMap.count(c)) {
-		_events.push_back(_keyMap[c]);
-		ret = true;
+	if ((c = getch()) != ERR) {
+		if (_keyMap.count(c)){
+			_events.push_back(_keyMap[c]);
+			ret = true;
+		}
 	}
+
 	return ret;
 }
 
@@ -186,5 +191,3 @@ size_t Arcade::nCurses::getMaxX() const
 {
 	return static_cast<size_t>(getmaxx(_win));
 }
-
-

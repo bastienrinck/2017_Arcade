@@ -1,13 +1,10 @@
-NAME	= lib_arcade_snake.so
+NAME	= lib_arcade_nibbler.so
 
 CC	= g++
 
 RM	= rm -f
 
-SRCS	= ./snake.cpp \
-	  ../../include/Color.cpp \
-	  ../../include/TextBox.cpp \
-	  ../../include/PixelBox.cpp
+SRCS	= ./snake.cpp
 
 CPPFLAGS = -I../../include -I../../interfaces
 CPPFLAGS += -W -Wall -Wextra
@@ -16,9 +13,8 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	 $(CC) -shared -o $(NAME) -fPIC $(SRCS) $(CPPFLAGS)
-
+	mv $(NAME) ../
 clean:
-	$(RM)
 
 fclean: clean
 	$(RM) $(NAME)

@@ -113,7 +113,7 @@ bool Arcade::snake::applyEvent(Arcade::Keys key)
 {
 	std::unordered_map<Arcade::Keys, size_t> action = {
 		{Arcade::Keys::Z, 0}, {Arcade::Keys::S, 1},
-		{Arcade::Keys::Q, 2}, {Arcade::Keys::D, 3}};
+		{Arcade::Keys::Q, 2}, {Arcade::Keys::D	, 3}};
 	bool (Arcade::snake::*moveArr[4])() = {&Arcade::snake::moveUp,
 		&Arcade::snake::moveDown, &Arcade::snake::moveLeft,
 		&Arcade::snake::moveRight};

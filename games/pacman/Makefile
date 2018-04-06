@@ -4,21 +4,18 @@ CC	= g++
 
 RM	= rm -f
 
-SRCS	= ./pacman.cpp \
-	  ../../include/Color.cpp \
-	  ../../include/TextBox.cpp \
-	  ../../include/PixelBox.cpp
+SRCS	= ./pacman.cpp
 
 CPPFLAGS = -I../../include -I../../interfaces
 CPPFLAGS += -W -Wall -Wextra
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME):
 	 $(CC) -shared -o $(NAME) -fPIC $(SRCS) $(CPPFLAGS)
+	mv $(NAME) ../
 
 clean:
-	$(RM)
 
 fclean: clean
 	$(RM) $(NAME)

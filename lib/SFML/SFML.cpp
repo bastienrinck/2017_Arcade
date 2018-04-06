@@ -54,7 +54,7 @@ void Arcade::sfml::closeRenderer()
 void Arcade::sfml::openRenderer(std::string const &title)
 {
 
-	_window.create(sf::VideoMode(1920, 1080), "Arcade");
+	_window.create(sf::VideoMode(1280, 720), title);
 }
 
 void Arcade::sfml::clearWindow()
@@ -87,7 +87,7 @@ void Arcade::sfml::drawText(Arcade::TextBox &tB)
 	_text.setString(tB.getValue());
 	_text.setCharacterSize(static_cast<unsigned int>(tB.getFontSize()));
 	_text.setFillColor(*(sf::Color *)((unsigned char *)tB.getColor()));
-	_text.setOutlineThickness(0.2);
+	_text.setOutlineThickness(0.4);
 	_text.setOutlineColor(
 		*(sf::Color *)((unsigned char *)tB.getBackgroundColor()));
 	_text.setPosition(tB.getPos().getX(), tB.getPos().getY());
@@ -111,9 +111,14 @@ bool Arcade::sfml::pollEvents()
 	bool ret = false;
 
 	while (_window.pollEvent(event)) {
-		if (_keyMap.count(event.key.code)) {
-			_events.push_back(_keyMap.at(event.key.code));
-			ret = true;
+		if (event.type == sf::Event::KeyPressed)
+			if (_keyMap.count(event.key.code)) {
+				_events.push_back(_keyMap.at(event.key.code));
+				ret = true;
+			}
+		if (event.type == sf::Event::Resized){
+			sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+			_window.setView(sf::View(visibleArea));
 		}
 	}
 	return ret;
@@ -126,17 +131,17 @@ void Arcade::sfml::clearEvents()
 
 Arcade::Vect<size_t> Arcade::sfml::getScreenSize() const
 {
-	auto mode = sf::VideoMode::getDesktopMode();
+	auto mode = _window.getSize();
 
-	return {mode.width, mode.height};
+	return {mode.x, mode.y};
 }
 
 size_t Arcade::sfml::getMaxY() const
 {
-	return sf::VideoMode::getDesktopMode().height;
+	return _window.getSize().y;
 }
 
 size_t Arcade::sfml::getMaxX() const
 {
-	return sf::VideoMode::getDesktopMode().width;
+	return _window.getSize().x;
 }
