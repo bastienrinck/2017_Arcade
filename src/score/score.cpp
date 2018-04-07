@@ -41,6 +41,7 @@ void PlayerStats::WriteStats(std::string Game)
 	myfile.close();
 }
 
+//
 /*	for (i = _Stats[Game].begin(); i != _Stats[Game].end(); i++)
 		for (i = _Stats[Game].begin(); i != _Stats[Game].end(); i++);*/
 
