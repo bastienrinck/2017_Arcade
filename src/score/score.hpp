@@ -15,6 +15,9 @@
 
 #define ERR_OPEN(path) "Error opening " + path
 
+std::string __game1("pacman");
+std::string __game2("snake");
+
 class PlayerStats
 {
 	public:
@@ -26,6 +29,10 @@ class PlayerStats
 		void UpdatePlayerScore(std::string Game, std::string
 		PlayerName, std::string Score);
 		void PrintGame(std::string Game);
+		void WriteStats(std::string Game);
+		void AddScore(std::string PlayerName, std::string Score);
+		void SetScore(std::string Game, std::string PlayerName,
+			std::string Score);
 private:
 		std::map<std::string, std::map<std::string, std::string>> _Stats;
 };
