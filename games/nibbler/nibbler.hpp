@@ -9,10 +9,10 @@
 #include <list>
 
 namespace Arcade {
-	class snake : public IGameLib {
+	class Nibbler : public IGameLib {
 	public:
-		snake() = default;
-		~snake() final = default;
+		Nibbler() = default;
+		~Nibbler() final = default;
 
 		/* Get the name of the game */
 		const std::string getName() const final;
@@ -41,15 +41,17 @@ namespace Arcade {
 		bool moveDown();
 		bool moveLeft();
 		bool moveRight();
-		void print_background(IGraphicLib &);
+		void print_background(IGraphicLib &, Vect<size_t> const &);
+		void check_bonus();
+		bool lost();
 
-		const std::string _name = "snake";
+		const std::string _name = "Nibbler";
+		std::time_t _timer;
 		std::list<Arcade::Vect<size_t>> _snake;
+		Arcade::Vect<size_t> _bonus;
 		Arcade::PixelBox _pB;
-		std::vector<char> _map;
-		size_t _height = 40;
-		size_t _width = 70;
 		size_t _direction = 2;
+		int _score;
 	};
 };
 

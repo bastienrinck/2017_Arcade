@@ -2,7 +2,7 @@ CC	= g++
 
 RM	= rm -f
 
-SUBDIRS	= pacman snake
+SUBDIRS	= pacman nibbler
 
 all:
 	for dir in $(SUBDIRS); do \

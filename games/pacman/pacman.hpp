@@ -80,7 +80,7 @@ namespace Arcade {
 		void printLine(int);
 
 		// Get Score of the player
-		size_t getScore();
+		size_t getScore() final;
 
 		// Get Direction of Pacman
 		int getDir();

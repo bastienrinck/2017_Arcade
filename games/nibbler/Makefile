@@ -4,7 +4,7 @@ CC	= g++
 
 RM	= rm -f
 
-SRCS	= ./snake.cpp
+SRCS	= ./nibbler.cpp
 
 CPPFLAGS = -I../../include -I../../interfaces
 CPPFLAGS += -W -Wall -Wextra

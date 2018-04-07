@@ -1,4 +1,4 @@
-NAME	= lib_arcade_nCurses.so
+NAME	= lib_arcade_ncurses.so
 
 CC	= g++
 

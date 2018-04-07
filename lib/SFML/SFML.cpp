@@ -31,7 +31,7 @@ Arcade::sfml::sfml()
 	_window.setFramerateLimit(30);
 	_texture.create(1920, 1080);
 	_sprite.setTexture(_texture);
-	_font.loadFromFile("ressources/fonts/Times New Roman.ttf");
+	_font.loadFromFile("ressources/fonts/font.ttf");
 };
 
 Arcade::sfml::~sfml() = default;
@@ -116,8 +116,9 @@ bool Arcade::sfml::pollEvents()
 				_events.push_back(_keyMap.at(event.key.code));
 				ret = true;
 			}
-		if (event.type == sf::Event::Resized){
-			sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+		if (event.type == sf::Event::Resized) {
+			sf::FloatRect visibleArea(0, 0, event.size.width,
+				event.size.height);
 			_window.setView(sf::View(visibleArea));
 		}
 	}

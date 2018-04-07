@@ -23,11 +23,19 @@ public :
 	explicit DLLoader(std::string &filepath, std::string &folder)
 		: _filePath(folder + filepath)
 	{
-		ptr = dlopen(_filePath.c_str(), RTLD_LAZY);
-		if (!ptr)
+		void *temp = nullptr;
+
+		if (!(ptr = dlopen(_filePath.c_str(), RTLD_LAZY))) {
+			std::cerr << "Error while loading " << filepath
+				<< std::endl;
 			std::cerr << dlerror() << std::endl;
+		} else if (!(temp = dlsym(ptr, _fctName.c_str()))) {
+			std::cerr << "Error while loading " << filepath
+				<< std::endl;
+			std::cerr << "Reason: " << dlerror() << std::endl;
+		} else
+			_instance = reinterpret_cast<T *(*)()>(temp)();
 		_filePath = folder + "./" + filepath;
-		std::cout << "Saved path :" << _filePath << std::endl;
 	}
 
 	~DLLoader()
@@ -39,12 +47,6 @@ public :
 public:
 	T *getInstance()
 	{
-		void *temp = nullptr;
-
-		if (ptr && !_instance) {
-			temp = dlsym(ptr, _fctName.c_str());
-			_instance = reinterpret_cast<T *(*)()>(temp)();
-		}
 		return _instance;
 	};
 

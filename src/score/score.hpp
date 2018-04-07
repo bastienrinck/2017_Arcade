@@ -16,7 +16,7 @@
 #define ERR_OPEN(path) "Error opening " + path
 
 std::string __game1("pacman");
-std::string __game2("snake");
+std::string __game2("Nibbler");
 
 class PlayerStats
 {

@@ -130,14 +130,14 @@ int main(int ac, char **av)
 	Stats.AddGame(Game);
 	Stats.SetScore(Game, PlayerName, "48");
 	Stats.SetScore(Game, "James", "500");
-	Stats.SetScore("snake", "Miaous", "10");
+	Stats.SetScore("Nibbler", "Miaous", "10");
 	std::cout << "score: " << Stats.GetPlayerScore(Game, PlayerName) <<
 								    std::endl;
 	std::cout << "score: " << Stats.GetPlayerScore(Game, "James") <<
 								    std::endl;
 	std::cout << "score: " << Stats.GetPlayerScore(Game, "Jimmy") <<
 		  std::endl;
-	std::cout << "score: " << Stats.GetPlayerScore("snake", "Jimmy") <<
+	std::cout << "score: " << Stats.GetPlayerScore("Nibbler", "Jimmy") <<
 		  std::endl;
 	//Stats.PrintGame(Game);
 	return 0;

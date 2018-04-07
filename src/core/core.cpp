@@ -12,21 +12,27 @@
 
 Arcade::Core::Core(std::string name)
 {
-	std::cout << "Loading libs and games:" << std::endl;
-	inspectDirectory("./lib/", _libs);
-	inspectDirectory("./games/", _games);
-	_menu.setLists(&_games, &_libs);
-	if (_libs.empty())
-		throw std::logic_error("No libs found in ./libs directory");
-	if (_games.empty())
-		throw std::logic_error("No games found in ./games directory");
-	for (unsigned i = 0; i < _libs.size(); ++i)
-		_lidx = (_libs[i]->getFilePath().find(name, 0) !=
-			std::string::npos) ? i : _lidx;
-	if (_lidx == UINT_MAX)
-		throw std::logic_error(name + ": Invalid library name");
-	std::cout << "Lib " << name << " founded, name :"
-		<< _libs[_lidx]->getFilePath() << std::endl;
+	bool ret;
+
+	std::cout << "Loading libs:" << std::endl;
+	ret = inspectDirectory("./lib/", _libs);
+	if (ret)
+		std::cout << std::endl << "Loading games:" << std::endl;
+	if (ret && inspectDirectory("./games/", _games)) {
+		_menu.setLists(&_games, &_libs);
+		if (_libs.empty())
+			throw std::logic_error(
+				"No libs found in ./libs directory");
+		if (_games.empty())
+			throw std::logic_error(
+				"No games found in ./games directory");
+		for (unsigned i = 0; i < _libs.size(); ++i)
+			_lidx = (_libs[i]->getFilePath().find(name, 0) !=
+				std::string::npos) ? i : _lidx;
+		if (_lidx == UINT_MAX)
+			std::cerr << "Library " << name << " not found"
+				<< std::endl;
+	}
 }
 
 Arcade::Core::~Core()
@@ -48,12 +54,10 @@ bool Arcade::Core::loadLib(std::string &name, std::string &dir,
 	auto library = new DLLoader<T>(name, dir);
 
 	if (library->getInstance()) {
-		std::string libname(library->getInstance()->getName());
-		std::cout << "Lib [" << libname << "] loaded !" << std::endl;
+		std::cout << "Lib " << library->getInstance()->getName()
+			<< " loaded" << std::endl << std::endl;
 		list.push_back(library);
-	} else
-		throw std::runtime_error(
-			"Unable to load lib [" + name + "]...");
+	}
 	return library->getInstance() != nullptr;
 }
 
@@ -73,7 +77,9 @@ bool Arcade::Core::inspectDirectory(std::string &&dir,
 	n = scandir(dir.c_str(), &list, filter, alphasort);
 	for (int i = 0; i < n; i++) {
 		std::string name(list[i]->d_name);
-		loadLib(name, dir, vec);
+		std::cout << "Loading " << name << "..." << std::endl;
+		if (!loadLib(name, dir, vec))
+			return false;
 		free(list[i]);
 	}
 	return !vec.empty();
@@ -101,34 +107,28 @@ bool Arcade::Core::applyKeys(
 	return true;
 }
 
+size_t Arcade::Core::getLibIdx() const
+{
+	return _lidx;
+}
+
 bool Arcade::Core::start()
 {
-	bool ret = true;
-	std::unordered_map<Arcade::Keys, bool (Core::*)()> actions = {
-		{Arcade::Keys::LEFT, &Core::prevLibG},
-		{Arcade::Keys::RIGHT, &Core::nextLibG},
-		{Arcade::Keys::DOWN, &Core::prevGame},
-		{Arcade::Keys::UP, &Core::nextGame},
-		{Arcade::Keys::SPACE, &Core::restartGame},
-		{Arcade::Keys::BACKSPACE, &Core::backMenu},
-		{Arcade::Keys::ESC, &Core::exit}};
-	std::unordered_map<Arcade::Keys, bool (Core::*)()> menuActions = {
-		{Arcade::Keys::LEFT, &Core::prevLibG},
-		{Arcade::Keys::RIGHT, &Core::nextLibG},
-		{Arcade::Keys::ESC, &Core::exit}};
 
 	_libs[_lidx]->getInstance()->openRenderer("Arcade");
-	while (ret) {
+	for (bool ret = true; !_exit; ret = true) {
 		if (_libs[_lidx]->getInstance()->pollEvents())
 			ret = applyKeys(
-				(_gidx == UINT_MAX) ? menuActions : actions);
+				(_gidx == UINT_MAX) ? _menuActions : _actions);
 		if (ret && _gidx != UINT_MAX) {
 			ret = _games[_gidx]->getInstance()->update();
 			_games[_gidx]->getInstance()->refresh(
 				*_libs[_lidx]->getInstance());
 		} else
 			_menu.refresh(_libs[_lidx]->getInstance(), _lidx);
+		_gidx = ret ? _gidx : UINT_MAX;
 	}
+	return true;
 }
 
 bool Arcade::Core::prevLibG()
@@ -192,6 +192,7 @@ bool Arcade::Core::backMenu()
 bool Arcade::Core::exit()
 {
 	std::cout << "exit" << std::endl;
+	_exit = true;
 	return false;
 }
 

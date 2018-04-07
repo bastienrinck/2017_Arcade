@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <unistd.h>
+#include <unordered_map>
 #include "pacman.hpp"
 
 // Map par défault si le fichier 'map.txt' n'est pas trouvé !
@@ -27,7 +28,8 @@ static const std::vector<char> default_map = {
 '|','|','|','|','|','=','.','=','=','.','.','.','.','.','.','.','.','.','=','=','=','.','=','|','|','|','|','|','\n',
 '|','|','|','|','|','=','.','=','=','.','.','=','=','_','=','=','.','.','=','=','=','.','=','|','|','|','|','|','\n',
 '=','=','=','=','=','=','.','=','=','.','.','=','1',' ','4','=','.','.','=','=','=','.','=','=','=','=','=','=','\n',
-'|','|','|','|','|','=','.','.','.','.','.','=','2',' ','3','=','.','.','.','.','.','.','=','|','|','|','|','|','\n','=','=','=','=','=','=','.','=','=','.','.','=','=','=','=','=','.','.','=','=','=','.','=','=','=','=','=','=','\n',
+'|','|','|','|','|','=','.','.','.','.','.','=','2',' ','3','=','.','.','.','.','.','.','=','|','|','|','|','|','\n',
+'=','=','=','=','=','=','.','=','=','.','.','=','=','=','=','=','.','.','=','=','=','.','=','=','=','=','=','=','\n',
 '|','|','|','|','|','=','.','=','=','.','.','.','.','.','.','.','.','.','=','=','=','.','=','|','|','|','|','|','\n',
 '|','|','|','|','|','=','.','=','=','.','.','.','.','.','.','.','.','.','.','=','=','.','=','|','|','|','|','|','\n',
 '|','|','|','|','|','=','.','=','=','.','=','=','=','=','=','=','=','=','.','=','=','.','=','|','|','|','|','|','\n',
@@ -117,9 +119,17 @@ bool Arcade::Pacman::stop()
 //	return true;
 //}
 
-bool Arcade::Pacman::applyEvent(Arcade::Keys keys)
+bool Arcade::Pacman::applyEvent(Arcade::Keys key)
 {
-	keys = keys;
+	std::unordered_map<Arcade::Keys, size_t> action = {{Arcade::Keys::Z, 0},
+		{Arcade::Keys::S, 1}, {Arcade::Keys::Q, 2},
+		{Arcade::Keys::D, 3}};
+	bool (Arcade::Pacman::*moveArr[4])() = {&Arcade::Pacman::moveUpP,
+		&Arcade::Pacman::moveDownP, &Arcade::Pacman::moveLeftP,
+		&Arcade::Pacman::moveRightP};
+
+	if (action.count(key))
+		return (this->*moveArr[action.at(key)])();
 	return true;
 }
 
@@ -130,40 +140,69 @@ bool Arcade::Pacman::update()
 
 void Arcade::Pacman::refresh(IGraphicLib& gl)
 {
-//	static int idx = 0;
-//	auto r = Arcade::PixelBox(Arcade::Vect<size_t>(gl.getMaxX(), gl.getMaxY()), Vect<size_t>(), Arcade::Color(255, 0, 0, 255));
-//	auto g = Arcade::PixelBox(Arcade::Vect<size_t>(gl.getMaxX(), gl.getMaxY()), Vect<size_t>(), Arcade::Color(0, 255, 0, 255));
-//	auto b = Arcade::PixelBox(Arcade::Vect<size_t>(gl.getMaxX(), gl.getMaxY()), Vect<size_t>(), Arcade::Color(0, 0, 255, 255));
-//
-//	gl.clearWindow();
-//	if (idx == 0)
-//		gl.drawText(_tB);
-//		std::cout << "Le tB mysterieux" << std::endl;
-//	else if (idx == 1)
-//		gl.drawPixelBox(r);
-//	else if (idx == 2)
-//		gl.drawPixelBox(g);
-//	else if (idx == 3)
-//		gl.drawPixelBox(b);
-//	gl.refreshWindow();
-//	idx = idx == 3 ? 0 : idx + 1;
+	auto res = gl.getScreenSize();
+	auto pWidth = static_cast<size_t>(res.getX() * 0.6 / _width);
+	auto pHeight = static_cast<size_t>(res.getY() * 0.6 / _height);
+	auto offsetX = static_cast<size_t>(res.getX() *0.3);
+	auto offsetY = static_cast<size_t>(res.getY() *0.3);
+	Arcade::TextBox score = Arcade::TextBox("Score : " + std::to_string(static_cast<unsigned >(_score)), Arcade::Vect<size_t>());
+	Arcade::TextBox timer = Arcade::TextBox("Time : " + std::to_string(static_cast<unsigned >(_time)), Arcade::Vect<size_t>(res.getX() / 2, 0));
+	Arcade::PixelBox pB;
 
-	size_t pWidth = _width * CELL_WIDTH;
-	size_t pHeight = _height * CELL_HEIGHT;
+	gl.clearWindow();
 
-	graphicsLib.clearWindow();
-	print_background(graphicsLib);
-	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(CELL_WIDTH, CELL_HEIGHT),
-	                       Arcade::Vect<size_t>(), Arcade::Color(255, 0, 0, 255));
-	for (auto cell : _snake) {
-		_pB.setX((graphicsLib.getMaxX() / 2) - (pWidth / 2) +
-		         (cell.getX() * CELL_WIDTH));
-		_pB.setY((graphicsLib.getMaxY() / 2) - (pHeight / 2) +
-		         (cell.getY() * CELL_HEIGHT));
-		graphicsLib.drawPixelBox(_pB);
+	//Print du score et du timer
+	gl.drawText(score);
+	gl.drawText(timer);
+
+	//Print du labyrinthe
+	for (unsigned i = 0; i < _map.size(); ++i){
+		if (_map[i] == '=')
+			pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(64, 25, 76, 255));
+		else if (_map[i] == '.')
+			pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(183, 110, 0, 255));
+		else
+			pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(236, 117, 115, 255));
+		if (_map[i] == '=' || _map[i] == '.' || _map[i] == 'o'){
+			pB.setX(offsetX + i % (_width + 1) * pWidth);
+			pB.setY(offsetY + i / (_width + 1) * pHeight);
+			gl.drawPixelBox(pB);
+		}
 	}
-	graphicsLib.refreshWindow();
 
+	//Print du Pacman
+	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(253, 255, 0, 255));
+	pB.setX(offsetX + _pos_p[0] * pWidth);
+	pB.setY(offsetY + _pos_p[1] * pHeight);
+	gl.drawPixelBox(pB);
+
+
+	//Print des fantomes
+	//F1
+	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(234, 130, 229, 255));
+	pB.setX(offsetX + _pos_f[0][0] * pWidth);
+	pB.setY(offsetY + _pos_f[0][1] * pHeight);
+	gl.drawPixelBox(pB);
+
+	//F2
+	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(70, 191, 238, 255));
+	pB.setX(offsetX + _pos_f[1][0] * pWidth);
+	pB.setY(offsetY + _pos_f[1][1] * pHeight);
+	gl.drawPixelBox(pB);
+
+	//F3
+	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(208, 62, 25, 255));
+	pB.setX(offsetX + _pos_f[2][0] * pWidth);
+	pB.setY(offsetY + _pos_f[2][1] * pHeight);
+	gl.drawPixelBox(pB);
+
+	//F4
+	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(219, 133, 28, 255));
+	pB.setX(offsetX + _pos_f[3][0] * pWidth);
+	pB.setY(offsetY + _pos_f[3][1] * pHeight);
+	gl.drawPixelBox(pB);
+
+	gl.refreshWindow();
 }
 
 void Arcade::Pacman::loadMap()

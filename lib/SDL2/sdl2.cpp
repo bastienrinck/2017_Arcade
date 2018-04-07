@@ -100,7 +100,7 @@ void Arcade::Sdl::drawText(Arcade::TextBox const &tB)
 	SDL_Color fgColor = {raw[0], raw[1], raw[2], raw[3]};
 	raw = (unsigned char *)tB.getBackgroundColor();
 	SDL_Color bgColor = {raw[0], raw[1], raw[2], raw[3]};
-	_font = TTF_OpenFont("ressources/fonts/Times New Roman.ttf",
+	_font = TTF_OpenFont("ressources/fonts/font.ttf",
 		static_cast<int>(tB.getFontSize()));
 	auto surface = TTF_RenderText_Shaded(_font, tB.getValue().c_str(), fgColor,
 		bgColor);
