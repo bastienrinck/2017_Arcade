@@ -28,6 +28,7 @@ PlayerStats::~PlayerStats()
 	WriteStats(__game2);
 }
 
+/* met le contenu de la map dans les fichiers .log à la destruction des objets */
 void PlayerStats::WriteStats(std::string Game)
 {
 	std::string savepath(SAVE_PATH + Game + SAVE_EXTENSION);
@@ -66,7 +67,7 @@ void PlayerStats::AddGame(std::string Game)
 		std::ofstream outfile(SAVE_PATH + Game + SAVE_EXTENSION);
 		outfile.close();
 	} else {
-		//ouvre le dossier path et stoque après ':' dans _stats
+		//ouvre le dossier path et stoque après ':' dans la map _stats
 		while (getline(myfile, line)) {
 			if (std::regex_match(line, match, reg)) {
 				_Stats[Game][match[1].str()] = match[2].str();
@@ -87,7 +88,6 @@ PlayerName, std::string Score)
 	_Stats[Game][PlayerName] = Score;
 }
 
-/* Met à jour le highscore d'un joueur pour un jeu */
 std::string PlayerStats::GetPlayerScore(std::string Game,
 					std::string PlayerName)
 {
