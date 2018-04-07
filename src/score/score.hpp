@@ -26,8 +26,8 @@ class PlayerStats
 	public:
 		void AddGame(std::string Game);
 		void GetGameStats(std::string Game, std::string PlayerName);
-		void UpdatePlayerScore(std::string Game, std::string
-		PlayerName, std::string Score);
+		std::string GetPlayerScore(std::string Game, std::string
+		PlayerName);
 		void PrintGame(std::string Game);
 		void WriteStats(std::string Game);
 		void AddScore(std::string PlayerName, std::string Score);

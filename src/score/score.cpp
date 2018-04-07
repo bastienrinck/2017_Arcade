@@ -30,10 +30,8 @@ PlayerStats::~PlayerStats()
 
 void PlayerStats::WriteStats(std::string Game)
 {
-	std::cout << "in writestat fc" << std::endl;
-
-	std::string savepathpacman(SAVE_PATH + Game + SAVE_EXTENSION);
-	std::ofstream myfile(savepathpacman);
+	std::string savepath(SAVE_PATH + Game + SAVE_EXTENSION);
+	std::ofstream myfile(savepath);
 
 	for (std::map<std::string, std::string>::iterator i = _Stats[Game].begin(); i != _Stats[Game].end(); i++) {
 		myfile << i->first << ":" << i->second << std::endl;
@@ -90,12 +88,10 @@ PlayerName, std::string Score)
 }
 
 /* Met à jour le highscore d'un joueur pour un jeu */
-void PlayerStats::UpdatePlayerScore(std::string Game, std::string PlayerName,
-				    std::string Score)
+std::string PlayerStats::GetPlayerScore(std::string Game,
+					std::string PlayerName)
 {
 	std::string path(SAVE_PATH + Game + SAVE_EXTENSION);
-	std::regex reg("^(\\w+):(\\w*)$");
-	std::smatch match;
 	std::map<std::string, std::string>::iterator i;
 
 	for (i = _Stats[Game]
@@ -106,14 +102,16 @@ void PlayerStats::UpdatePlayerScore(std::string Game, std::string PlayerName,
 					std::cout << "joueur " << PlayerName
 						  << " trouvé pour le jeu "
 						  << Game << std::endl;
-					i->second = Score;
 					break;
 					}
 	}
 	/* joueur non existant */
 	if (i == _Stats[Game].end()) {
-		_Stats[Game][PlayerName] = Score;
+		std::cout << "joueur " << PlayerName << " non trouvé pour le "
+			"jeu " << Game << std::endl;
+		return (""); /* pas d'autre idée pour ne pas toucher à _Stats[Game][PlayerName] */
 	}
+	return (_Stats[Game][PlayerName]);
 }
 
 void PlayerStats::PrintGame(std::string Game)
@@ -131,11 +129,20 @@ int main(int ac, char **av)
 
 	Stats.AddGame(Game);
 	Stats.SetScore(Game, PlayerName, "48");
-	Stats.UpdatePlayerScore(Game, PlayerName, "499999");
+	Stats.SetScore(Game, "James", "500");
+	Stats.SetScore("snake", "Miaous", "10");
+	std::cout << "score: " << Stats.GetPlayerScore(Game, PlayerName) <<
+								    std::endl;
+	std::cout << "score: " << Stats.GetPlayerScore(Game, "James") <<
+								    std::endl;
+	std::cout << "score: " << Stats.GetPlayerScore(Game, "Jimmy") <<
+		  std::endl;
+	std::cout << "score: " << Stats.GetPlayerScore("snake", "Jimmy") <<
+		  std::endl;
 	//Stats.PrintGame(Game);
 	return 0;
 }
 
 // pour tester:
 // g++ -std=c++11 score.cpp && ./a.out
-// cat ../../.save/pacman.log
+// cat ../../.save/pacman.log (les fichiers .log sont à la racine dans le dossier .save)
