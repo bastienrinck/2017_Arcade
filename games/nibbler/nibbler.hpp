@@ -41,7 +41,7 @@ namespace Arcade {
 		bool moveDown();
 		bool moveLeft();
 		bool moveRight();
-		void print_background(IGraphicLib &, Vect<size_t> const &);
+		void print_map(IGraphicLib &, Vect<size_t> const &);
 		void check_bonus();
 		bool lost();
 

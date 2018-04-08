@@ -33,17 +33,17 @@ namespace Arcade {
 		void printBackground(Arcade::IGraphicLib *,
 			Arcade::Vect<size_t> &
 		);
-
 		void printGames(Arcade::IGraphicLib *, Arcade::Vect<size_t> &);
-
 		void printLibs(Arcade::IGraphicLib *, Arcade::Vect<size_t> &,
 			unsigned
 		);
+		void printScore(Arcade::IGraphicLib *, std::map<std::string, std::string>);
 
 		std::vector<DLLoader<Arcade::IGameLib> *> *_games = nullptr;
 		std::vector<DLLoader<Arcade::IGraphicLib> *> *_libs = nullptr;
 		std::string _username = "player";
 		unsigned _idx = 0;
+		bool _score = false;
 	};
 
 	class Core {

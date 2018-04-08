@@ -9,46 +9,30 @@
 #include <iostream>
 #include "nibbler.hpp"
 
-#define WIDTH 64
-#define HEIGHT 36
+#define WIDTH 41
+#define HEIGHT 20
 
 static std::vector<std::string> map = {
-	"                                                                ",
-	"                                                                ",
-	"                                                                ",
-	"    ******                                            ******    ",
-	"    ******                                            ******    ",
-	"    ***          ******************************          ***    ",
-	"    ***          ******************************          ***    ",
-	"                                                                ",
-	"            **                                    **            ",
-	"            *                                      *            ",
-	"                                                                ",
-	"        **                    ****                     **       ",
-	"        **                    ****                     **       ",
-	"        **                    ****                     **       ",
-	"        **                    ****                     **       ",
-	"        **                    ****                     **       ",
-	"        **            ********************             **       ",
-	"        **            ********************             **       ",
-	"        **            ********************             **       ",
-	"        **            ********************             **       ",
-	"        **                    ****                     **       ",
-	"        **                    ****                     **       ",
-	"        **                    ****                     **       ",
-	"        **                    ****                     **       ",
-	"        **                    ****                     **       ",
-	"                                                                ",
-	"                                                                ",
-	"            *                                      *            ",
-	"            **                                    **            ",
-	"    ***          ******************************          ***    ",
-	"    ***          ******************************          ***    ",
-	"    ******                                            ******    ",
-	"    ******                                            ******    ",
-	"                                                                ",
-	"                                                                ",
-	"                                                                "};
+	"                                         ",
+	" *****                             ***** ",
+	" ***                                 *** ",
+	"                                         ",
+	"     **  ***********************  **     ",
+	"     *                             *     ",
+	"                                         ",
+	"    *              ****             *    ",
+	"    *              ****             *    ",
+	"    *              ****             *    ",
+	"    *      ********************     *    ",
+	"    *      ********************     *    ",
+	"    *              ****             *    ",
+	"    *              ****             *    ",
+	"                   ****                  ",
+	"     *                             *     ",
+	"     **  ***********************  **     ",
+	" ***                                 *** ",
+	" *****                             ***** ",
+	"                                         ",};
 
 Arcade::IGameLib *lib = nullptr;
 
@@ -197,28 +181,32 @@ bool Arcade::Nibbler::moveRight()
 	return lost();
 }
 
-void Arcade::Nibbler::print_background(Arcade::IGraphicLib &graphicsLib,
+void Arcade::Nibbler::print_map(Arcade::IGraphicLib &graphicsLib,
 	Arcade::Vect<size_t> const &res
 )
 {
-	auto pWidth = static_cast<size_t>(res.getX() * 0.7);
-	auto pHeight = static_cast<size_t>(res.getY() * 0.7);
-	auto offsetX = static_cast<size_t>(res.getX() * 0.25);
-	auto offsetY = static_cast<size_t>(res.getY() * 0.25);
-	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
-		Arcade::Vect<size_t>(offsetX, offsetY),
-		Arcade::Color(76, 38, 114, 255));
-	graphicsLib.drawPixelBox(_pB);
+	auto pWidth = static_cast<size_t>(res.getX() * 0.6 / WIDTH);
+	auto pHeight = static_cast<size_t>(res.getY() * 0.6 / HEIGHT);
+	auto offsetX = static_cast<size_t>(res.getX() * 0.3);
+	auto offsetY = static_cast<size_t>(res.getY() * 0.3);
 
-	pWidth = static_cast<size_t>(res.getX() * 0.6);
-	pHeight = static_cast<size_t>(res.getY() * 0.6);
-	offsetX = static_cast<size_t>(res.getX() * 0.3);
-	offsetY = static_cast<size_t>(res.getY() * 0.3);
-
-	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
-		Arcade::Vect<size_t>(offsetX, offsetY),
-		Arcade::Color(0, 0, 0, 255));
-	graphicsLib.drawPixelBox(_pB);
+	for (unsigned i = 0; i < map.size(); ++i) {
+		for (unsigned j = 0; j < map[i].size(); ++j) {
+			if (map[i][j] == '*')
+				_pB = Arcade::PixelBox(
+					Arcade::Vect<size_t>(pWidth, pHeight),
+					Arcade::Vect<size_t>(),
+					Arcade::Color(76, 38, 114, 255));
+			else
+				_pB = Arcade::PixelBox(
+					Arcade::Vect<size_t>(pWidth, pHeight),
+					Arcade::Vect<size_t>(),
+					Arcade::Color(255, 255, 255, 255));
+			_pB.setX(offsetX + j * pWidth);
+			_pB.setY(offsetY + i * pHeight);
+			graphicsLib.drawPixelBox(_pB);
+		}
+	}
 }
 
 bool Arcade::Nibbler::applyEvent(Arcade::Keys key)
@@ -257,22 +245,11 @@ void Arcade::Nibbler::refresh(Arcade::IGraphicLib &graphicsLib)
 	auto pHeight = static_cast<size_t>(res.getY() * 0.6 / HEIGHT);
 	auto offsetX = static_cast<size_t>(res.getX() * 0.3);
 	auto offsetY = static_cast<size_t>(res.getY() * 0.3);
-	auto text = Arcade::TextBox(std::to_string(_score),
+	auto text = Arcade::TextBox("Score : " + std::to_string(_score),
 		Arcade::Vect<size_t>());
 
 	graphicsLib.clearWindow();
-	print_background(graphicsLib, res);
-	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
-		Arcade::Vect<size_t>(), Arcade::Color(76, 38, 114, 255));
-	for (unsigned i = 0; i < map.size(); ++i) {
-		for (unsigned j = 0; j < map[i].size(); ++j) {
-			if (map[i][j] == '*') {
-				_pB.setX(offsetX + j * pWidth);
-				_pB.setY(offsetY + i * pHeight);
-				graphicsLib.drawPixelBox(_pB);
-			}
-		}
-	}
+	print_map(graphicsLib, res);
 	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
 		Arcade::Vect<size_t>(), Arcade::Color(191, 63, 63, 255));
 	for (auto cell : _snake) {

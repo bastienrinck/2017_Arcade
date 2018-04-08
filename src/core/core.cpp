@@ -163,8 +163,8 @@ bool Arcade::Core::prevGame()
 	_games[_gidx]->getInstance()->stop();
 	_gidx = (!_gidx) ? static_cast<unsigned int>(_games.size() - 1) :
 		_gidx - 1;
-	_games[_gidx]->getInstance()->init();
 	_libs[_lidx]->getInstance()->openRenderer("Arcade");
+	_games[_gidx]->getInstance()->init();
 	return true;
 }
 
@@ -174,8 +174,8 @@ bool Arcade::Core::nextGame()
 	_libs[_lidx]->getInstance()->closeRenderer();
 	_games[_gidx]->getInstance()->stop();
 	_gidx = (_gidx == _games.size() - 1) ? 0 : _gidx + 1;
-	_games[_gidx]->getInstance()->init();
 	_libs[_lidx]->getInstance()->openRenderer("Arcade");
+	_games[_gidx]->getInstance()->init();
 	return true;
 }
 
@@ -216,8 +216,6 @@ void Arcade::Core::updateScore()
 		std::string name = _menu.getUserName();
 		auto score = static_cast<int>(_games[_gidx]->getInstance()->getScore());
 
-		std::cout << "Score de " << name << " dans le jeu " << game
-			<< ": " << score << std::endl;
 		if (score > _score.getPlayerScore(game, name))
 			_score.setScore(game, name,
 				static_cast<unsigned int>(score));
@@ -273,7 +271,7 @@ void Arcade::Menu::printLibs(Arcade::IGraphicLib *gl,
 	text.setBackgroundColor(Arcade::Color(221, 221, 221, 255));
 	for (unsigned i = 0; i < _libs->size(); ++i) {
 		text.setValue((*_libs)[i]->getInstance()->getName());
-		text.setX(mode.getX() / 2);
+		//text.setX(mode.getX() / 2);
 		text.setY(static_cast<size_t>(
 			mode.getY() * 0.1 +
 				(i * (_libs->size() * mode.getY() * 0.04))));
@@ -283,27 +281,40 @@ void Arcade::Menu::printLibs(Arcade::IGraphicLib *gl,
 	}
 }
 
+void Arcade::Menu::printScore(Arcade::IGraphicLib *gl, std::map<std::string, std::string> scores)
+{
+	auto mode = gl->getScreenSize();
+	auto text = Arcade::TextBox("", Arcade::Vect<size_t>(0, 0));
+	int i = 0;
+
+	text.setColor(Arcade::Color(0, 0, 0, 255));
+	text.setBackgroundColor(Arcade::Color(221, 221, 221, 255));
+	for (auto &cell : scores) {
+		text.setX(mode.getX() / 10 + mode.getX() / 2);
+		text.setY(static_cast<size_t>(mode.getY() * 0.1 + (i * (scores.size() * mode.getY() * 0.04))));
+		text.setValue(cell.first + ": " + cell.second);
+		gl->drawText(text);
+		i++;
+	}
+}
+
 void Arcade::Menu::refresh(Arcade::IGraphicLib *gl, unsigned idx,
 	Arcade::Score score
 )
 {
 	auto mode = gl->getScreenSize();
 	auto gameName = (*_games)[_idx]->getInstance()->getName();
-	auto text = Arcade::TextBox(_username, Arcade::Vect<size_t>(0, 0));
+	auto text = Arcade::TextBox("Gamer tag : " + _username, Arcade::Vect<size_t>(0, 0));
 
 	gl->clearWindow();
 	printBackground(gl, mode);
 	gl->drawText(text);
 	printGames(gl, mode);
-	printLibs(gl, mode, idx);
+	if (_score)
+		printScore(gl, score.getGameStats(gameName));
+	else
+		printLibs(gl, mode, idx);
 	text.setColor(Arcade::Color(0, 255, 0, 255));
-	for (auto &cell : score.getGameStats(gameName)) {
-		text.setY(static_cast<size_t>(gl->getMaxY() * 0.9));
-		text.setValue(cell.first + ": " + cell.second);
-		gl->drawText(text);
-		text.setX(static_cast<size_t>(text.getX() +
-			gl->getMaxX() * 0.33));
-	}
 	gl->refreshWindow();
 }
 
@@ -317,6 +328,8 @@ unsigned Arcade::Menu::applyEvent(Arcade::Keys key)
 		_idx += 1;
 	else if (key == Arcade::Keys::UP && _idx > 0)
 		_idx -= 1;
+	else if (key == Arcade::Keys::TAB)
+		_score = !_score;
 	else if (key < 26)
 		_username += keysC[key - 1];
 	else if (key == Arcade::Keys::BACKSPACE && !_username.empty())
