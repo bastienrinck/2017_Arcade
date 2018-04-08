@@ -14,7 +14,7 @@ Arcade::PixelBox::PixelBox(Arcade::Vect<size_t> size, Arcade::Vect<size_t> pos,
 	Arcade::Color col
 ) : _size(size), _pos(pos)
 {
-	for (unsigned	 i = 0; i < size.getY() * size.getX(); ++i)
+	for (unsigned i = 0; i < size.getY() * size.getX(); ++i)
 		_colorFrame.push_back(col);
 }
 
@@ -66,6 +66,7 @@ Arcade::Vect<size_t> Arcade::PixelBox::getSize() const
 void Arcade::PixelBox::setSize(Arcade::Vect<size_t> size)
 {
 	_size = size;
+	_colorFrame.reserve(getWidth() * getHeight());
 }
 
 Arcade::Vect<size_t> Arcade::PixelBox::getPos() const
@@ -92,11 +93,9 @@ void Arcade::PixelBox::putRect(Arcade::Vect<size_t> pos,
 	Arcade::Vect<size_t> size, Arcade::Color col
 )
 {
-	for (unsigned i = 0; i < size.getY() && pos.getY() + i < _size.getY(); ++i)
-		for (unsigned j = 0;
-			j < size.getX() && pos.getX() + j < size.getX(); ++j)
-			_colorFrame[(pos.getY() + i) * _size.getY() +
-				(pos.getX() + j)] = col;
+	for (unsigned i = 0; i < size.getY(); ++i)
+		for (unsigned j = 0; j < size.getX(); ++j)
+			putPixel(Arcade::Vect<size_t>(pos.getX() + j, pos.getY() + i), col);
 }
 
 std::vector<Arcade::Color> const &Arcade::PixelBox::getPixelArray() const
