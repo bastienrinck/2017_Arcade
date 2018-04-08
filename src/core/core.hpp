@@ -13,6 +13,7 @@
 #include <dirent.h>
 #include <unordered_map>
 #include "DLLoader.hpp"
+#include "../score/score.hpp"
 
 namespace Arcade {
 	class Menu {
@@ -24,10 +25,9 @@ namespace Arcade {
 		void setLists(std::vector<DLLoader<IGameLib> *> *,
 			std::vector<DLLoader<IGraphicLib> *> *
 		);
-
-		void refresh(IGraphicLib *, unsigned);
-
+		void refresh(IGraphicLib *, unsigned, Arcade::Score);
 		unsigned applyEvent(Keys);
+		std::string getUserName() const;
 
 	private:
 		void printBackground(Arcade::IGraphicLib *,
@@ -71,6 +71,7 @@ namespace Arcade {
 			std::unordered_map<Arcade::Keys, bool (Core::*)()> &
 		);
 
+		void updateScore();
 		bool prevLibG();
 		bool nextLibG();
 		bool prevGame();
@@ -80,6 +81,7 @@ namespace Arcade {
 		bool exit();
 
 		Menu _menu;
+		Arcade::Score _score;
 		std::vector<DLLoader<Arcade::IGraphicLib> *> _libs;
 		std::vector<DLLoader<Arcade::IGameLib> *> _games;
 		std::unordered_map<Arcade::Keys, bool (Core::*)()> _actions = {

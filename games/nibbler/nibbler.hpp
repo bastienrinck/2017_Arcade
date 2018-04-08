@@ -46,12 +46,12 @@ namespace Arcade {
 		bool lost();
 
 		const std::string _name = "Nibbler";
-		std::time_t _timer;
+		std::time_t _timer = 0;
 		std::list<Arcade::Vect<size_t>> _snake;
 		Arcade::Vect<size_t> _bonus;
 		Arcade::PixelBox _pB;
 		size_t _direction = 2;
-		int _score;
+		int _score = 0;
 	};
 };
 

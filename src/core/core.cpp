@@ -115,6 +115,10 @@ size_t Arcade::Core::getLibIdx() const
 bool Arcade::Core::start()
 {
 
+	for (auto &cell : _games) {
+		std::string gameName = cell->getInstance()->getName();
+		_score.addGame(gameName);
+	}
 	_libs[_lidx]->getInstance()->openRenderer("Arcade");
 	for (bool ret = true; !_exit; ret = true) {
 		if (_libs[_lidx]->getInstance()->pollEvents())
@@ -125,8 +129,12 @@ bool Arcade::Core::start()
 			_games[_gidx]->getInstance()->refresh(
 				*_libs[_lidx]->getInstance());
 		} else
-			_menu.refresh(_libs[_lidx]->getInstance(), _lidx);
-		_gidx = ret ? _gidx : UINT_MAX;
+			_menu.refresh(_libs[_lidx]->getInstance(), _lidx,
+				_score);
+		if (!ret){
+			updateScore();
+			_gidx = UINT_MAX;
+		}
 	}
 	return true;
 }
@@ -150,6 +158,7 @@ bool Arcade::Core::nextLibG()
 
 bool Arcade::Core::prevGame()
 {
+	updateScore();
 	_libs[_lidx]->getInstance()->closeRenderer();
 	_games[_gidx]->getInstance()->stop();
 	_gidx = (!_gidx) ? static_cast<unsigned int>(_games.size() - 1) :
@@ -161,6 +170,7 @@ bool Arcade::Core::prevGame()
 
 bool Arcade::Core::nextGame()
 {
+	updateScore();
 	_libs[_lidx]->getInstance()->closeRenderer();
 	_games[_gidx]->getInstance()->stop();
 	_gidx = (_gidx == _games.size() - 1) ? 0 : _gidx + 1;
@@ -171,6 +181,7 @@ bool Arcade::Core::nextGame()
 
 bool Arcade::Core::restartGame()
 {
+	updateScore();
 	if (_gidx != UINT_MAX) {
 		_games[_gidx]->getInstance()->init();
 		_games[_gidx]->getInstance()->refresh(
@@ -181,9 +192,10 @@ bool Arcade::Core::restartGame()
 
 bool Arcade::Core::backMenu()
 {
+	updateScore();
 	if (_gidx != UINT_MAX) {
 		_games[_gidx]->getInstance()->stop();
-		_menu.refresh(_libs[_lidx]->getInstance(), _lidx);
+		_menu.refresh(_libs[_lidx]->getInstance(), _lidx, _score);
 	}
 	_gidx = UINT_MAX;
 	return true;
@@ -191,9 +203,25 @@ bool Arcade::Core::backMenu()
 
 bool Arcade::Core::exit()
 {
+	updateScore();
 	std::cout << "exit" << std::endl;
 	_exit = true;
 	return false;
+}
+
+void Arcade::Core::updateScore()
+{
+	if (_gidx != UINT_MAX) {
+		std::string game = _games[_gidx]->getInstance()->getName();
+		std::string name = _menu.getUserName();
+		auto score = static_cast<int>(_games[_gidx]->getInstance()->getScore());
+
+		std::cout << "Score de " << name << " dans le jeu " << game
+			<< ": " << score << std::endl;
+		if (score > _score.getPlayerScore(game, name))
+			_score.setScore(game, name,
+				static_cast<unsigned int>(score));
+	}
 }
 
 void Arcade::Menu::printBackground(Arcade::IGraphicLib *gl,
@@ -255,9 +283,12 @@ void Arcade::Menu::printLibs(Arcade::IGraphicLib *gl,
 	}
 }
 
-void Arcade::Menu::refresh(Arcade::IGraphicLib *gl, unsigned idx)
+void Arcade::Menu::refresh(Arcade::IGraphicLib *gl, unsigned idx,
+	Arcade::Score score
+)
 {
 	auto mode = gl->getScreenSize();
+	auto gameName = (*_games)[_idx]->getInstance()->getName();
 	auto text = Arcade::TextBox(_username, Arcade::Vect<size_t>(0, 0));
 
 	gl->clearWindow();
@@ -265,6 +296,14 @@ void Arcade::Menu::refresh(Arcade::IGraphicLib *gl, unsigned idx)
 	gl->drawText(text);
 	printGames(gl, mode);
 	printLibs(gl, mode, idx);
+	text.setColor(Arcade::Color(0, 255, 0, 255));
+	for (auto &cell : score.getGameStats(gameName)) {
+		text.setY(static_cast<size_t>(gl->getMaxY() * 0.9));
+		text.setValue(cell.first + ": " + cell.second);
+		gl->drawText(text);
+		text.setX(static_cast<size_t>(text.getX() +
+			gl->getMaxX() * 0.33));
+	}
 	gl->refreshWindow();
 }
 
@@ -291,4 +330,9 @@ void Arcade::Menu::setLists(std::vector<DLLoader<Arcade::IGameLib> *> *games,
 {
 	_games = games;
 	_libs = libs;
+}
+
+std::string Arcade::Menu::getUserName() const
+{
+	return _username;
 }

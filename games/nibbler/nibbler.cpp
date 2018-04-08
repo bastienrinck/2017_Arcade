@@ -134,7 +134,7 @@ bool Arcade::Nibbler::moveUp()
 	else if (_direction != 1) {
 		_snake.push_front(Arcade::Vect<size_t>(_snake.front().getX(),
 			_snake.front().getY() - 1));
-		if (_bonus.getX() != _snake.front().getX() &&
+		if (_bonus.getX() != _snake.front().getX() ||
 			_bonus.getY() != _snake.front().getY())
 			_snake.pop_back();
 		_direction = 0;
@@ -151,7 +151,7 @@ bool Arcade::Nibbler::moveDown()
 	else if (_direction) {
 		_snake.push_front(Arcade::Vect<size_t>(_snake.front().getX(),
 			_snake.front().getY() + 1));
-		if (_bonus.getX() != _snake.front().getX() &&
+		if (_bonus.getX() != _snake.front().getX() ||
 			_bonus.getY() != _snake.front().getY())
 			_snake.pop_back();
 		_direction = 1;
@@ -169,7 +169,7 @@ bool Arcade::Nibbler::moveLeft()
 		_snake.push_front(
 			Arcade::Vect<size_t>(_snake.front().getX() - 1,
 				_snake.front().getY()));
-		if (_bonus.getX() != _snake.front().getX() &&
+		if (_bonus.getX() != _snake.front().getX() ||
 			_bonus.getY() != _snake.front().getY())
 			_snake.pop_back();
 		_direction = 2;
@@ -187,7 +187,7 @@ bool Arcade::Nibbler::moveRight()
 		_snake.push_front(
 			Arcade::Vect<size_t>(_snake.front().getX() + 1,
 				_snake.front().getY()));
-		if (_bonus.getX() != _snake.front().getX() &&
+		if (_bonus.getX() != _snake.front().getX() ||
 			_bonus.getY() != _snake.front().getY())
 			_snake.pop_back();
 		_direction = 3;
@@ -198,16 +198,26 @@ bool Arcade::Nibbler::moveRight()
 }
 
 void Arcade::Nibbler::print_background(Arcade::IGraphicLib &graphicsLib,
-	Arcade::Vect<size_t> const &dimension
+	Arcade::Vect<size_t> const &res
 )
 {
-	auto modWidth = dimension.getX() % WIDTH;
-	auto modHeight = dimension.getY() % HEIGHT;
+	auto pWidth = static_cast<size_t>(res.getX() * 0.7);
+	auto pHeight = static_cast<size_t>(res.getY() * 0.7);
+	auto offsetX = static_cast<size_t>(res.getX() * 0.25);
+	auto offsetY = static_cast<size_t>(res.getY() * 0.25);
+	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+		Arcade::Vect<size_t>(offsetX, offsetY),
+		Arcade::Color(76, 38, 114, 255));
+	graphicsLib.drawPixelBox(_pB);
 
-	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(dimension.getX() - modWidth,
-		dimension.getY() - modHeight),
-		Arcade::Vect<size_t>(modWidth / 2, modWidth / 2),
-		Arcade::Color(255, 255, 255, 255));
+	pWidth = static_cast<size_t>(res.getX() * 0.6);
+	pHeight = static_cast<size_t>(res.getY() * 0.6);
+	offsetX = static_cast<size_t>(res.getX() * 0.3);
+	offsetY = static_cast<size_t>(res.getY() * 0.3);
+
+	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+		Arcade::Vect<size_t>(offsetX, offsetY),
+		Arcade::Color(0, 0, 0, 255));
 	graphicsLib.drawPixelBox(_pB);
 }
 
@@ -242,35 +252,38 @@ bool Arcade::Nibbler::update()
 
 void Arcade::Nibbler::refresh(Arcade::IGraphicLib &graphicsLib)
 {
-	Arcade::Vect<size_t> dimension = graphicsLib.getScreenSize();
-	auto modWidth = dimension.getX() % WIDTH;
-	auto modHeight = dimension.getY() % HEIGHT;
-	auto width = (dimension.getX() - modWidth) / WIDTH;
-	auto height = (dimension.getY() - modHeight) / HEIGHT;
-	auto text = Arcade::TextBox(std::to_string(_score), Arcade::Vect<size_t>());
+	Arcade::Vect<size_t> res = graphicsLib.getScreenSize();
+	auto pWidth = static_cast<size_t>(res.getX() * 0.6 / WIDTH);
+	auto pHeight = static_cast<size_t>(res.getY() * 0.6 / HEIGHT);
+	auto offsetX = static_cast<size_t>(res.getX() * 0.3);
+	auto offsetY = static_cast<size_t>(res.getY() * 0.3);
+	auto text = Arcade::TextBox(std::to_string(_score),
+		Arcade::Vect<size_t>());
 
 	graphicsLib.clearWindow();
-	print_background(graphicsLib, dimension);
-	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(width, height),
-		Arcade::Vect<size_t>(), Arcade::Color(0, 255, 0, 255));
+	print_background(graphicsLib, res);
+	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+		Arcade::Vect<size_t>(), Arcade::Color(76, 38, 114, 255));
 	for (unsigned i = 0; i < map.size(); ++i) {
 		for (unsigned j = 0; j < map[i].size(); ++j) {
 			if (map[i][j] == '*') {
-				_pB.setX(j * width);
-				_pB.setY(i * height);
+				_pB.setX(offsetX + j * pWidth);
+				_pB.setY(offsetY + i * pHeight);
 				graphicsLib.drawPixelBox(_pB);
 			}
 		}
 	}
-	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(width, height),
-		Arcade::Vect<size_t>(), Arcade::Color(0, 0, 255, 255));
+	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+		Arcade::Vect<size_t>(), Arcade::Color(191, 63, 63, 255));
 	for (auto cell : _snake) {
-		_pB.setX(cell.getX() * width);
-		_pB.setY(cell.getY() * height);
+		_pB.setX(offsetX + cell.getX() * pWidth);
+		_pB.setY(offsetY + cell.getY() * pHeight);
 		graphicsLib.drawPixelBox(_pB);
 	}
 
-	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(width, height), Arcade::Vect<size_t>(_bonus.getX() * width, _bonus.getY() * height),
+	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+		Arcade::Vect<size_t>(offsetX + _bonus.getX() * pWidth,
+			offsetY + _bonus.getY() * pHeight),
 		Arcade::Color(255, 0, 0, 255));
 	graphicsLib.drawPixelBox(_pB);
 	graphicsLib.drawText(text);
@@ -279,5 +292,5 @@ void Arcade::Nibbler::refresh(Arcade::IGraphicLib &graphicsLib)
 
 size_t Arcade::Nibbler::getScore()
 {
-	return 0;
+	return static_cast<size_t>(_score);
 }
