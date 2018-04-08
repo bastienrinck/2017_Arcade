@@ -247,7 +247,7 @@ void Arcade::Pacman::loadMap()
 
 	if (!input) {
 		std::cout << "Error : file 'map.txt' not found. The default "
-	       "map is loaded" << std::endl;
+		"map is loaded" << std::endl;
 		_map = _defaultMap;
 	} else {
 		while (input.read(&tmp, 1)) {
@@ -293,7 +293,7 @@ bool Arcade::Pacman::moveDownP() // dir = 2
 		return false;
 	}
 	if (_map[((_posp[1] + 1) * _width) + (_posp[0])] == '.'
-	    || _map[((_posp[1] + 1) * _width) + (_posp[0])] == 'o'){
+		|| _map[((_posp[1] + 1) * _width) + (_posp[0])] == 'o'){
 		_food--;
 		_score += 100;
 	}
@@ -383,7 +383,7 @@ bool Arcade::Pacman::moveUpF(std::vector<size_t> &pos, char sym)
 	// Déplacement en bas d'un fantom
 	pos[2] = 1;
 	if (_map[(((pos[1] - 1) * _width) + pos[0])] == '='
-	    || isNum(_map[(((pos[1] - 1) * _width) + pos[0])])) {
+		|| isNum(_map[(((pos[1] - 1) * _width) + pos[0])])) {
 		pos[2] = 0;
 		return false;
 	}
@@ -418,7 +418,7 @@ bool Arcade::Pacman::moveLeftF(std::vector<size_t> &pos, char sym)
 	// Déplacement à gauche d'un fantom
 	pos[2] = 3;
 	if (_map[(((pos[1]) * _width) + pos[0] - 1)] == '='
-	    || isNum(_map[(((pos[1]) * _width) + pos[0] - 1)] )) {
+		|| isNum(_map[(((pos[1]) * _width) + pos[0] - 1)] )) {
 		pos[2] = 0;
 		return false;
 	}
@@ -506,25 +506,25 @@ void Arcade::Pacman::findDirection(int nb)
 		dir = rand() % 5;
 		if (dir == 1
 			&& (_map[_posf[nb][0] + ((_posf[nb][1] - 1) * _width)] == '.'
-		        || _map[_posf[nb][0] + ((_posf[nb][1] - 1) * _width)] == ' '
+			|| _map[_posf[nb][0] + ((_posf[nb][1] - 1) * _width)] == ' '
 			|| _map[_posf[nb][0] + ((_posf[nb][1] - 1) * _width)] == 'X'
-		        || _map[_posf[nb][0] + ((_posf[nb][1] - 1) * _width)] == 'o'))
+			|| _map[_posf[nb][0] + ((_posf[nb][1] - 1) * _width)] == 'o'))
 			_posf[nb][2] = 1;
 		else if (dir == 2
 			&& (_map[_posf[nb][0] + ((_posf[nb][1] + 1) * _width)] == '.'
 			|| _map[_posf[nb][0] + ((_posf[nb][1] + 1) * _width)] == ' '
-		        || _map[_posf[nb][0] + ((_posf[nb][1] + 1) * _width)] == 'X'
-		        || _map[_posf[nb][0] + ((_posf[nb][1] + 1) * _width)] == 'o'))
+			|| _map[_posf[nb][0] + ((_posf[nb][1] + 1) * _width)] == 'X'
+			|| _map[_posf[nb][0] + ((_posf[nb][1] + 1) * _width)] == 'o'))
 			_posf[nb][2] = 2;
 		else if (dir == 3
 			&& (_map[_posf[nb][0] - 1 + ((_posf[nb][1]) * _width)] == '.'
-		        || _map[_posf[nb][0] - 1 + ((_posf[nb][1]) * _width)] == ' '
+			|| _map[_posf[nb][0] - 1 + ((_posf[nb][1]) * _width)] == ' '
 			|| _map[_posf[nb][0] - 1 + ((_posf[nb][1]) * _width)] == 'X'
 			|| _map[_posf[nb][0] - 1 + ((_posf[nb][1]) * _width)] == 'o'))
 			_posf[nb][2] = 3;
 		else if ((dir == 4
 			&& ((_map[_posf[nb][0] + 1 + ((_posf[nb][1]) * _width)] == '.')
-		        || (_map[_posf[nb][0] + 1 + ((_posf[nb][1]) * _width)] == ' ')
+			|| (_map[_posf[nb][0] + 1 + ((_posf[nb][1]) * _width)] == ' ')
 			|| (_map[_posf[nb][0] + 1 + ((_posf[nb][1]) * _width)] == 'X')
 			|| (_map[_posf[nb][0] + 1 + ((_posf[nb][1]) * _width)] == 'o'))))
 			_posf[nb][2] = 4;
@@ -568,7 +568,7 @@ bool Arcade::Pacman::exitRoom(int i)
 		_posf[i][2] = 0;
 		return true;
 	} else if (_posf[i][0] < 13
-	           && _map[_width * _posf[i][1] + 13] == ' ') {
+		&& _map[_width * _posf[i][1] + 13] == ' ') {
 		_map[_width * _posf[i][1] + 12] = _posf[i][3];
 		_posf[i][3] = _map[_width * _posf[i][1] + 13];
 		_map[_width * _posf[i][1] + 13] = i + 1 + 48;
@@ -578,8 +578,8 @@ bool Arcade::Pacman::exitRoom(int i)
 	}
 	if (_posf[i][0] == 13 && _posf[i][1] <= 14 && _posf[i][1] >= 12
 		&& (_map[_width * (_posf[i][1] - 1) + _posf[i][0]] == ' '
-	        || _map[_width * (_posf[i][1] - 1) + _posf[i][0]] == '.'
-	        || _map[_width * (_posf[i][1] - 1) + _posf[i][0]] == '_')) {
+		|| _map[_width * (_posf[i][1] - 1) + _posf[i][0]] == '.'
+		|| _map[_width * (_posf[i][1] - 1) + _posf[i][0]] == '_')) {
 		_map[_width * (_posf[i][1]) + _posf[i][0]] = _posf[i][3];
 		_posf[i][3] = _map[_width * (_posf[i][1] - 1) + _posf[i][0]];
 		_map[_width * (_posf[i][1] - 1) + _posf[i][0]] = i + 1 + 48;
@@ -607,32 +607,6 @@ void Arcade::Pacman::countFood()
 			_food++;
 	}
 }
-
-/*
-**  Display
-*/
-
-void Arcade::Pacman::printMap()
-{
-	std::cout << "La taille de la map : " << _map.size() << std::endl << std::endl;
-	for (size_t i = 0 ; i != _map.size() ; i++) {
-		std::cout << _map[i] ;
-		if (i % (_width) == 27 && i != 0 ) {
-			std::cout << '|' << i << std::endl;
-		}
-	}
-	std::cout << std::endl;
-}
-
-void Arcade::Pacman::printLine(int nb)
-{
-	std::cout << "La ligne n " << nb << " : " << std::endl;
-	for (size_t i = 0 ; i != _width ; i++) {
-		std::cout << _map[i + (_width * nb)];
-	}
-	std::cout << std::endl;
-}
-
 
 /*
 **  Getter
