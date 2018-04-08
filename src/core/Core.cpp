@@ -101,8 +101,8 @@ bool Arcade::Core::applyKeys(
 				_games[_gidx]->getInstance()->init();
 				_libs[_lidx]->getInstance()->clearWindow();
 			}
-		} else
-			_games[_gidx]->getInstance()->applyEvent(key);
+		} else if (!_games[_gidx]->getInstance()->applyEvent(key))
+			return false;
 	}
 	return true;
 }

@@ -45,7 +45,8 @@ namespace Arcade {
 		void printSnake(Arcade::IGraphicLib &, Arcade::Vect<size_t> const &);
 		void printBonus(Arcade::IGraphicLib &, Arcade::Vect<size_t> const &);
 		void checkBonus();
-		bool lost();
+		bool lost() const;
+		bool checkBonusOnSnake() const;
 
 		const std::string _name = "Nibbler";
 		std::time_t _timer = 0;

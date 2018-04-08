@@ -54,7 +54,7 @@ bool Arcade::Nibbler::stop()
 	return true;
 }
 
-bool Arcade::Nibbler::lost()
+bool Arcade::Nibbler::lost() const
 {
 	for (auto cell = _snake.begin(); cell != _snake.end(); ++cell) {
 		if (_map[cell->getY()][cell->getX()] == '*')
@@ -67,6 +67,15 @@ bool Arcade::Nibbler::lost()
 	return true;
 }
 
+bool Arcade::Nibbler::checkBonusOnSnake() const {
+	for (auto &cell : _snake) {
+		if (cell.getX() == _bonus.getX() &&
+			cell.getY() == _bonus.getY())
+			return true;
+	}
+	return false;
+}
+
 void Arcade::Nibbler::checkBonus()
 {
 	if (_bonus.getX() != _snake.front().getX() ||
@@ -75,13 +84,8 @@ void Arcade::Nibbler::checkBonus()
 	for (bool ret = true; ret;) {
 		_bonus.setX(static_cast<size_t>(std::rand() % WIDTH));
 		_bonus.setY(static_cast<size_t>(std::rand() % HEIGHT));
-		for (auto &cell : _snake) {
-			if ((_map[_bonus.getY()][_bonus.getX()] == '*') ||
-				(cell.getX() == _bonus.getX() &&
-					cell.getY() == _bonus.getY()))
-				break;
-		}
-		ret = false;
+		if (_map[_bonus.getY()][_bonus.getX()] != '*')
+			ret = checkBonusOnSnake();
 	}
 	_score += 100;
 }
