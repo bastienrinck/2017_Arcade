@@ -24,12 +24,6 @@ namespace Arcade {
 		// Unloads the library
 		bool stop() final;
 
-		// Closes the game => stop loop (go menu)
-//		bool close() final;
-
-		// Opens the game => start loop
-//		bool open() final;
-
 		// Processes the key obtained by the IGraphicLib from the user to update the game state
 		bool applyEvent(Arcade::Keys) final;
 
@@ -71,13 +65,6 @@ namespace Arcade {
 
 		// Put the Fantom out of the room
 		bool exitRoom(int);
-
-		//Display map
-		void printMap();
-
-		//Display one line of the map
-		// int : number of the line you want to display
-		void printLine(int);
 
 		// Get Score of the player
 		size_t getScore() final;
