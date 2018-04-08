@@ -94,6 +94,18 @@ namespace Arcade {
 		// Set position of Pacman & Fantom
 		void initPosition();
 
+		// Check end condition
+		bool end_condition();
+
+		// Check if is a num
+		bool isNum(char);
+
+		// Count number of food
+		void countFood();
+
+		// Clear the value
+		void clearValue();
+
 	private:
 		// Name of the game
 		std::string _name = "Pacman";
@@ -122,6 +134,11 @@ namespace Arcade {
 		// Direction séléctionné pour le Pacman
 		int _dir = 0; // x en position 0 | y en position 1
 
+		// Si le GodMod est activé
+		bool _god = false;
+
+		// Le nombre de truc a bouffer
+		int _food;
 	};
 }
 #endif
