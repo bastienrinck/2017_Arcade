@@ -42,7 +42,6 @@ bool Arcade::Pacman::init()
 	return true;
 }
 
-
 void Arcade::Pacman::clearValue()
 {
 	// Remet à 0 les valeurs
@@ -64,16 +63,16 @@ void Arcade::Pacman::initPosition()
 	_posp.push_back(27 - 1); // x
 	_posp.push_back(30 - 1); // y
 
-	std::vector<size_t> one = {13 - 1 , 14 - 1, 0, 32};
+	std::vector<size_t> one = {13 - 1, 14 - 1, 0, 32};
 	_posf.push_back(one);
 
-	std::vector<size_t> two =  {13 - 1 , 15 - 1, 0, 32};
+	std::vector<size_t> two = {13 - 1, 15 - 1, 0, 32};
 	_posf.push_back(two);
 
-	std::vector<size_t> three = {15 - 1 , 15 - 1, 0, 32};
+	std::vector<size_t> three = {15 - 1, 15 - 1, 0, 32};
 	_posf.push_back(three);
 
-	std::vector<size_t> four = {15 - 1 , 14 - 1, 0, 32};
+	std::vector<size_t> four = {15 - 1, 14 - 1, 0, 32};
 	_posf.push_back(four);
 }
 
@@ -105,7 +104,7 @@ bool Arcade::Pacman::update()
 	return end_condition();
 }
 
-void Arcade::Pacman::refresh(IGraphicLib& gl)
+void Arcade::Pacman::refresh(IGraphicLib &gl)
 {
 	// Gestion du temsp de jeu
 	_time = time(nullptr) - _startTime;
@@ -123,10 +122,14 @@ void Arcade::Pacman::refresh(IGraphicLib& gl)
 	auto res = gl.getScreenSize();
 	auto pWidth = static_cast<size_t>(res.getX() * 0.6 / _width);
 	auto pHeight = static_cast<size_t>(res.getY() * 0.6 / _height);
-	auto offsetX = static_cast<size_t>(res.getX() *0.3);
-	auto offsetY = static_cast<size_t>(res.getY() *0.3);
-	Arcade::TextBox score = Arcade::TextBox("Score : " + std::to_string(static_cast<unsigned >(_score)), Arcade::Vect<size_t>());
-	Arcade::TextBox timer = Arcade::TextBox("Time : " + std::to_string(static_cast<unsigned >(_time)), Arcade::Vect<size_t>(res.getX() / 2, 0));
+	auto offsetX = static_cast<size_t>(res.getX() * 0.3);
+	auto offsetY = static_cast<size_t>(res.getY() * 0.3);
+	Arcade::TextBox score = Arcade::TextBox(
+		"Score : " + std::to_string(static_cast<unsigned >(_score)),
+		Arcade::Vect<size_t>());
+	Arcade::TextBox timer = Arcade::TextBox(
+		"Time : " + std::to_string(static_cast<unsigned >(_time)),
+		Arcade::Vect<size_t>(res.getX() / 2, 0));
 	Arcade::PixelBox pB;
 
 	gl.clearWindow();
@@ -136,14 +139,23 @@ void Arcade::Pacman::refresh(IGraphicLib& gl)
 	gl.drawText(timer);
 
 	//Print du labyrinthe
-	for (unsigned i = 0; i < _map.size(); ++i){
+	for (unsigned i = 0; i < _map.size(); ++i) {
 		if (_map[i] == '=')
-			pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(64, 25, 76, 255));
+			pB = Arcade::PixelBox(
+				Arcade::Vect<size_t>(pWidth, pHeight),
+				Arcade::Vect<size_t>(),
+				Arcade::Color(64, 25, 76, 255));
 		else if (_map[i] == '.')
-			pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(183, 110, 0, 255));
+			pB = Arcade::PixelBox(
+				Arcade::Vect<size_t>(pWidth, pHeight),
+				Arcade::Vect<size_t>(),
+				Arcade::Color(183, 110, 0, 255));
 		else
-			pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(236, 117, 115, 255));
-		if (_map[i] == '=' || _map[i] == '.' || _map[i] == 'o'){
+			pB = Arcade::PixelBox(
+				Arcade::Vect<size_t>(pWidth, pHeight),
+				Arcade::Vect<size_t>(),
+				Arcade::Color(236, 117, 115, 255));
+		if (_map[i] == '=' || _map[i] == '.' || _map[i] == 'o') {
 			pB.setX(offsetX + i % (_width) * pWidth);
 			pB.setY(offsetY + i / (_width) * pHeight);
 			gl.drawPixelBox(pB);
@@ -151,7 +163,8 @@ void Arcade::Pacman::refresh(IGraphicLib& gl)
 	}
 
 	//Print du Pacman
-	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(253, 255, 0, 255));
+	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+		Arcade::Vect<size_t>(), Arcade::Color(253, 255, 0, 255));
 	pB.setX(offsetX + _posp[0] * pWidth);
 	pB.setY(offsetY + _posp[1] * pHeight);
 	gl.drawPixelBox(pB);
@@ -159,25 +172,29 @@ void Arcade::Pacman::refresh(IGraphicLib& gl)
 
 	//Print des fantomes
 	//F1
-	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(234, 130, 229, 255));
+	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+		Arcade::Vect<size_t>(), Arcade::Color(234, 130, 229, 255));
 	pB.setX(offsetX + _posf[0][0] * pWidth);
 	pB.setY(offsetY + _posf[0][1] * pHeight);
 	gl.drawPixelBox(pB);
 
 	//F2
-	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(70, 191, 238, 255));
+	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+		Arcade::Vect<size_t>(), Arcade::Color(70, 191, 238, 255));
 	pB.setX(offsetX + _posf[1][0] * pWidth);
 	pB.setY(offsetY + _posf[1][1] * pHeight);
 	gl.drawPixelBox(pB);
 
 	//F3
-	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(208, 62, 25, 255));
+	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+		Arcade::Vect<size_t>(), Arcade::Color(208, 62, 25, 255));
 	pB.setX(offsetX + _posf[2][0] * pWidth);
 	pB.setY(offsetY + _posf[2][1] * pHeight);
 	gl.drawPixelBox(pB);
 
 	//F4
-	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight), Arcade::Vect<size_t>(), Arcade::Color(219, 133, 28, 255));
+	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+		Arcade::Vect<size_t>(), Arcade::Color(219, 133, 28, 255));
 	pB.setX(offsetX + _posf[3][0] * pWidth);
 	pB.setY(offsetY + _posf[3][1] * pHeight);
 	gl.drawPixelBox(pB);
@@ -192,9 +209,9 @@ bool Arcade::Pacman::end_condition()
 		_god = false;
 
 	// Condition de fin (si un fantom attrape Pacman)
-	for (int i = 0; i != 4 ; i++) {
-		if (_posf[i][0] == _posp[0]
-		    && _posf[i][1] == _posp[1] && !_god) {
+	for (int i = 0; i != 4; i++) {
+		if (_posf[i][0] == _posp[0] && _posf[i][1] == _posp[1] &&
+			!_god) {
 			// Réinitialisation des variables
 			clearValue();
 			_score = 0;
@@ -208,9 +225,9 @@ bool Arcade::Pacman::end_condition()
 void Arcade::Pacman::goToHouse()
 {
 	// Réinitialise la position d'un fantom si il est mangé
-	for (int i = 0 ; i != 4 ; i++) {
-		if (_posp[0] == _posf[i][0] && _posp[1] == _posf[i][1]
-			&& _god) {
+	for (int i = 0; i != 4; i++) {
+		if (_posp[0] == _posf[i][0] && _posp[1] == _posf[i][1] &&
+			_god) {
 			switch (i) {
 				case 0:
 					setValue(12, 13, 0, 32, i);
@@ -229,8 +246,9 @@ void Arcade::Pacman::goToHouse()
 	}
 }
 
-void Arcade::Pacman::setValue(size_t x, size_t y, size_t pos,
-	size_t old_char, int nb)
+void Arcade::Pacman::setValue(size_t x, size_t y, size_t pos, size_t old_char,
+	int nb
+)
 {
 	// Set la position d'un fantom
 	_posf[nb][0] = x;
@@ -247,7 +265,7 @@ void Arcade::Pacman::loadMap()
 
 	if (!input) {
 		std::cout << "Error : file 'map.txt' not found. The default "
-		"map is loaded" << std::endl;
+			"map is loaded" << std::endl;
 		_map = _defaultMap;
 	} else {
 		while (input.read(&tmp, 1)) {
@@ -270,8 +288,8 @@ bool Arcade::Pacman::moveUpP() // dir = 1
 	if (_map[(((_posp[1] - 1) * _width) + _posp[0])] == '=') {
 		return false;
 	}
-	if (_map[((_posp[1] - 1) * _width) + (_posp[0])] == '.'
-		|| _map[((_posp[1] - 1) * _width) + (_posp[0])] == 'o') {
+	if (_map[((_posp[1] - 1) * _width) + (_posp[0])] == '.' ||
+		_map[((_posp[1] - 1) * _width) + (_posp[0])] == 'o') {
 		_food--;
 		_score += 100;
 	}
@@ -289,11 +307,11 @@ bool Arcade::Pacman::moveDownP() // dir = 2
 {
 	// Deplacement en bas de Pacman
 	_dir = 2;
-	if (_map[((_posp[1] + 1) * _width) + _posp[0]] == '='){
+	if (_map[((_posp[1] + 1) * _width) + _posp[0]] == '=') {
 		return false;
 	}
-	if (_map[((_posp[1] + 1) * _width) + (_posp[0])] == '.'
-		|| _map[((_posp[1] + 1) * _width) + (_posp[0])] == 'o'){
+	if (_map[((_posp[1] + 1) * _width) + (_posp[0])] == '.' ||
+		_map[((_posp[1] + 1) * _width) + (_posp[0])] == 'o') {
 		_food--;
 		_score += 100;
 	}
@@ -311,11 +329,11 @@ bool Arcade::Pacman::moveLeftP() // dir = 3
 {
 	// Deplacement à gauche de Pacman
 	_dir = 3;
-	if (_map[((_posp[1]) * _width) + (_posp[0] - 1)] == '='){
+	if (_map[((_posp[1]) * _width) + (_posp[0] - 1)] == '=') {
 		return false;
 	}
-	if (_map[((_posp[1]) * _width) + (_posp[0] - 1)] == '.'
-		|| _map[((_posp[1]) * _width) + (_posp[0] - 1)] == 'o'){
+	if (_map[((_posp[1]) * _width) + (_posp[0] - 1)] == '.' ||
+		_map[((_posp[1]) * _width) + (_posp[0] - 1)] == 'o') {
 		_food--;
 		_score += 100;
 	}
@@ -333,11 +351,11 @@ bool Arcade::Pacman::moveRightP() // dir = 4
 {
 	// Deplacement à droite de Pacman
 	_dir = 4;
-	if (_map[((_posp[1]) * _width) + (_posp[0] + 1)] == '='){
+	if (_map[((_posp[1]) * _width) + (_posp[0] + 1)] == '=') {
 		return false;
 	}
-	if (_map[((_posp[1]) * _width) + (_posp[0] + 1)] == '.'
-		|| _map[((_posp[1]) * _width) + (_posp[0] + 1)] == 'o') {
+	if (_map[((_posp[1]) * _width) + (_posp[0] + 1)] == '.' ||
+		_map[((_posp[1]) * _width) + (_posp[0] + 1)] == 'o') {
 		_food--;
 		_score += 100;
 	}
@@ -356,7 +374,7 @@ bool Arcade::Pacman::movePacman()
 	bool ret; // Valeur de retour
 
 	// Deplacement du Pacman
-	switch(_dir){
+	switch (_dir) {
 		case 0:
 			return false;
 		case 1:
@@ -382,8 +400,8 @@ bool Arcade::Pacman::moveUpF(std::vector<size_t> &pos, char sym)
 {
 	// Déplacement en bas d'un fantom
 	pos[2] = 1;
-	if (_map[(((pos[1] - 1) * _width) + pos[0])] == '='
-		|| isNum(_map[(((pos[1] - 1) * _width) + pos[0])])) {
+	if (_map[(((pos[1] - 1) * _width) + pos[0])] == '=' ||
+		isNum(_map[(((pos[1] - 1) * _width) + pos[0])])) {
 		pos[2] = 0;
 		return false;
 	}
@@ -392,7 +410,6 @@ bool Arcade::Pacman::moveUpF(std::vector<size_t> &pos, char sym)
 	_map[(((pos[1] - 1) * _width) + pos[0])] = sym;
 	pos[1]--;
 	return true;
-
 }
 
 // _posf[i][2] = dir = 2
@@ -400,12 +417,12 @@ bool Arcade::Pacman::moveDownF(std::vector<size_t> &pos, char sym)
 {
 	// Déplacement en bas d'un fantom
 	pos[2] = 2;
-	if (_map[(((pos[1] + 1) * _width) + pos[0])] == '='
-		|| isNum(_map[(((pos[1] + 1) * _width) + pos[0])])) {
+	if (_map[(((pos[1] + 1) * _width) + pos[0])] == '=' ||
+		isNum(_map[(((pos[1] + 1) * _width) + pos[0])])) {
 		pos[2] = 0;
 		return false;
 	}
-	_map[((pos[1] ) * _width) + pos[0]] = pos[3];
+	_map[((pos[1]) * _width) + pos[0]] = pos[3];
 	pos[3] = _map[(((pos[1] + 1) * _width) + pos[0])];
 	_map[(((pos[1] + 1) * _width) + pos[0])] = sym;
 	pos[1]++;
@@ -417,8 +434,8 @@ bool Arcade::Pacman::moveLeftF(std::vector<size_t> &pos, char sym)
 {
 	// Déplacement à gauche d'un fantom
 	pos[2] = 3;
-	if (_map[(((pos[1]) * _width) + pos[0] - 1)] == '='
-		|| isNum(_map[(((pos[1]) * _width) + pos[0] - 1)] )) {
+	if (_map[(((pos[1]) * _width) + pos[0] - 1)] == '=' ||
+		isNum(_map[(((pos[1]) * _width) + pos[0] - 1)])) {
 		pos[2] = 0;
 		return false;
 	}
@@ -434,8 +451,8 @@ bool Arcade::Pacman::moveRightF(std::vector<size_t> &pos, char sym)
 {
 	// Déplacement à droite d'un fantom
 	pos[2] = 4;
-	if (_map[(((pos[1]) * _width) + pos[0] + 1)] == '='
-		|| isNum(_map[(((pos[1]) * _width) + pos[0] + 1)])) {
+	if (_map[(((pos[1]) * _width) + pos[0] + 1)] == '=' ||
+		isNum(_map[(((pos[1]) * _width) + pos[0] + 1)])) {
 		pos[2] = 0;
 		return false;
 	}
@@ -450,10 +467,10 @@ bool Arcade::Pacman::moveFantom()
 {
 	bool ret; // Valeur de retour
 
-	for (int i = 0 ; i != 4 ; i++){
-		if (_posf[i][0] >= 12 && _posf[i][0] <= 14
-			&& _posf[i][1] >= 12 && _posf[i][1] <= 14
-			&& _time >= 10) { // Si les fantomes sont dans la room
+	for (int i = 0; i != 4; i++) {
+		if (_posf[i][0] >= 12 && _posf[i][0] <= 14 &&
+			_posf[i][1] >= 12 && _posf[i][1] <= 14 &&
+			_time >= 10) { // Si les fantomes sont dans la room
 			ret = exitRoom(i);
 		} else { // Si les fantom ne sont pas dans leur room
 			if (_posf[i][2] != 0) { // Si ils n'ont pas de direction
@@ -471,7 +488,8 @@ bool Arcade::Pacman::moveFantom()
 
 // count the number of intersection for the fantom
 // if > 3 Fantom choose a new direction
-bool Arcade::Pacman::findIntersection(int nb){
+bool Arcade::Pacman::findIntersection(int nb)
+{
 	int count = 0;
 
 	if (_map[_posf[nb][0] + ((_posf[nb][1] - 1) * _width)] != '=')
@@ -483,7 +501,7 @@ bool Arcade::Pacman::findIntersection(int nb){
 	if (_map[_posf[nb][0] - 1 + ((_posf[nb][1]) * _width)] != '=')
 		count++;
 
-	if (count >= 3){
+	if (count >= 3) {
 		_posf[nb][2] = 0;
 		return true;
 	}
@@ -504,29 +522,41 @@ void Arcade::Pacman::findDirection(int nb)
 
 	while (_posf[nb][2] == 0 && count < 1000) {
 		dir = rand() % 5;
-		if (dir == 1
-			&& (_map[_posf[nb][0] + ((_posf[nb][1] - 1) * _width)] == '.'
-			|| _map[_posf[nb][0] + ((_posf[nb][1] - 1) * _width)] == ' '
-			|| _map[_posf[nb][0] + ((_posf[nb][1] - 1) * _width)] == 'X'
-			|| _map[_posf[nb][0] + ((_posf[nb][1] - 1) * _width)] == 'o'))
+		if (dir == 1 &&
+			(_map[_posf[nb][0] + ((_posf[nb][1] - 1) * _width)] ==
+				'.' || _map[_posf[nb][0] +
+				((_posf[nb][1] - 1) * _width)] == ' ' ||
+				_map[_posf[nb][0] +
+					((_posf[nb][1] - 1) * _width)] == 'X' ||
+				_map[_posf[nb][0] +
+					((_posf[nb][1] - 1) * _width)] == 'o'))
 			_posf[nb][2] = 1;
-		else if (dir == 2
-			&& (_map[_posf[nb][0] + ((_posf[nb][1] + 1) * _width)] == '.'
-			|| _map[_posf[nb][0] + ((_posf[nb][1] + 1) * _width)] == ' '
-			|| _map[_posf[nb][0] + ((_posf[nb][1] + 1) * _width)] == 'X'
-			|| _map[_posf[nb][0] + ((_posf[nb][1] + 1) * _width)] == 'o'))
+		else if (dir == 2 &&
+			(_map[_posf[nb][0] + ((_posf[nb][1] + 1) * _width)] ==
+				'.' || _map[_posf[nb][0] +
+				((_posf[nb][1] + 1) * _width)] == ' ' ||
+				_map[_posf[nb][0] +
+					((_posf[nb][1] + 1) * _width)] == 'X' ||
+				_map[_posf[nb][0] +
+					((_posf[nb][1] + 1) * _width)] == 'o'))
 			_posf[nb][2] = 2;
-		else if (dir == 3
-			&& (_map[_posf[nb][0] - 1 + ((_posf[nb][1]) * _width)] == '.'
-			|| _map[_posf[nb][0] - 1 + ((_posf[nb][1]) * _width)] == ' '
-			|| _map[_posf[nb][0] - 1 + ((_posf[nb][1]) * _width)] == 'X'
-			|| _map[_posf[nb][0] - 1 + ((_posf[nb][1]) * _width)] == 'o'))
+		else if (dir == 3 &&
+			(_map[_posf[nb][0] - 1 + ((_posf[nb][1]) * _width)] ==
+				'.' || _map[_posf[nb][0] - 1 +
+				((_posf[nb][1]) * _width)] == ' ' ||
+				_map[_posf[nb][0] - 1 +
+					((_posf[nb][1]) * _width)] == 'X' ||
+				_map[_posf[nb][0] - 1 +
+					((_posf[nb][1]) * _width)] == 'o'))
 			_posf[nb][2] = 3;
-		else if ((dir == 4
-			&& ((_map[_posf[nb][0] + 1 + ((_posf[nb][1]) * _width)] == '.')
-			|| (_map[_posf[nb][0] + 1 + ((_posf[nb][1]) * _width)] == ' ')
-			|| (_map[_posf[nb][0] + 1 + ((_posf[nb][1]) * _width)] == 'X')
-			|| (_map[_posf[nb][0] + 1 + ((_posf[nb][1]) * _width)] == 'o'))))
+		else if ((dir == 4 &&
+			((_map[_posf[nb][0] + 1 + ((_posf[nb][1]) * _width)] ==
+				'.') || (_map[_posf[nb][0] + 1 +
+				((_posf[nb][1]) * _width)] == ' ') ||
+				(_map[_posf[nb][0] + 1 +
+					((_posf[nb][1]) * _width)] == 'X') ||
+				(_map[_posf[nb][0] + 1 +
+					((_posf[nb][1]) * _width)] == 'o'))))
 			_posf[nb][2] = 4;
 		else
 			_posf[nb][2] = 0;
@@ -560,15 +590,14 @@ bool Arcade::Pacman::exitRoom(int i)
 {
 	// Déplace les fantom dans leur room afin qu'il sortent !
 
-	if (_posf[i][0] > 13 && _map[_width * _posf[i][1] + 13] == ' '){
+	if (_posf[i][0] > 13 && _map[_width * _posf[i][1] + 13] == ' ') {
 		_map[_width * _posf[i][1] + 14] = _posf[i][3];
 		_posf[i][3] = _map[_width * _posf[i][1] + 13];
 		_map[_width * _posf[i][1] + 13] = i + 1 + 48;
 		_posf[i][0]--;
 		_posf[i][2] = 0;
 		return true;
-	} else if (_posf[i][0] < 13
-		&& _map[_width * _posf[i][1] + 13] == ' ') {
+	} else if (_posf[i][0] < 13 && _map[_width * _posf[i][1] + 13] == ' ') {
 		_map[_width * _posf[i][1] + 12] = _posf[i][3];
 		_posf[i][3] = _map[_width * _posf[i][1] + 13];
 		_map[_width * _posf[i][1] + 13] = i + 1 + 48;
@@ -576,10 +605,11 @@ bool Arcade::Pacman::exitRoom(int i)
 		_posf[i][2] = 0;
 		return true;
 	}
-	if (_posf[i][0] == 13 && _posf[i][1] <= 14 && _posf[i][1] >= 12
-		&& (_map[_width * (_posf[i][1] - 1) + _posf[i][0]] == ' '
-		|| _map[_width * (_posf[i][1] - 1) + _posf[i][0]] == '.'
-		|| _map[_width * (_posf[i][1] - 1) + _posf[i][0]] == '_')) {
+	if (_posf[i][0] == 13 && _posf[i][1] <= 14 && _posf[i][1] >= 12 &&
+		(_map[_width * (_posf[i][1] - 1) + _posf[i][0]] == ' ' ||
+			_map[_width * (_posf[i][1] - 1) + _posf[i][0]] == '.' ||
+			_map[_width * (_posf[i][1] - 1) + _posf[i][0]] ==
+				'_')) {
 		_map[_width * (_posf[i][1]) + _posf[i][0]] = _posf[i][3];
 		_posf[i][3] = _map[_width * (_posf[i][1] - 1) + _posf[i][0]];
 		_map[_width * (_posf[i][1] - 1) + _posf[i][0]] = i + 1 + 48;
@@ -602,7 +632,7 @@ bool Arcade::Pacman::isNum(char num)
 void Arcade::Pacman::countFood()
 {
 	// Compte le nombre de "pacgums" sur la map
-	for (size_t i = 0 ; i != _map.size() ; i++) {
+	for (size_t i = 0; i != _map.size(); i++) {
 		if (_map[i] == '.' || _map[i] == 'o')
 			_food++;
 	}
@@ -624,7 +654,7 @@ int Arcade::Pacman::getDir()
 	return _dir;
 }
 
-std::vector<size_t>& Arcade::Pacman::getPacmanPos()
+std::vector<size_t> &Arcade::Pacman::getPacmanPos()
 {
 	// Retourne le vecteur de position de pacman
 	return _posp;
