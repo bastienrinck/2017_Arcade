@@ -104,71 +104,15 @@ bool Arcade::Pacman::update()
 	return end_condition();
 }
 
-void Arcade::Pacman::refresh(IGraphicLib &gl)
+void Arcade::Pacman::printGhost(Arcade::IGraphicLib &gl,
+	Arcade::Vect<size_t> res
+) const
 {
-	// Gestion du temsp de jeu
-	_time = time(nullptr) - _startTime;
-
-	// Movement du Pacman et des Fantoms
-	movePacman();
-	moveFantom();
-
-	// Condition de win (avoir tout mangé sur la map)
-	if (_food <= 0) {
-		clearValue();
-		init();
-	}
-
-	auto res = gl.getScreenSize();
+	Arcade::PixelBox pB;
 	auto pWidth = static_cast<size_t>(res.getX() * 0.6 / _width);
 	auto pHeight = static_cast<size_t>(res.getY() * 0.6 / _height);
 	auto offsetX = static_cast<size_t>(res.getX() * 0.3);
 	auto offsetY = static_cast<size_t>(res.getY() * 0.3);
-	Arcade::TextBox score = Arcade::TextBox(
-		"Score : " + std::to_string(static_cast<unsigned >(_score)),
-		Arcade::Vect<size_t>());
-	Arcade::TextBox timer = Arcade::TextBox(
-		"Time : " + std::to_string(static_cast<unsigned >(_time)),
-		Arcade::Vect<size_t>(res.getX() / 2, 0));
-	Arcade::PixelBox pB;
-
-	gl.clearWindow();
-
-	//Print du score et du timer
-	gl.drawText(score);
-	gl.drawText(timer);
-
-	//Print du labyrinthe
-	for (unsigned i = 0; i < _map.size(); ++i) {
-		if (_map[i] == '=')
-			pB = Arcade::PixelBox(
-				Arcade::Vect<size_t>(pWidth, pHeight),
-				Arcade::Vect<size_t>(),
-				Arcade::Color(64, 25, 76, 255));
-		else if (_map[i] == '.')
-			pB = Arcade::PixelBox(
-				Arcade::Vect<size_t>(pWidth, pHeight),
-				Arcade::Vect<size_t>(),
-				Arcade::Color(183, 110, 0, 255));
-		else
-			pB = Arcade::PixelBox(
-				Arcade::Vect<size_t>(pWidth, pHeight),
-				Arcade::Vect<size_t>(),
-				Arcade::Color(236, 117, 115, 255));
-		if (_map[i] == '=' || _map[i] == '.' || _map[i] == 'o') {
-			pB.setX(offsetX + i % (_width) * pWidth);
-			pB.setY(offsetY + i / (_width) * pHeight);
-			gl.drawPixelBox(pB);
-		}
-	}
-
-	//Print du Pacman
-	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
-		Arcade::Vect<size_t>(), Arcade::Color(253, 255, 0, 255));
-	pB.setX(offsetX + _posp[0] * pWidth);
-	pB.setY(offsetY + _posp[1] * pHeight);
-	gl.drawPixelBox(pB);
-
 
 	//Print des fantomes
 	//F1
@@ -198,7 +142,79 @@ void Arcade::Pacman::refresh(IGraphicLib &gl)
 	pB.setX(offsetX + _posf[3][0] * pWidth);
 	pB.setY(offsetY + _posf[3][1] * pHeight);
 	gl.drawPixelBox(pB);
+}
 
+void Arcade::Pacman::printPac(Arcade::IGraphicLib &gl, Arcade::Vect<size_t> res
+) const
+{
+	Arcade::PixelBox pB;
+	auto pWidth = static_cast<size_t>(res.getX() * 0.6 / _width);
+	auto pHeight = static_cast<size_t>(res.getY() * 0.6 / _height);
+	auto offsetX = static_cast<size_t>(res.getX() * 0.3);
+	auto offsetY = static_cast<size_t>(res.getY() * 0.3);
+
+	//Print du Pacman
+	pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+		Arcade::Vect<size_t>(), Arcade::Color(253, 255, 0, 255));
+	pB.setX(offsetX + _posp[0] * pWidth);
+	pB.setY(offsetY + _posp[1] * pHeight);
+	gl.drawPixelBox(pB);
+}
+
+void Arcade::Pacman::printMaze(Arcade::IGraphicLib &gl,
+	Arcade::Vect<size_t> res
+) const
+{
+	Arcade::PixelBox pB;
+	auto pWidth = static_cast<size_t>(res.getX() * 0.6 / _width);
+	auto pHeight = static_cast<size_t>(res.getY() * 0.6 / _height);
+	auto offsetX = static_cast<size_t>(res.getX() * 0.3);
+	auto offsetY = static_cast<size_t>(res.getY() * 0.3);
+	Arcade::Color cols[3] = {Arcade::Color(64, 25, 76, 255),
+		Arcade::Color(183, 110, 0, 255),
+		Arcade::Color(236, 117, 115, 255)};
+	char caracs[5] = {'=', '.', 'o', '|', 'X'};
+
+	//Print du labyrinthe
+	for (unsigned i = 0, idx = 0; i < _map.size(); ++i, idx = 0) {
+		for (int iter = 0; !iter; ++idx)
+			iter = _map[i] == caracs[idx];
+		pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+			Arcade::Vect<size_t>(), cols[idx % 3]);
+		if (_map[i] == '=' || _map[i] == '.' || _map[i] == 'o') {
+			pB.setX(offsetX + i % (_width) * pWidth);
+			pB.setY(offsetY + i / (_width) * pHeight);
+			gl.drawPixelBox(pB);
+		}
+	}
+}
+
+void Arcade::Pacman::refresh(IGraphicLib &gl)
+{
+	auto res = gl.getScreenSize();
+	// Gestion du temsp de jeu
+	_time = time(nullptr) - _startTime;
+	// Movement du Pacman et des Fantoms
+	movePacman();
+	moveFantom();
+	// Condition de win (avoir tout mangé sur la map)
+	if (_food <= 0) {
+		clearValue();
+		init();
+	}
+	Arcade::TextBox score = Arcade::TextBox(
+		"Score : " + std::to_string(static_cast<unsigned >(_score)),
+		Arcade::Vect<size_t>());
+	Arcade::TextBox timer = Arcade::TextBox(
+		"Time : " + std::to_string(static_cast<unsigned >(_time)),
+		Arcade::Vect<size_t>(res.getX() / 2, 0));
+	gl.clearWindow();
+	printMaze(gl, res);
+	printPac(gl, res);
+	printGhost(gl, res);
+	//Print du score et du timer
+	gl.drawText(score);
+	gl.drawText(timer);
 	gl.refreshWindow();
 }
 
