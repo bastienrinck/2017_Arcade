@@ -4,7 +4,7 @@ CC	= g++
 
 RM	= rm -f
 
-SRCS	= ./sdl2.cpp
+SRCS	= ./Sdl2.cpp
 
 CPPFLAGS = -I../../include -I../../interfaces
 CPPFLAGS += -W -Wall -Wextra

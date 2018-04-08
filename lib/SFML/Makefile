@@ -4,7 +4,7 @@ CC	= g++
 
 RM	= rm -f
 
-SRCS	= ./SFML.cpp
+SRCS	= ./Sfml.cpp
 
 CPPFLAGS = -I../../include -I../../interfaces
 CPPFLAGS += -W -Wall -Wextra

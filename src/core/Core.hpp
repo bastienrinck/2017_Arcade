@@ -13,39 +13,10 @@
 #include <dirent.h>
 #include <unordered_map>
 #include "DLLoader.hpp"
-#include "../score/score.hpp"
+#include "../score/Score.hpp"
+#include "../menu/Menu.hpp"
 
 namespace Arcade {
-	class Menu {
-	public:
-		Menu() = default;
-
-		~Menu() = default;
-
-		void setLists(std::vector<DLLoader<IGameLib> *> *,
-			std::vector<DLLoader<IGraphicLib> *> *
-		);
-		void refresh(IGraphicLib *, unsigned, Arcade::Score);
-		unsigned applyEvent(Keys);
-		std::string getUserName() const;
-
-	private:
-		void printBackground(Arcade::IGraphicLib *,
-			Arcade::Vect<size_t> &
-		);
-		void printGames(Arcade::IGraphicLib *, Arcade::Vect<size_t> &);
-		void printLibs(Arcade::IGraphicLib *, Arcade::Vect<size_t> &,
-			unsigned
-		);
-		void printScore(Arcade::IGraphicLib *, std::map<std::string, std::string>);
-
-		std::vector<DLLoader<Arcade::IGameLib> *> *_games = nullptr;
-		std::vector<DLLoader<Arcade::IGraphicLib> *> *_libs = nullptr;
-		std::string _username = "player";
-		unsigned _idx = 0;
-		bool _score = false;
-	};
-
 	class Core {
 	public:
 		explicit Core(std::string);

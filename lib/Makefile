@@ -2,7 +2,7 @@ CC	= g++
 
 RM	= rm -f
 
-SUBDIRS	= nCurses SDL2 SFML
+SUBDIRS	= NCurses SDL2 SFML
 
 all:
 	for dir in $(SUBDIRS); do \

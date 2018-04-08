@@ -5,8 +5,9 @@ CC	= g++
 RM	= rm -f
 
 SRCS	= ./src/main.cpp \
-	  ./src/core/core.cpp \
-	  ./src/score/score.cpp \
+	  ./src/core/Core.cpp \
+	  ./src/menu/Menu.cpp \
+	  ./src/score/Score.cpp \
 	  ./include/TextBox.cpp	\
 	  ./include/PixelBox.cpp \
 	  ./include/Color.cpp

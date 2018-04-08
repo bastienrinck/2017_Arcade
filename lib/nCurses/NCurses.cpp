@@ -8,15 +8,13 @@
 #include <ncurses.h>
 #include <algorithm>
 #include <iostream>
-#include <fcntl.h>
-#include <zconf.h>
-#include "nCurses.hpp"
+#include "NCurses.hpp"
 
 Arcade::IGraphicLib *lib = nullptr;
 
 __attribute__((constructor)) void init()
 {
-	lib = new Arcade::nCurses;
+	lib = new Arcade::NCurses;
 }
 
 __attribute__((destructor)) void destruct()
@@ -29,28 +27,28 @@ extern "C" Arcade::IGraphicLib *entryPoint(void)
 	return lib;
 }
 
-Arcade::nCurses::~nCurses()
+Arcade::NCurses::~NCurses()
 {
 	endwin();
 }
 
-std::string Arcade::nCurses::getName() const
+std::string Arcade::NCurses::getName() const
 {
 	return _name;
 }
 
-bool Arcade::nCurses::isOpen() const
+bool Arcade::NCurses::isOpen() const
 {
 	return _isOpen;
 }
 
-void Arcade::nCurses::closeRenderer()
+void Arcade::NCurses::closeRenderer()
 {
 	delwin(_win);
 	endwin();
 }
 
-void Arcade::nCurses::openRenderer(std::string const &title)
+void Arcade::NCurses::openRenderer(std::string const &title)
 {
 	int h, w;
 
@@ -66,18 +64,18 @@ void Arcade::nCurses::openRenderer(std::string const &title)
 	_win = newwin(h, w, 0, 0);
 }
 
-void Arcade::nCurses::clearWindow()
+void Arcade::NCurses::clearWindow()
 {
 	wattron(_win, 0);
 	wclear(_win);
 }
 
-void Arcade::nCurses::refreshWindow()
+void Arcade::NCurses::refreshWindow()
 {
 	wrefresh(_win);
 }
 
-int Arcade::nCurses::getPairIndex(int i, int j)
+int Arcade::NCurses::getPairIndex(int i, int j)
 {
 	std::pair<int, int> pair(i, j);
 	auto iter = std::find(_pairedColor.begin(), _pairedColor.end(), pair);
@@ -92,7 +90,7 @@ int Arcade::nCurses::getPairIndex(int i, int j)
 	return idx;
 }
 
-int Arcade::nCurses::getColorIndex(Arcade::Color &color)
+int Arcade::NCurses::getColorIndex(Arcade::Color &color)
 {
 	auto raw = (unsigned char *)color;
 	auto iter = std::find(_savedColor.begin(), _savedColor.end(), color);
@@ -109,7 +107,7 @@ int Arcade::nCurses::getColorIndex(Arcade::Color &color)
 	return idx;
 }
 
-void Arcade::nCurses::drawPixelBox(Arcade::PixelBox const &pB)
+void Arcade::NCurses::drawPixelBox(Arcade::PixelBox const &pB)
 {
 	for (size_t i = 0; i < pB.getHeight(); i++) {
 		for (size_t j = 0; j < pB.getWidth(); j++) {
@@ -124,7 +122,7 @@ void Arcade::nCurses::drawPixelBox(Arcade::PixelBox const &pB)
 	}
 }
 
-int Arcade::nCurses::getDoubleColorPair(Arcade::Color fg, Arcade::Color bg)
+int Arcade::NCurses::getDoubleColorPair(Arcade::Color fg, Arcade::Color bg)
 {
 	auto fgColor = getColorIndex(fg);
 	auto bgColor = getColorIndex(bg);
@@ -132,7 +130,7 @@ int Arcade::nCurses::getDoubleColorPair(Arcade::Color fg, Arcade::Color bg)
 	return getPairIndex(fgColor, bgColor);
 }
 
-void Arcade::nCurses::drawText(Arcade::TextBox const &tB)
+void Arcade::NCurses::drawText(Arcade::TextBox const &tB)
 {
 	auto pairID = getDoubleColorPair(tB.getColor(),
 		tB.getBackgroundColor());
@@ -143,7 +141,7 @@ void Arcade::nCurses::drawText(Arcade::TextBox const &tB)
 	wattroff(_win, COLOR_PAIR(pairID));
 }
 
-bool Arcade::nCurses::pollEvents()
+bool Arcade::NCurses::pollEvents()
 {
 	bool ret = false;
 	int c;
@@ -158,7 +156,7 @@ bool Arcade::nCurses::pollEvents()
 	return ret;
 }
 
-Arcade::Keys Arcade::nCurses::getLastEvent()
+Arcade::Keys Arcade::NCurses::getLastEvent()
 {
 	Arcade::Keys key = Arcade::Keys::NONE;
 
@@ -169,12 +167,12 @@ Arcade::Keys Arcade::nCurses::getLastEvent()
 	return key;
 }
 
-void Arcade::nCurses::clearEvents()
+void Arcade::NCurses::clearEvents()
 {
 	_events.clear();
 }
 
-Arcade::Vect<size_t> Arcade::nCurses::getScreenSize() const
+Arcade::Vect<size_t> Arcade::NCurses::getScreenSize() const
 {
 	int x, y;
 
@@ -182,12 +180,12 @@ Arcade::Vect<size_t> Arcade::nCurses::getScreenSize() const
 	return {static_cast<size_t>(x), static_cast<size_t>(y)};
 }
 
-size_t Arcade::nCurses::getMaxY() const
+size_t Arcade::NCurses::getMaxY() const
 {
 	return static_cast<size_t>(getmaxy(_win));
 }
 
-size_t Arcade::nCurses::getMaxX() const
+size_t Arcade::NCurses::getMaxX() const
 {
 	return static_cast<size_t>(getmaxx(_win));
 }

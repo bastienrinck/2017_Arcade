@@ -5,13 +5,13 @@
 ** Created by rectoria
 */
 #include <stdexcept>
-#include "sdl2.hpp"
+#include "Sdl2.hpp"
 
 Arcade::IGraphicLib *lib = nullptr;
 
 __attribute__((constructor)) void init()
 {
-	lib = new Arcade::Sdl;
+	lib = new Arcade::Sdl2;
 }
 
 __attribute__((destructor)) void destruct()
@@ -24,7 +24,7 @@ extern "C" Arcade::IGraphicLib *entryPoint(void)
 	return lib;
 }
 
-Arcade::Sdl::Sdl()
+Arcade::Sdl2::Sdl2()
 {
 	if (TTF_Init() == -1)
 		throw std::runtime_error("SDL TTF initialization failed");
@@ -32,23 +32,23 @@ Arcade::Sdl::Sdl()
 		throw std::runtime_error("SDL initialization failed");
 }
 
-Arcade::Sdl::~Sdl()
+Arcade::Sdl2::~Sdl2()
 {
 	SDL_Quit();
 	TTF_Quit();
 }
 
-std::string Arcade::Sdl::getName() const
+std::string Arcade::Sdl2::getName() const
 {
 	return _name;
 }
 
-bool Arcade::Sdl::isOpen() const
+bool Arcade::Sdl2::isOpen() const
 {
 	return _window != nullptr;
 }
 
-void Arcade::Sdl::closeRenderer()
+void Arcade::Sdl2::closeRenderer()
 {
 	if (_window)
 		SDL_DestroyWindow(_window);
@@ -58,7 +58,7 @@ void Arcade::Sdl::closeRenderer()
 		SDL_DestroyTexture(_texture);
 }
 
-void Arcade::Sdl::openRenderer(std::string const &title)
+void Arcade::Sdl2::openRenderer(std::string const &title)
 {
 	if (_window)
 		SDL_DestroyWindow(_window);
@@ -69,18 +69,18 @@ void Arcade::Sdl::openRenderer(std::string const &title)
 		SDL_TEXTUREACCESS_STREAMING, 1920, 1080);
 }
 
-void Arcade::Sdl::clearWindow()
+void Arcade::Sdl2::clearWindow()
 {
 	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
 	SDL_RenderClear(_renderer);
 }
 
-void Arcade::Sdl::refreshWindow()
+void Arcade::Sdl2::refreshWindow()
 {
 	SDL_RenderPresent(_renderer);
 }
 
-void Arcade::Sdl::drawPixelBox(Arcade::PixelBox const &pB)
+void Arcade::Sdl2::drawPixelBox(Arcade::PixelBox const &pB)
 {
 	SDL_Rect rect{};
 
@@ -93,14 +93,16 @@ void Arcade::Sdl::drawPixelBox(Arcade::PixelBox const &pB)
 	SDL_RenderCopy(_renderer, _texture, &rect, &rect);
 }
 
-void Arcade::Sdl::drawText(Arcade::TextBox const &tB)
+void Arcade::Sdl2::drawText(Arcade::TextBox const &tB)
 {
 	auto raw = (unsigned char *)tB.getColor();
 
+	if(tB.getValue().empty())
+		return;
 	SDL_Color fgColor = {raw[0], raw[1], raw[2], raw[3]};
 	raw = (unsigned char *)tB.getBackgroundColor();
 	SDL_Color bgColor = {raw[0], raw[1], raw[2], raw[3]};
-	_font = TTF_OpenFont("ressources/fonts/font.ttf",
+	_font = TTF_OpenFont("resources/fonts/font.ttf",
 		static_cast<int>(tB.getFontSize()));
 	auto surface = TTF_RenderText_Shaded(_font, tB.getValue().c_str(), fgColor,
 		bgColor);
@@ -111,7 +113,7 @@ void Arcade::Sdl::drawText(Arcade::TextBox const &tB)
 	TTF_CloseFont(_font);
 }
 
-bool Arcade::Sdl::pollEvents()
+bool Arcade::Sdl2::pollEvents()
 {
 	SDL_Event event{};
 	bool ret = false;
@@ -126,7 +128,7 @@ bool Arcade::Sdl::pollEvents()
 	return ret;
 }
 
-Arcade::Keys Arcade::Sdl::getLastEvent()
+Arcade::Keys Arcade::Sdl2::getLastEvent()
 {
 	Arcade::Keys key = Arcade::Keys::NONE;
 
@@ -137,12 +139,12 @@ Arcade::Keys Arcade::Sdl::getLastEvent()
 	return key;
 }
 
-void Arcade::Sdl::clearEvents()
+void Arcade::Sdl2::clearEvents()
 {
 	_events.clear();
 }
 
-Arcade::Vect<size_t> Arcade::Sdl::getScreenSize() const
+Arcade::Vect<size_t> Arcade::Sdl2::getScreenSize() const
 {
 	int x = 0;
 	int y = 0;
@@ -151,7 +153,7 @@ Arcade::Vect<size_t> Arcade::Sdl::getScreenSize() const
 	return {static_cast<size_t>(x), static_cast<size_t>(y)};
 }
 
-size_t Arcade::Sdl::getMaxY() const
+size_t Arcade::Sdl2::getMaxY() const
 {
 	int y = 0;
 
@@ -159,7 +161,7 @@ size_t Arcade::Sdl::getMaxY() const
 	return static_cast<size_t >(y);
 }
 
-size_t Arcade::Sdl::getMaxX() const
+size_t Arcade::Sdl2::getMaxX() const
 {
 	int x = 0;
 

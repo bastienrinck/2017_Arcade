@@ -4,7 +4,7 @@ CC	= g++
 
 RM	= rm -f
 
-SRCS	= ./nCurses.cpp
+SRCS	= ./NCurses.cpp
 
 CPPFLAGS = -I../../include -I../../interfaces
 CPPFLAGS += -W -Wall -Wextra

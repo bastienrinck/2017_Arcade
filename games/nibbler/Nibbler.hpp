@@ -5,8 +5,8 @@
 #ifndef SNAKE_HPP
 #define SNAKE_HPP
 
-#include <IGameLib.hpp>
 #include <list>
+#include "IGameLib.hpp"
 
 namespace Arcade {
 	class Nibbler : public IGameLib {
@@ -41,8 +41,10 @@ namespace Arcade {
 		bool moveDown();
 		bool moveLeft();
 		bool moveRight();
-		void print_map(IGraphicLib &, Vect<size_t> const &);
-		void check_bonus();
+		void printMap(IGraphicLib &, Vect<size_t> const &);
+		void printSnake(Arcade::IGraphicLib &, Arcade::Vect<size_t> const &);
+		void printBonus(Arcade::IGraphicLib &, Arcade::Vect<size_t> const &);
+		void checkBonus();
 		bool lost();
 
 		const std::string _name = "Nibbler";
@@ -52,6 +54,26 @@ namespace Arcade {
 		Arcade::PixelBox _pB;
 		size_t _direction = 2;
 		int _score = 0;
+		const std::vector<std::string> _map = {
+			"                                         ",
+			" *****                             ***** ",
+			" ***                                 *** ",
+			"     **  ***********************  **     ",
+			"     *                             *     ",
+			"                                         ",
+			"    *              ****             *    ",
+			"    *              ****             *    ",
+			"    *              ****             *    ",
+			"    *      ********************     *    ",
+			"    *      ********************     *    ",
+			"    *              ****             *    ",
+			"    *              ****             *    ",
+			"                   ****                  ",
+			"     *                             *     ",
+			"     **  ***********************  **     ",
+			" ***                                 *** ",
+			" *****                             ***** ",
+			"                                         "};
 	};
 };
 

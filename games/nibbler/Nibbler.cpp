@@ -6,33 +6,10 @@
 */
 #include <ctime>
 #include <unordered_map>
-#include <iostream>
-#include "nibbler.hpp"
+#include "Nibbler.hpp"
 
 #define WIDTH 41
-#define HEIGHT 20
-
-static std::vector<std::string> map = {
-	"                                         ",
-	" *****                             ***** ",
-	" ***                                 *** ",
-	"                                         ",
-	"     **  ***********************  **     ",
-	"     *                             *     ",
-	"                                         ",
-	"    *              ****             *    ",
-	"    *              ****             *    ",
-	"    *              ****             *    ",
-	"    *      ********************     *    ",
-	"    *      ********************     *    ",
-	"    *              ****             *    ",
-	"    *              ****             *    ",
-	"                   ****                  ",
-	"     *                             *     ",
-	"     **  ***********************  **     ",
-	" ***                                 *** ",
-	" *****                             ***** ",
-	"                                         ",};
+#define HEIGHT 19
 
 Arcade::IGameLib *lib = nullptr;
 
@@ -79,9 +56,8 @@ bool Arcade::Nibbler::stop()
 
 bool Arcade::Nibbler::lost()
 {
-	for (std::list<Arcade::Vect<size_t>>::const_iterator cell = _snake.begin(), end = _snake.end();
-		cell != end; ++cell) {
-		if (map[cell->getY()][cell->getX()] == '*')
+	for (auto cell = _snake.begin(); cell != _snake.end(); ++cell) {
+		if (_map[cell->getY()][cell->getX()] == '*')
 			return false;
 		else if (_snake.begin() != cell &&
 			_snake.begin()->getX() == cell->getX() &&
@@ -91,7 +67,7 @@ bool Arcade::Nibbler::lost()
 	return true;
 }
 
-void Arcade::Nibbler::check_bonus()
+void Arcade::Nibbler::checkBonus()
 {
 	if (_bonus.getX() != _snake.front().getX() ||
 		_bonus.getY() != _snake.front().getY())
@@ -99,11 +75,10 @@ void Arcade::Nibbler::check_bonus()
 	for (bool ret = true; ret;) {
 		_bonus.setX(static_cast<size_t>(std::rand() % WIDTH));
 		_bonus.setY(static_cast<size_t>(std::rand() % HEIGHT));
-		for (std::list<Arcade::Vect<size_t>>::const_iterator cell = _snake.begin(), end = _snake.end();
-			cell != end; ++cell) {
-			if ((map[_bonus.getY()][_bonus.getX()] == '*') ||
-				(cell->getX() == _bonus.getX() &&
-					cell->getY() == _bonus.getY()))
+		for (auto &cell : _snake) {
+			if ((_map[_bonus.getY()][_bonus.getX()] == '*') ||
+				(cell.getX() == _bonus.getX() &&
+					cell.getY() == _bonus.getY()))
 				break;
 		}
 		ret = false;
@@ -123,7 +98,7 @@ bool Arcade::Nibbler::moveUp()
 			_snake.pop_back();
 		_direction = 0;
 		_timer = std::time(nullptr);
-		check_bonus();
+		checkBonus();
 	}
 	return lost();
 }
@@ -140,7 +115,7 @@ bool Arcade::Nibbler::moveDown()
 			_snake.pop_back();
 		_direction = 1;
 		_timer = std::time(nullptr);
-		check_bonus();
+		checkBonus();
 	}
 	return lost();
 }
@@ -158,7 +133,7 @@ bool Arcade::Nibbler::moveLeft()
 			_snake.pop_back();
 		_direction = 2;
 		_timer = std::time(nullptr);
-		check_bonus();
+		checkBonus();
 	}
 	return lost();
 }
@@ -176,12 +151,14 @@ bool Arcade::Nibbler::moveRight()
 			_snake.pop_back();
 		_direction = 3;
 		_timer = std::time(nullptr);
-		check_bonus();
+		checkBonus();
 	}
 	return lost();
 }
 
-void Arcade::Nibbler::print_map(Arcade::IGraphicLib &graphicsLib,
+
+
+void Arcade::Nibbler::printMap(Arcade::IGraphicLib &graphicsLib,
 	Arcade::Vect<size_t> const &res
 )
 {
@@ -190,23 +167,52 @@ void Arcade::Nibbler::print_map(Arcade::IGraphicLib &graphicsLib,
 	auto offsetX = static_cast<size_t>(res.getX() * 0.3);
 	auto offsetY = static_cast<size_t>(res.getY() * 0.3);
 
-	for (unsigned i = 0; i < map.size(); ++i) {
-		for (unsigned j = 0; j < map[i].size(); ++j) {
-			if (map[i][j] == '*')
-				_pB = Arcade::PixelBox(
-					Arcade::Vect<size_t>(pWidth, pHeight),
-					Arcade::Vect<size_t>(),
-					Arcade::Color(76, 38, 114, 255));
-			else
-				_pB = Arcade::PixelBox(
-					Arcade::Vect<size_t>(pWidth, pHeight),
-					Arcade::Vect<size_t>(),
-					Arcade::Color(255, 255, 255, 255));
+	for (unsigned i = 0; i < _map.size(); ++i) {
+		for (unsigned j = 0; j < _map[i].size(); ++j) {
+			_pB = Arcade::PixelBox(
+				Arcade::Vect<size_t>(pWidth, pHeight),
+				Arcade::Vect<size_t>(), ((_map[i][j] == '*') ?
+					Arcade::Color(76, 38, 114, 255) :
+					Arcade::Color(255, 255, 255, 255)));
 			_pB.setX(offsetX + j * pWidth);
 			_pB.setY(offsetY + i * pHeight);
 			graphicsLib.drawPixelBox(_pB);
 		}
 	}
+}
+
+void Arcade::Nibbler::printSnake(Arcade::IGraphicLib &graphicsLib,
+	Arcade::Vect<size_t> const &res
+)
+{
+	auto pWidth = static_cast<size_t>(res.getX() * 0.6 / WIDTH);
+	auto pHeight = static_cast<size_t>(res.getY() * 0.6 / HEIGHT);
+	auto offsetX = static_cast<size_t>(res.getX() * 0.3);
+	auto offsetY = static_cast<size_t>(res.getY() * 0.3);
+
+	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+		Arcade::Vect<size_t>(), Arcade::Color(191, 63, 63, 255));
+	for (auto cell : _snake) {
+		_pB.setX(offsetX + cell.getX() * pWidth);
+		_pB.setY(offsetY + cell.getY() * pHeight);
+		graphicsLib.drawPixelBox(_pB);
+	}
+}
+
+void Arcade::Nibbler::printBonus(Arcade::IGraphicLib &graphicLib,
+	Arcade::Vect<size_t> const &res
+)
+{
+	auto pWidth = static_cast<size_t>(res.getX() * 0.6 / WIDTH);
+	auto pHeight = static_cast<size_t>(res.getY() * 0.6 / HEIGHT);
+	auto offsetX = static_cast<size_t>(res.getX() * 0.3);
+	auto offsetY = static_cast<size_t>(res.getY() * 0.3);
+
+	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
+		Arcade::Vect<size_t>(offsetX + _bonus.getX() * pWidth,
+			offsetY + _bonus.getY() * pHeight),
+		Arcade::Color(255, 0, 0, 255));
+	graphicLib.drawPixelBox(_pB);
 }
 
 bool Arcade::Nibbler::applyEvent(Arcade::Keys key)
@@ -241,28 +247,13 @@ bool Arcade::Nibbler::update()
 void Arcade::Nibbler::refresh(Arcade::IGraphicLib &graphicsLib)
 {
 	Arcade::Vect<size_t> res = graphicsLib.getScreenSize();
-	auto pWidth = static_cast<size_t>(res.getX() * 0.6 / WIDTH);
-	auto pHeight = static_cast<size_t>(res.getY() * 0.6 / HEIGHT);
-	auto offsetX = static_cast<size_t>(res.getX() * 0.3);
-	auto offsetY = static_cast<size_t>(res.getY() * 0.3);
 	auto text = Arcade::TextBox("Score : " + std::to_string(_score),
 		Arcade::Vect<size_t>());
 
 	graphicsLib.clearWindow();
-	print_map(graphicsLib, res);
-	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
-		Arcade::Vect<size_t>(), Arcade::Color(191, 63, 63, 255));
-	for (auto cell : _snake) {
-		_pB.setX(offsetX + cell.getX() * pWidth);
-		_pB.setY(offsetY + cell.getY() * pHeight);
-		graphicsLib.drawPixelBox(_pB);
-	}
-
-	_pB = Arcade::PixelBox(Arcade::Vect<size_t>(pWidth, pHeight),
-		Arcade::Vect<size_t>(offsetX + _bonus.getX() * pWidth,
-			offsetY + _bonus.getY() * pHeight),
-		Arcade::Color(255, 0, 0, 255));
-	graphicsLib.drawPixelBox(_pB);
+	printMap(graphicsLib, res);
+	printSnake(graphicsLib, res);
+	printBonus(graphicsLib, res);
 	graphicsLib.drawText(text);
 	graphicsLib.refreshWindow();
 }

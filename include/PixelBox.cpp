@@ -1,6 +1,3 @@
-#include <cstddef>
-#include "Color.hpp"
-
 /*
 ** EPITECH PROJECT, 2021
 ** cpp_arcade
@@ -8,11 +5,14 @@
 ** Created by rectoria
 */
 
+#include <cstddef>
 #include "PixelBox.hpp"
 
 Arcade::PixelBox::PixelBox(Arcade::Vect<size_t> size, Arcade::Vect<size_t> pos,
 	Arcade::Color col
-) : _size(size), _pos(pos)
+) :
+	_size(size)
+	, _pos(pos)
 {
 	for (unsigned i = 0; i < size.getY() * size.getX(); ++i)
 		_colorFrame.push_back(col);

@@ -9,7 +9,11 @@
 
 Arcade::Color::Color(unsigned char red, unsigned char green, unsigned char blue,
 	unsigned char alpha
-) : _red(red), _green(green), _blue(blue), _alpha(alpha)
+) :
+	_red(red)
+	, _green(green)
+	, _blue(blue)
+	, _alpha(alpha)
 {
 }
 

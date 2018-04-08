@@ -7,13 +7,13 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "SFML.hpp"
+#include "Sfml.hpp"
 
 Arcade::IGraphicLib *lib = nullptr;
 
 __attribute__((constructor)) void init()
 {
-	lib = new Arcade::sfml;
+	lib = new Arcade::Sfml;
 }
 
 __attribute__((destructor)) void destruct()
@@ -26,48 +26,48 @@ extern "C" Arcade::IGraphicLib *entryPoint(void)
 	return lib;
 }
 
-Arcade::sfml::sfml()
+Arcade::Sfml::Sfml()
 {
 	_window.setFramerateLimit(30);
 	_texture.create(1920, 1080);
 	_sprite.setTexture(_texture);
-	_font.loadFromFile("ressources/fonts/font.ttf");
+	_font.loadFromFile("resources/fonts/font.ttf");
 };
 
-Arcade::sfml::~sfml() = default;
+Arcade::Sfml::~Sfml() = default;
 
-std::string Arcade::sfml::getName() const
+std::string Arcade::Sfml::getName() const
 {
 	return _name;
 }
 
-bool Arcade::sfml::isOpen() const
+bool Arcade::Sfml::isOpen() const
 {
 	return _window.isOpen();
 }
 
-void Arcade::sfml::closeRenderer()
+void Arcade::Sfml::closeRenderer()
 {
 	_window.close();
 }
 
-void Arcade::sfml::openRenderer(std::string const &title)
+void Arcade::Sfml::openRenderer(std::string const &title)
 {
 
 	_window.create(sf::VideoMode(1280, 720), title);
 }
 
-void Arcade::sfml::clearWindow()
+void Arcade::Sfml::clearWindow()
 {
 	_window.clear();
 }
 
-void Arcade::sfml::refreshWindow()
+void Arcade::Sfml::refreshWindow()
 {
 	_window.display();
 }
 
-void Arcade::sfml::drawPixelBox(Arcade::PixelBox const &pB)
+void Arcade::Sfml::drawPixelBox(Arcade::PixelBox const &pB)
 {
 	_texture.update((unsigned char *)&pB.getPixelArray()[0],
 		static_cast<unsigned int>(pB.getWidth()),
@@ -81,7 +81,7 @@ void Arcade::sfml::drawPixelBox(Arcade::PixelBox const &pB)
 	_window.draw(_sprite);
 }
 
-void Arcade::sfml::drawText(Arcade::TextBox const &tB)
+void Arcade::Sfml::drawText(Arcade::TextBox const &tB)
 {
 	_text.setFont(_font);
 	_text.setString(tB.getValue());
@@ -94,7 +94,7 @@ void Arcade::sfml::drawText(Arcade::TextBox const &tB)
 	_window.draw(_text);
 }
 
-Arcade::Keys Arcade::sfml::getLastEvent()
+Arcade::Keys Arcade::Sfml::getLastEvent()
 {
 	Arcade::Keys key = Arcade::Keys::NONE;
 
@@ -105,7 +105,7 @@ Arcade::Keys Arcade::sfml::getLastEvent()
 	return key;
 }
 
-bool Arcade::sfml::pollEvents()
+bool Arcade::Sfml::pollEvents()
 {
 	auto event = sf::Event();
 	bool ret = false;
@@ -125,24 +125,24 @@ bool Arcade::sfml::pollEvents()
 	return ret;
 }
 
-void Arcade::sfml::clearEvents()
+void Arcade::Sfml::clearEvents()
 {
 	_events.clear();
 }
 
-Arcade::Vect<size_t> Arcade::sfml::getScreenSize() const
+Arcade::Vect<size_t> Arcade::Sfml::getScreenSize() const
 {
 	auto mode = _window.getSize();
 
 	return {mode.x, mode.y};
 }
 
-size_t Arcade::sfml::getMaxY() const
+size_t Arcade::Sfml::getMaxY() const
 {
 	return _window.getSize().y;
 }
 
-size_t Arcade::sfml::getMaxX() const
+size_t Arcade::Sfml::getMaxX() const
 {
 	return _window.getSize().x;
 }

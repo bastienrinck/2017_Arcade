@@ -11,11 +11,11 @@
 #include "IGraphicLib.hpp"
 
 namespace Arcade {
-	class sfml : public Arcade::IGraphicLib {
+	class Sfml : public Arcade::IGraphicLib {
 	public:
-		sfml();
+		Sfml();
 
-		~sfml() override;
+		~Sfml() override;
 
 	public:
 		/* Get the name of the library */
@@ -72,7 +72,7 @@ namespace Arcade {
 		size_t getMaxX() const final;
 
 	private:
-		std::string _name = "sfml";
+		std::string _name = "SFML";
 		std::list<Arcade::Keys> _events;
 		sf::Text _text;
 		sf::Font _font;

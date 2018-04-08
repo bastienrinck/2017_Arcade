@@ -9,7 +9,7 @@
 #include <fstream>
 #include <regex>
 #include <iostream>
-#include "score.hpp"
+#include "Score.hpp"
 
 Arcade::Score::Score()
 {
