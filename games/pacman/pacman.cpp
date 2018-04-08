@@ -64,22 +64,22 @@ extern "C" Arcade::IGameLib *entryPoint(void)
 	return lib;
 }
 
-const std::string Arcade::Pacman::getName() const
-{
-	return _name;
-}
-
 bool Arcade::Pacman::init()
 {
+	// Initialisation des variables, des Fantom et de la map
 	loadMap();
 	initPosition();
 	countFood();
-	std::cout << _map[(14 - 1) * 28 + (13 - 1)] << std::endl;
 	return true;
 }
 
+
 void Arcade::Pacman::clearValue()
 {
+	// Remet à 0 les valeurs
+	_score = 0;
+	_time = 0;
+	_start_time = time(NULL);
 	_pos_p.pop_back();
 	_pos_p.pop_back();
 
@@ -91,6 +91,7 @@ void Arcade::Pacman::clearValue()
 
 void Arcade::Pacman::initPosition()
 {
+	// Initialisation de toutes les positions
 	_pos_p.push_back(27 - 1); // x
 	_pos_p.push_back(30 - 1); // y
 
@@ -105,30 +106,15 @@ void Arcade::Pacman::initPosition()
 
 	std::vector<size_t> four = {15 - 1 , 14 - 1, 0, 32};
 	_pos_f.push_back(four);
-
-	for (int i = 0 ; i != 4; i++){
-		std::cout << "nb : " << i << std::endl;
-		std::cout << "size : " << _pos_f[i].size() << std::endl;
-		std::cout << "x : " << _pos_f[i][0] << std::endl;
-		std::cout << "y : " << _pos_f[i][1] << std::endl;
-		std::cout << _map[_width * _pos_f[i][1] + _pos_f[i][0]] << std::endl;
-	}
 }
 
 bool Arcade::Pacman::stop()
 {
+	// Lorsque BACKSPACE est cliqué
+	clearValue();
+	init();
 	return true;
 }
-
-//bool Arcade::Pacman::close()
-//{
-//	return true;
-//}
-//
-//bool Arcade::Pacman::open()
-//{
-//	return true;
-//}
 
 bool Arcade::Pacman::applyEvent(Arcade::Keys key)
 {
@@ -146,17 +132,25 @@ bool Arcade::Pacman::applyEvent(Arcade::Keys key)
 
 bool Arcade::Pacman::update()
 {
+	goToHouse();
 	return end_condition();
 }
 
 void Arcade::Pacman::refresh(IGraphicLib& gl)
 {
+	// Gestion du temsp de jeu
+	_time = time(NULL) - _start_time;
+
+	// Movement du Pacman et des Fantoms
 	movePacman();
 	moveFantom();
+
+	// Condition de win (avoir tout mangé sur la map)
 	if (_food <= 0) {
 		clearValue();
 		init();
 	}
+
 	auto res = gl.getScreenSize();
 	auto pWidth = static_cast<size_t>(res.getX() * 0.6 / _width);
 	auto pHeight = static_cast<size_t>(res.getY() * 0.6 / _height);
@@ -224,8 +218,15 @@ void Arcade::Pacman::refresh(IGraphicLib& gl)
 
 bool Arcade::Pacman::end_condition()
 {
+	// Gestion du temps de GodMod
+	if (_time - _timeGod >= 10)
+		_god = false;
+
+	// Condition de fin (si un fantom attrape Pacman)
 	for (int i = 0; i != 4 ; i++) {
-		if (_pos_f[i][0] == _pos_p[0] && _pos_f[i][1] == _pos_p[1]) {
+		if (_pos_f[i][0] == _pos_p[0]
+		    && _pos_f[i][1] == _pos_p[1] && !_god) {
+			// Réinitialisation des variables
 			clearValue();
 			_score = 0;
 			init();
@@ -235,8 +236,43 @@ bool Arcade::Pacman::end_condition()
 	return true;
 }
 
+void Arcade::Pacman::goToHouse()
+{
+	// Réinitialise la position d'un fantom si il est mangé
+	for (int i = 0 ; i != 4 ; i++) {
+		if (_pos_p[0] == _pos_f[i][0] && _pos_p[1] == _pos_f[i][1]
+			&& _god) {
+			switch (i) {
+				case 0:
+					setValue(12, 13, 0, 32, i);
+					break;
+				case 1:
+					setValue(12, 14, 0, 32, i);
+					break;
+				case 2:
+					setValue(14, 14, 0, 32, i);
+					break;
+				case 3:
+					setValue(14, 13, 0, 32, i);
+					break;
+			}
+		}
+	}
+}
+
+void Arcade::Pacman::setValue(size_t x, size_t y, size_t pos,
+	size_t old_char, int nb)
+{
+	// Set la position d'un fantom
+	_pos_f[nb][0] = x;
+	_pos_f[nb][1] = y;
+	_pos_f[nb][2] = pos;
+	_pos_f[nb][3] = old_char;
+}
+
 void Arcade::Pacman::loadMap()
 {
+	// Chargement de la map dans le fichier map.txt
 	std::ifstream input("map.txt");
 	char tmp;
 
@@ -256,29 +292,23 @@ void Arcade::Pacman::loadMap()
 **  Movement
 */
 
-//PACMAN
+// PACMAN
 
 bool Arcade::Pacman::moveUpP() // dir = 1
 {
-	std::cout << "moveUpP() " << std::endl;
+	// Deplacement en haur de Pacman
 	_dir = 1;
 	if (_map[(((_pos_p[1] - 1) * _width) + _pos_p[0])] == '=') {
-		printLine(_pos_p[1] - 1);
-		printLine(_pos_p[1]);
-		printLine(_pos_p[1] + 1);
-		printMap();
-		printLine(0);
-		printLine(1);
-		printLine(2);
-		printLine(3);
-		printLine(4);
-		std::cout << "Impossible to moveUp" << std::endl;
 		return false;
 	}
 	if (_map[((_pos_p[1] - 1) * _width) + (_pos_p[0])] == '.'
 		|| _map[((_pos_p[1] - 1) * _width) + (_pos_p[0])] == 'o') {
 		_food--;
 		_score += 100;
+	}
+	if (_map[((_pos_p[1] - 1) * _width) + (_pos_p[0])] == 'o') {
+		_timeGod = _time;
+		_god = true;
 	}
 	_map[(((_pos_p[1] - 1) * _width) + _pos_p[0])] = 'X';
 	_map[((_pos_p[1]) * _width) + _pos_p[0]] = ' ';
@@ -288,14 +318,9 @@ bool Arcade::Pacman::moveUpP() // dir = 1
 
 bool Arcade::Pacman::moveDownP() // dir = 2
 {
-	std::cout << "moveDownP() " << std::endl;
+	// Deplacement en bas de Pacman
 	_dir = 2;
 	if (_map[((_pos_p[1] + 1) * _width) + _pos_p[0]] == '='){
-		printLine(_pos_p[1] - 1);
-		printLine(_pos_p[1]);
-		printLine(_pos_p[1] + 1);
-		printMap();
-		std::cout << "Impossible to moveDown" << std::endl;
 		return false;
 	}
 	if (_map[((_pos_p[1] + 1) * _width) + (_pos_p[0])] == '.'
@@ -303,29 +328,31 @@ bool Arcade::Pacman::moveDownP() // dir = 2
 		_food--;
 		_score += 100;
 	}
+	if (_map[((_pos_p[1] + 1) * _width) + (_pos_p[0])] == 'o') {
+		_timeGod = _time;
+		_god = true;
+	}
 	_map[((_pos_p[1] + 1) * _width) + _pos_p[0]] = 'X';
 	_map[((_pos_p[1]) * _width) + _pos_p[0]] = ' ';
 	_pos_p[1]++;
-//	_food = 0;
 	return true;
 }
 
 bool Arcade::Pacman::moveLeftP() // dir = 3
 {
-	std::cout << "moveLeftP() " << std::endl;
+	// Deplacement à gauche de Pacman
 	_dir = 3;
 	if (_map[((_pos_p[1]) * _width) + (_pos_p[0] - 1)] == '='){
-		printLine(_pos_p[1] - 1);
-		printLine(_pos_p[1]);
-		printLine(_pos_p[1] + 1);
-		printMap();
-		std::cout << "Impossible to moveLeft" << std::endl;
 		return false;
 	}
 	if (_map[((_pos_p[1]) * _width) + (_pos_p[0] - 1)] == '.'
 		|| _map[((_pos_p[1]) * _width) + (_pos_p[0] - 1)] == 'o'){
 		_food--;
 		_score += 100;
+	}
+	if (_map[((_pos_p[1]) * _width) + (_pos_p[0] - 1)] == 'o') {
+		_timeGod = _time;
+		_god = true;
 	}
 	_map[((_pos_p[1]) * _width) + (_pos_p[0] - 1)] = 'X';
 	_map[((_pos_p[1]) * _width) + _pos_p[0]] = ' ';
@@ -335,20 +362,19 @@ bool Arcade::Pacman::moveLeftP() // dir = 3
 
 bool Arcade::Pacman::moveRightP() // dir = 4
 {
-	std::cout << "moveRightP() " << std::endl;
+	// Deplacement à droite de Pacman
 	_dir = 4;
 	if (_map[((_pos_p[1]) * _width) + (_pos_p[0] + 1)] == '='){
-		printLine(_pos_p[1] - 1);
-		printLine(_pos_p[1]);
-		printLine(_pos_p[1] + 1);
-		printMap();
-		std::cout << "Impossible to moveRight" << std::endl;
 		return false;
 	}
 	if (_map[((_pos_p[1]) * _width) + (_pos_p[0] + 1)] == '.'
 		|| _map[((_pos_p[1]) * _width) + (_pos_p[0] + 1)] == 'o') {
 		_food--;
 		_score += 100;
+	}
+	if (_map[((_pos_p[1]) * _width) + (_pos_p[0] + 1)] == 'o') {
+		_timeGod = _time;
+		_god = true;
 	}
 	_map[((_pos_p[1]) * _width) + (_pos_p[0] + 1)] = 'X';
 	_map[((_pos_p[1]) * _width) + _pos_p[0]] = ' ';
@@ -358,8 +384,9 @@ bool Arcade::Pacman::moveRightP() // dir = 4
 
 bool Arcade::Pacman::movePacman()
 {
-	bool ret;
+	bool ret; // Valeur de retour
 
+	// Deplacement du Pacman
 	switch(_dir){
 		case 0:
 			return false;
@@ -376,36 +403,25 @@ bool Arcade::Pacman::movePacman()
 			ret = moveRightP();
 			break;
 	}
-	if (ret) {
-		printMap();
-		std::cout << std::endl << std::endl;
-	}
 	return ret;
 }
 
-//FANTOM
+// FANTOM
 
 // _pos_f[i][2] = dir = 1
 bool Arcade::Pacman::moveUpF(std::vector<size_t> &pos, char sym)
 {
-	std::cout << "moveUpF() " << std::endl;
+	// Déplacement en bas d'un fantom
 	pos[2] = 1;
 	if (_map[(((pos[1] - 1) * _width) + pos[0])] == '='
 	    || isNum(_map[(((pos[1] - 1) * _width) + pos[0])])) {
-		std::cout << "Impossible to moveUp" << std::endl;
 		pos[2] = 0;
 		return false;
 	}
 	_map[((pos[1]) * _width) + pos[0]] = pos[3];
 	pos[3] = _map[(((pos[1] - 1) * _width) + pos[0])];
-//	if (_map[((pos[1] - 1) * _width) + pos[0]] != ' '
-//	    && _map[((pos[1] - 1) * _width) + pos[0]] != 'X'
-//	    && _map[((pos[1] - 1) * _width) + pos[0]] != '.'
-//	    && _map[((pos[1] - 1) * _width) + pos[0]] != 'o')
-//		pos[3] = _pos_f[(_map[(((pos[1] - 1) * _width) + pos[0])]) - 48][3];
 	_map[(((pos[1] - 1) * _width) + pos[0])] = sym;
 	pos[1]--;
-//	sleep(1);
 	return true;
 
 }
@@ -413,94 +429,71 @@ bool Arcade::Pacman::moveUpF(std::vector<size_t> &pos, char sym)
 // _pos_f[i][2] = dir = 2
 bool Arcade::Pacman::moveDownF(std::vector<size_t> &pos, char sym)
 {
-	std::cout << "moveDownF() " << std::endl;
+	// Déplacement en bas d'un fantom
 	pos[2] = 2;
 	if (_map[(((pos[1] + 1) * _width) + pos[0])] == '='
 		|| isNum(_map[(((pos[1] + 1) * _width) + pos[0])])) {
-		std::cout << "Impossible to moveDown" << std::endl;
 		pos[2] = 0;
 		return false;
 	}
 	_map[((pos[1] ) * _width) + pos[0]] = pos[3];
 	pos[3] = _map[(((pos[1] + 1) * _width) + pos[0])];
-//	if (_map[((pos[1] + 1) * _width) + pos[0]] != ' '
-//		&& _map[((pos[1] + 1) * _width) + pos[0]] != 'X'
-//		&& _map[((pos[1] + 1) * _width) + pos[0]] != '.'
-//		&& _map[((pos[1] + 1) * _width) + pos[0]] != 'o')
-//		pos[3] = _pos_f[(_map[(((pos[1] + 1) * _width) + pos[0])]) - 48][3];
 	_map[(((pos[1] + 1) * _width) + pos[0])] = sym;
 	pos[1]++;
-//	sleep(1);
 	return true;
 }
 
 // _pos_f[i][2] = dir = 3
 bool Arcade::Pacman::moveLeftF(std::vector<size_t> &pos, char sym)
 {
-	std::cout << "moveLeftF() " << std::endl;
+	// Déplacement à gauche d'un fantom
 	pos[2] = 3;
 	if (_map[(((pos[1]) * _width) + pos[0] - 1)] == '='
 	    || isNum(_map[(((pos[1]) * _width) + pos[0] - 1)] )) {
-		std::cout << "Impossible to moveDown" << std::endl;
 		pos[2] = 0;
 		return false;
 	}
 	_map[((pos[1]) * _width) + pos[0]] = pos[3];
 	pos[3] = _map[(((pos[1]) * _width) + pos[0] - 1)];
-//	if (_map[((pos[1]) * _width) + pos[0] - 1] != ' '
-//	    && _map[((pos[1]) * _width) + pos[0] - 1] != 'X'
-//	    && _map[((pos[1]) * _width) + pos[0] - 1] != '.'
-//	    && _map[((pos[1]) * _width) + pos[0] - 1] != 'o')
-//		pos[3] = _pos_f[(_map[(((pos[1]) * _width) + pos[0] - 1)]) - 48][3];
 	_map[(((pos[1]) * _width) + pos[0] - 1)] = sym;
 	pos[0]--;
-//	sleep(1);
 	return true;
 }
 
 // _pos_f[i][2] = dir = 4
 bool Arcade::Pacman::moveRightF(std::vector<size_t> &pos, char sym)
 {
-	std::cout << "moveRightF() " << std::endl;
+	// Déplacement à droite d'un fantom
 	pos[2] = 4;
 	if (_map[(((pos[1]) * _width) + pos[0] + 1)] == '='
 		|| isNum(_map[(((pos[1]) * _width) + pos[0] + 1)])) {
-		std::cout << "Impossible to moveDown" << std::endl;
 		pos[2] = 0;
 		return false;
 	}
 	_map[((pos[1]) * _width) + pos[0]] = pos[3];
 	pos[3] = _map[(((pos[1]) * _width) + pos[0] + 1)];
-//	if (_map[((pos[1]) * _width) + pos[0] + 1] != ' '
-//	    && _map[((pos[1]) * _width) + pos[0] + 1] != 'X'
-//	    && _map[((pos[1]) * _width) + pos[0] + 1] != '.'
-//	    && _map[((pos[1]) * _width) + pos[0] + 1] != 'o')
-//		pos[3] = _pos_f[(_map[(((pos[1]) * _width) + pos[0] + 1)]) - 48][3];
 	_map[(((pos[1]) * _width) + pos[0] + 1)] = sym;
 	pos[0]++;
-//	sleep(1);
 	return true;
 }
 
 bool Arcade::Pacman::moveFantom()
 {
-	bool ret;
+	bool ret; // Valeur de retour
 
 	for (int i = 0 ; i != 4 ; i++){
 		if (_pos_f[i][0] >= 12 && _pos_f[i][0] <= 14
-			&& _pos_f[i][1] >= 12 && _pos_f[i][1] <= 14){
+			&& _pos_f[i][1] >= 12 && _pos_f[i][1] <= 14
+			&& _time >= 10) { // Si les fantomes sont dans la room
 			ret = exitRoom(i);
-			printMap();
-		} else {
-			if (_pos_f[i][2] != 0) {
+		} else { // Si les fantom ne sont pas dans leur room
+			if (_pos_f[i][2] != 0) { // Si ils n'ont pas de direction
 				if (findIntersection(i))
 					findDirection(i);
 				ret = dirFantom(i);
-				printMap();
-			} else {
+			} else { // Si ils sont sortis !
 				findDirection(i);
 				ret = dirFantom(i);
-				printMap();
 			}
 		}
 	}
@@ -522,7 +515,6 @@ bool Arcade::Pacman::findIntersection(int nb){
 		count++;
 
 	if (count >= 3){
-		std::cout << "On a trouvé une intersection" << std::endl;
 		_pos_f[nb][2] = 0;
 		return true;
 	}
@@ -531,8 +523,9 @@ bool Arcade::Pacman::findIntersection(int nb){
 
 void Arcade::Pacman::findDirection(int nb)
 {
-	int dir;
-	int count = 0;
+	int dir; // Direction aléatoire
+	int count = 0; // Si trop grand saute le tour du Fantom afin de ne
+	// pas bloquer le jeu
 
 	// if : check si la case au dessus est libre ! dir = 1
 	// else if : check si la case au dessous est libre ! dir = 2
@@ -542,13 +535,6 @@ void Arcade::Pacman::findDirection(int nb)
 
 	while (_pos_f[nb][2] == 0 && count < 1000) {
 		dir = rand() % 5;
-		std::cout << "Le num du Fantom : " << nb << std::endl;
-		std::cout << "Son x : " << _pos_f[nb][0] << std::endl;
-		std::cout << "Son y : " << _pos_f[nb][1] << std::endl;
-		std::cout << "Dir " << dir << std::endl;
-		printMap();
-//		sleep(2);
-//		continue;
 		if (dir == 1
 			&& (_map[_pos_f[nb][0] + ((_pos_f[nb][1] - 1) * _width)] == '.'
 		        || _map[_pos_f[nb][0] + ((_pos_f[nb][1] - 1) * _width)] == ' '
@@ -577,14 +563,13 @@ void Arcade::Pacman::findDirection(int nb)
 			_pos_f[nb][2] = 0;
 		count++;
 	}
-	std::cout << "La direction du Fantom nb " << nb + 1 << " : " <<
-	          _pos_f[nb][2] << std::endl;
 }
 
 bool Arcade::Pacman::dirFantom(int nb) // deplace le fantom dans sa direction
 {
-	bool ret;
+	bool ret; // Valeur de retour
 
+	// Deplacement d'un Fantom
 	switch (_pos_f[nb][2]) {
 		case 1:
 			ret = moveUpF(_pos_f[nb], nb + 1 + 48);
@@ -599,15 +584,13 @@ bool Arcade::Pacman::dirFantom(int nb) // deplace le fantom dans sa direction
 			ret = moveRightF(_pos_f[nb], nb + 1 + 48);
 			break;
 	}
-	if (ret){
-		printMap();
-		std::cout << std::endl << std::endl;
-	}
 	return ret;
 }
 
 bool Arcade::Pacman::exitRoom(int i)
 {
+	// Déplace les fantom dans leur room afin qu'il sortent !
+
 	if (_pos_f[i][0] > 13 && _map[_width * _pos_f[i][1] + 13] == ' '){
 		_map[_width * _pos_f[i][1] + 14] = _pos_f[i][3];
 		_pos_f[i][3] = _map[_width * _pos_f[i][1] + 13];
@@ -651,6 +634,7 @@ bool Arcade::Pacman::isNum(char num)
 
 void Arcade::Pacman::countFood()
 {
+	// Compte le nombre de "pacgums" sur la map
 	for (size_t i = 0 ; i != _map.size() ; i++) {
 		if (_map[i] == '.' || _map[i] == 'o')
 			_food++;
@@ -671,9 +655,6 @@ void Arcade::Pacman::printMap()
 		}
 	}
 	std::cout << std::endl;
-//	printLine(0);	printLine(1);	printLine(2);	printLine(3);	printLine(4);	printLine(5);	printLine(6);	printLine(7);	printLine(8);	printLine(9);	printLine(10);
-//	printLine(11);	printLine(12);	printLine(13);	printLine(14);	printLine(15);	printLine(16);	printLine(17);	printLine(18);	printLine(19);	printLine(20);
-//	printLine(21);	printLine(22);	printLine(23);	printLine(24);	printLine(25);	printLine(26);	printLine(27);	printLine(28);	printLine(29);	printLine(30);
 }
 
 void Arcade::Pacman::printLine(int nb)
@@ -692,93 +673,29 @@ void Arcade::Pacman::printLine(int nb)
 
 size_t Arcade::Pacman::getScore()
 {
+	// Retourne le score du joueur actuel
 	return _score;
 }
 
 int Arcade::Pacman::getDir()
 {
+	// Retourne la direction de pacman
 	return _dir;
 }
 
 std::vector<size_t>& Arcade::Pacman::getPacmanPos()
 {
+	// Retourne le vecteur de position de pacman
 	return _pos_p;
 }
 
 std::vector<std::vector<size_t>> Arcade::Pacman::getFantomPos()
 {
+	// Retourne le vector contenant les vector des positions des fantomes
 	return _pos_f;
 }
 
-/*
-int main()
+const std::string Arcade::Pacman::getName() const
 {
-	bool test;
-	Arcade::Pacman pac;
-
-
-	pac.init();
-
-	pac.printMap();
-
-//	test = pac.moveDown();
-//	if (test){
-//		pac.printMap();
-//		std::cout << "===========================" << std::endl;
-//	}
-
-	test = pac.moveLeftP();
-	if (test){
-		pac.printMap();
-		std::cout << "===========================" << std::endl;
-	}
-
-	sleep(2);
-	while (1){
-		std::cout << "La valeur de dir : " << pac.getDir() << std::endl;
-		test = pac.movePacman();
-		pac.moveFantom();
-		sleep(1);
-		if (!test){
-			std::cout << "Votre score est de : " << pac.getScore() << std::endl;
-			exit(0);
-		}
-	}
-
-//	test = pac.moveUp();
-//	if (test){
-//		pac.printMap();
-//		std::cout << "===========================" << std::endl;
-//	}
-//
-//	test = pac.moveUp();
-//	if (test){
-//		pac.printMap();
-//		std::cout << "===========================" << std::endl;
-//	}
-//
-//	test = pac.moveUp();
-//	if (test){
-//		pac.printMap();
-//		std::cout << "===========================" << std::endl;
-//	}
-//
-//	test = pac.moveLeft();
-//	if (test){
-//		pac.printMap();
-//		std::cout << "===========================" << std::endl;
-//	}
-//	test = pac.moveLeft();
-//	if (test){
-//		pac.printMap();
-//		std::cout << "===========================" << std::endl;
-//	}
-//	test = pac.moveRight();
-//	if (test){
-//		pac.printMap();
-//		std::cout << "===========================" << std::endl;
-//	}
-
-	std::cout << "Votre score est de : " << pac.getScore() << std::endl;
+	return _name;
 }
-*/

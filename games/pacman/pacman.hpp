@@ -106,6 +106,12 @@ namespace Arcade {
 		// Clear the value
 		void clearValue();
 
+		// Fantom to House
+		void goToHouse();
+
+		// Set value of Fantom
+		void setValue(size_t, size_t, size_t, size_t, int);
+
 	private:
 		// Name of the game
 		std::string _name = "Pacman";
@@ -124,6 +130,12 @@ namespace Arcade {
 
 		// Durée de jeu
 		size_t _time = 0;
+
+		// Start time
+		size_t _start_time = time(NULL);
+
+		// God mod time
+		size_t _timeGod = 0;
 
 		// Contient la position du Pacman
 		std::vector<size_t> _pos_p;
