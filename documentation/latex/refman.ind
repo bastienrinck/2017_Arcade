@@ -1,0 +1,368 @@
+\begin{theindex}
+
+  \item {/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/include/\+Color.\+hpp}, 
+		\hyperpage{67}
+  \item {/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/include/\+Keys.\+hpp}, 
+		\hyperpage{68}
+  \item {/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/include/\+Pixel\+Box.\+hpp}, 
+		\hyperpage{69}
+  \item {/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/include/\+Text\+Box.\+hpp}, 
+		\hyperpage{70}
+  \item {/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/include/\+Vect.\+hpp}, 
+		\hyperpage{72}
+  \item {/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/interfaces/\+I\+Game\+Lib.\+hpp}, 
+		\hyperpage{73}
+  \item {/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/interfaces/\+I\+Graphic\+Lib.\+hpp}, 
+		\hyperpage{74}
+  \item {$\sim$\+I\+Game\+Lib}
+    \subitem {Arcade\+::\+I\+Game\+Lib}, \hyperpage{16}
+  \item {$\sim$\+I\+Graphic\+Lib}
+    \subitem {Arcade\+::\+I\+Graphic\+Lib}, \hyperpage{20}
+
+  \indexspace
+
+  \item {apply\+Event}
+    \subitem {Arcade\+::\+I\+Game\+Lib}, \hyperpage{17}
+    \subitem {Arcade\+::\+Nibbler}, \hyperpage{29}
+    \subitem {Arcade\+::\+Pacman}, \hyperpage{33}
+  \item {Arcade}, \hyperpage{9}
+    \subitem {Keys}, \hyperpage{10}
+  \item {Arcade\+::\+Color}, \hyperpage{11}
+    \subitem {Color}, \hyperpage{12}
+    \subitem {get\+Alpha}, \hyperpage{12}
+    \subitem {get\+Blue}, \hyperpage{12}
+    \subitem {get\+Green}, \hyperpage{12}
+    \subitem {get\+Red}, \hyperpage{13}
+    \subitem {operator unsigned char $\ast$}, \hyperpage{13}
+    \subitem {operator==}, \hyperpage{13}
+    \subitem {set\+Alpha}, \hyperpage{14}
+    \subitem {set\+Blue}, \hyperpage{14}
+    \subitem {set\+Color}, \hyperpage{14}
+    \subitem {set\+Green}, \hyperpage{14}
+    \subitem {set\+Red}, \hyperpage{14}
+  \item {Arcade\+::\+Core}, \hyperpage{15}
+  \item {Arcade\+::\+I\+Game\+Lib}, \hyperpage{16}
+    \subitem {$\sim$\+I\+Game\+Lib}, \hyperpage{16}
+    \subitem {apply\+Event}, \hyperpage{17}
+    \subitem {get\+Name}, \hyperpage{17}
+    \subitem {get\+Score}, \hyperpage{17}
+    \subitem {init}, \hyperpage{18}
+    \subitem {refresh}, \hyperpage{18}
+    \subitem {stop}, \hyperpage{18}
+    \subitem {update}, \hyperpage{19}
+  \item {Arcade\+::\+I\+Graphic\+Lib}, \hyperpage{19}
+    \subitem {$\sim$\+I\+Graphic\+Lib}, \hyperpage{20}
+    \subitem {clear\+Events}, \hyperpage{21}
+    \subitem {close\+Renderer}, \hyperpage{21}
+    \subitem {get\+Last\+Event}, \hyperpage{21}
+    \subitem {get\+MaxX}, \hyperpage{21}
+    \subitem {get\+MaxY}, \hyperpage{22}
+    \subitem {get\+Name}, \hyperpage{22}
+    \subitem {get\+Screen\+Size}, \hyperpage{22}
+    \subitem {is\+Open}, \hyperpage{22}
+    \subitem {open\+Renderer}, \hyperpage{23}
+    \subitem {poll\+Events}, \hyperpage{23}
+  \item {Arcade\+::\+Menu}, \hyperpage{24}
+  \item {Arcade\+::\+N\+Curses}, \hyperpage{24}
+    \subitem {clear\+Events}, \hyperpage{25}
+    \subitem {close\+Renderer}, \hyperpage{25}
+    \subitem {get\+Last\+Event}, \hyperpage{26}
+    \subitem {get\+MaxX}, \hyperpage{26}
+    \subitem {get\+MaxY}, \hyperpage{26}
+    \subitem {get\+Name}, \hyperpage{26}
+    \subitem {get\+Screen\+Size}, \hyperpage{27}
+    \subitem {is\+Open}, \hyperpage{27}
+    \subitem {open\+Renderer}, \hyperpage{27}
+    \subitem {poll\+Events}, \hyperpage{28}
+  \item {Arcade\+::\+Nibbler}, \hyperpage{28}
+    \subitem {apply\+Event}, \hyperpage{29}
+    \subitem {get\+Name}, \hyperpage{30}
+    \subitem {get\+Score}, \hyperpage{30}
+    \subitem {init}, \hyperpage{30}
+    \subitem {refresh}, \hyperpage{30}
+    \subitem {stop}, \hyperpage{31}
+    \subitem {update}, \hyperpage{31}
+  \item {Arcade\+::\+Pacman}, \hyperpage{32}
+    \subitem {apply\+Event}, \hyperpage{33}
+    \subitem {get\+Name}, \hyperpage{33}
+    \subitem {get\+Score}, \hyperpage{33}
+    \subitem {init}, \hyperpage{33}
+    \subitem {refresh}, \hyperpage{34}
+    \subitem {stop}, \hyperpage{34}
+    \subitem {update}, \hyperpage{34}
+  \item {Arcade\+::\+Pixel\+Box}, \hyperpage{35}
+    \subitem {get\+Height}, \hyperpage{37}
+    \subitem {get\+Pixel}, \hyperpage{37}
+    \subitem {get\+Pixel\+Array}, \hyperpage{37}
+    \subitem {get\+Pos}, \hyperpage{37}
+    \subitem {get\+Size}, \hyperpage{38}
+    \subitem {get\+Width}, \hyperpage{38}
+    \subitem {getX}, \hyperpage{38}
+    \subitem {getY}, \hyperpage{38}
+    \subitem {Pixel\+Box}, \hyperpage{36}
+    \subitem {put\+Pixel}, \hyperpage{39}
+    \subitem {put\+Rect}, \hyperpage{39}
+    \subitem {set\+Pos}, \hyperpage{39}
+    \subitem {set\+Size}, \hyperpage{41}
+  \item {Arcade\+::\+Score}, \hyperpage{41}
+  \item {Arcade\+::\+Sdl2}, \hyperpage{42}
+    \subitem {clear\+Events}, \hyperpage{43}
+    \subitem {close\+Renderer}, \hyperpage{43}
+    \subitem {get\+Last\+Event}, \hyperpage{43}
+    \subitem {get\+MaxX}, \hyperpage{44}
+    \subitem {get\+MaxY}, \hyperpage{44}
+    \subitem {get\+Name}, \hyperpage{44}
+    \subitem {get\+Screen\+Size}, \hyperpage{45}
+    \subitem {is\+Open}, \hyperpage{45}
+    \subitem {open\+Renderer}, \hyperpage{45}
+    \subitem {poll\+Events}, \hyperpage{46}
+  \item {Arcade\+::\+Sfml}, \hyperpage{46}
+    \subitem {clear\+Events}, \hyperpage{47}
+    \subitem {close\+Renderer}, \hyperpage{48}
+    \subitem {get\+Last\+Event}, \hyperpage{48}
+    \subitem {get\+MaxX}, \hyperpage{48}
+    \subitem {get\+MaxY}, \hyperpage{48}
+    \subitem {get\+Name}, \hyperpage{49}
+    \subitem {get\+Screen\+Size}, \hyperpage{49}
+    \subitem {is\+Open}, \hyperpage{49}
+    \subitem {open\+Renderer}, \hyperpage{49}
+    \subitem {poll\+Events}, \hyperpage{50}
+  \item {Arcade\+::\+Text\+Box}, \hyperpage{50}
+    \subitem {get\+Background\+Color}, \hyperpage{53}
+    \subitem {get\+Color}, \hyperpage{53}
+    \subitem {get\+Font\+Size}, \hyperpage{53}
+    \subitem {get\+Pos}, \hyperpage{54}
+    \subitem {get\+Value}, \hyperpage{54}
+    \subitem {set\+Background\+Color}, \hyperpage{54}
+    \subitem {set\+Color}, \hyperpage{55}
+    \subitem {set\+Font\+Size}, \hyperpage{55}
+    \subitem {set\+Pos}, \hyperpage{55}
+    \subitem {set\+Value}, \hyperpage{55}
+    \subitem {Text\+Box}, \hyperpage{51}
+  \item {Arcade\+::\+Vect}
+    \subitem {getX}, \hyperpage{57}
+    \subitem {getY}, \hyperpage{57}
+    \subitem {operator$\ast$}, \hyperpage{58}
+    \subitem {operator$\ast$=}, \hyperpage{58, 59}
+    \subitem {operator+}, \hyperpage{59, 60}
+    \subitem {operator+=}, \hyperpage{60}
+    \subitem {operator-\/}, \hyperpage{61}
+    \subitem {operator-\/=}, \hyperpage{61, 62}
+    \subitem {operator/}, \hyperpage{62, 63}
+    \subitem {operator/=}, \hyperpage{63}
+    \subitem {operator==}, \hyperpage{64}
+    \subitem {set\+XY}, \hyperpage{64}
+    \subitem {setX}, \hyperpage{64}
+    \subitem {setY}, \hyperpage{65}
+    \subitem {Vect}, \hyperpage{57}
+  \item {Arcade\+::\+Vect$<$ T $>$}, \hyperpage{56}
+
+  \indexspace
+
+  \item {clear\+Events}
+    \subitem {Arcade\+::\+I\+Graphic\+Lib}, \hyperpage{21}
+    \subitem {Arcade\+::\+N\+Curses}, \hyperpage{25}
+    \subitem {Arcade\+::\+Sdl2}, \hyperpage{43}
+    \subitem {Arcade\+::\+Sfml}, \hyperpage{47}
+  \item {close\+Renderer}
+    \subitem {Arcade\+::\+I\+Graphic\+Lib}, \hyperpage{21}
+    \subitem {Arcade\+::\+N\+Curses}, \hyperpage{25}
+    \subitem {Arcade\+::\+Sdl2}, \hyperpage{43}
+    \subitem {Arcade\+::\+Sfml}, \hyperpage{48}
+  \item {Color}
+    \subitem {Arcade\+::\+Color}, \hyperpage{12}
+
+  \indexspace
+
+  \item {D\+L\+Loader$<$ T $>$}, \hyperpage{15}
+
+  \indexspace
+
+  \item {get\+Alpha}
+    \subitem {Arcade\+::\+Color}, \hyperpage{12}
+  \item {get\+Background\+Color}
+    \subitem {Arcade\+::\+Text\+Box}, \hyperpage{53}
+  \item {get\+Blue}
+    \subitem {Arcade\+::\+Color}, \hyperpage{12}
+  \item {get\+Color}
+    \subitem {Arcade\+::\+Text\+Box}, \hyperpage{53}
+  \item {get\+Font\+Size}
+    \subitem {Arcade\+::\+Text\+Box}, \hyperpage{53}
+  \item {get\+Green}
+    \subitem {Arcade\+::\+Color}, \hyperpage{12}
+  \item {get\+Height}
+    \subitem {Arcade\+::\+Pixel\+Box}, \hyperpage{37}
+  \item {get\+Last\+Event}
+    \subitem {Arcade\+::\+I\+Graphic\+Lib}, \hyperpage{21}
+    \subitem {Arcade\+::\+N\+Curses}, \hyperpage{26}
+    \subitem {Arcade\+::\+Sdl2}, \hyperpage{43}
+    \subitem {Arcade\+::\+Sfml}, \hyperpage{48}
+  \item {get\+MaxX}
+    \subitem {Arcade\+::\+I\+Graphic\+Lib}, \hyperpage{21}
+    \subitem {Arcade\+::\+N\+Curses}, \hyperpage{26}
+    \subitem {Arcade\+::\+Sdl2}, \hyperpage{44}
+    \subitem {Arcade\+::\+Sfml}, \hyperpage{48}
+  \item {get\+MaxY}
+    \subitem {Arcade\+::\+I\+Graphic\+Lib}, \hyperpage{22}
+    \subitem {Arcade\+::\+N\+Curses}, \hyperpage{26}
+    \subitem {Arcade\+::\+Sdl2}, \hyperpage{44}
+    \subitem {Arcade\+::\+Sfml}, \hyperpage{48}
+  \item {get\+Name}
+    \subitem {Arcade\+::\+I\+Game\+Lib}, \hyperpage{17}
+    \subitem {Arcade\+::\+I\+Graphic\+Lib}, \hyperpage{22}
+    \subitem {Arcade\+::\+N\+Curses}, \hyperpage{26}
+    \subitem {Arcade\+::\+Nibbler}, \hyperpage{30}
+    \subitem {Arcade\+::\+Pacman}, \hyperpage{33}
+    \subitem {Arcade\+::\+Sdl2}, \hyperpage{44}
+    \subitem {Arcade\+::\+Sfml}, \hyperpage{49}
+  \item {get\+Pixel}
+    \subitem {Arcade\+::\+Pixel\+Box}, \hyperpage{37}
+  \item {get\+Pixel\+Array}
+    \subitem {Arcade\+::\+Pixel\+Box}, \hyperpage{37}
+  \item {get\+Pos}
+    \subitem {Arcade\+::\+Pixel\+Box}, \hyperpage{37}
+    \subitem {Arcade\+::\+Text\+Box}, \hyperpage{54}
+  \item {get\+Red}
+    \subitem {Arcade\+::\+Color}, \hyperpage{13}
+  \item {get\+Score}
+    \subitem {Arcade\+::\+I\+Game\+Lib}, \hyperpage{17}
+    \subitem {Arcade\+::\+Nibbler}, \hyperpage{30}
+    \subitem {Arcade\+::\+Pacman}, \hyperpage{33}
+  \item {get\+Screen\+Size}
+    \subitem {Arcade\+::\+I\+Graphic\+Lib}, \hyperpage{22}
+    \subitem {Arcade\+::\+N\+Curses}, \hyperpage{27}
+    \subitem {Arcade\+::\+Sdl2}, \hyperpage{45}
+    \subitem {Arcade\+::\+Sfml}, \hyperpage{49}
+  \item {get\+Size}
+    \subitem {Arcade\+::\+Pixel\+Box}, \hyperpage{38}
+  \item {get\+Value}
+    \subitem {Arcade\+::\+Text\+Box}, \hyperpage{54}
+  \item {get\+Width}
+    \subitem {Arcade\+::\+Pixel\+Box}, \hyperpage{38}
+  \item {getX}
+    \subitem {Arcade\+::\+Pixel\+Box}, \hyperpage{38}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{57}
+  \item {getY}
+    \subitem {Arcade\+::\+Pixel\+Box}, \hyperpage{38}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{57}
+
+  \indexspace
+
+  \item {init}
+    \subitem {Arcade\+::\+I\+Game\+Lib}, \hyperpage{18}
+    \subitem {Arcade\+::\+Nibbler}, \hyperpage{30}
+    \subitem {Arcade\+::\+Pacman}, \hyperpage{33}
+  \item {is\+Open}
+    \subitem {Arcade\+::\+I\+Graphic\+Lib}, \hyperpage{22}
+    \subitem {Arcade\+::\+N\+Curses}, \hyperpage{27}
+    \subitem {Arcade\+::\+Sdl2}, \hyperpage{45}
+    \subitem {Arcade\+::\+Sfml}, \hyperpage{49}
+
+  \indexspace
+
+  \item {Keys}
+    \subitem {Arcade}, \hyperpage{10}
+
+  \indexspace
+
+  \item {open\+Renderer}
+    \subitem {Arcade\+::\+I\+Graphic\+Lib}, \hyperpage{23}
+    \subitem {Arcade\+::\+N\+Curses}, \hyperpage{27}
+    \subitem {Arcade\+::\+Sdl2}, \hyperpage{45}
+    \subitem {Arcade\+::\+Sfml}, \hyperpage{49}
+  \item {operator unsigned char $\ast$}
+    \subitem {Arcade\+::\+Color}, \hyperpage{13}
+  \item {operator$\ast$}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{58}
+  \item {operator$\ast$=}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{58, 59}
+  \item {operator+}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{59, 60}
+  \item {operator+=}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{60}
+  \item {operator-\/}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{61}
+  \item {operator-\/=}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{61, 62}
+  \item {operator/}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{62, 63}
+  \item {operator/=}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{63}
+  \item {operator==}
+    \subitem {Arcade\+::\+Color}, \hyperpage{13}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{64}
+
+  \indexspace
+
+  \item {Pixel\+Box}
+    \subitem {Arcade\+::\+Pixel\+Box}, \hyperpage{36}
+  \item {poll\+Events}
+    \subitem {Arcade\+::\+I\+Graphic\+Lib}, \hyperpage{23}
+    \subitem {Arcade\+::\+N\+Curses}, \hyperpage{28}
+    \subitem {Arcade\+::\+Sdl2}, \hyperpage{46}
+    \subitem {Arcade\+::\+Sfml}, \hyperpage{50}
+  \item {put\+Pixel}
+    \subitem {Arcade\+::\+Pixel\+Box}, \hyperpage{39}
+  \item {put\+Rect}
+    \subitem {Arcade\+::\+Pixel\+Box}, \hyperpage{39}
+
+  \indexspace
+
+  \item {refresh}
+    \subitem {Arcade\+::\+I\+Game\+Lib}, \hyperpage{18}
+    \subitem {Arcade\+::\+Nibbler}, \hyperpage{30}
+    \subitem {Arcade\+::\+Pacman}, \hyperpage{34}
+
+  \indexspace
+
+  \item {set\+Alpha}
+    \subitem {Arcade\+::\+Color}, \hyperpage{14}
+  \item {set\+Background\+Color}
+    \subitem {Arcade\+::\+Text\+Box}, \hyperpage{54}
+  \item {set\+Blue}
+    \subitem {Arcade\+::\+Color}, \hyperpage{14}
+  \item {set\+Color}
+    \subitem {Arcade\+::\+Color}, \hyperpage{14}
+    \subitem {Arcade\+::\+Text\+Box}, \hyperpage{55}
+  \item {set\+Font\+Size}
+    \subitem {Arcade\+::\+Text\+Box}, \hyperpage{55}
+  \item {set\+Green}
+    \subitem {Arcade\+::\+Color}, \hyperpage{14}
+  \item {set\+Pos}
+    \subitem {Arcade\+::\+Pixel\+Box}, \hyperpage{39}
+    \subitem {Arcade\+::\+Text\+Box}, \hyperpage{55}
+  \item {set\+Red}
+    \subitem {Arcade\+::\+Color}, \hyperpage{14}
+  \item {set\+Size}
+    \subitem {Arcade\+::\+Pixel\+Box}, \hyperpage{41}
+  \item {set\+Value}
+    \subitem {Arcade\+::\+Text\+Box}, \hyperpage{55}
+  \item {set\+XY}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{64}
+  \item {setX}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{64}
+  \item {setY}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{65}
+  \item {stop}
+    \subitem {Arcade\+::\+I\+Game\+Lib}, \hyperpage{18}
+    \subitem {Arcade\+::\+Nibbler}, \hyperpage{31}
+    \subitem {Arcade\+::\+Pacman}, \hyperpage{34}
+
+  \indexspace
+
+  \item {Text\+Box}
+    \subitem {Arcade\+::\+Text\+Box}, \hyperpage{51}
+
+  \indexspace
+
+  \item {update}
+    \subitem {Arcade\+::\+I\+Game\+Lib}, \hyperpage{19}
+    \subitem {Arcade\+::\+Nibbler}, \hyperpage{31}
+    \subitem {Arcade\+::\+Pacman}, \hyperpage{34}
+
+  \indexspace
+
+  \item {Vect}
+    \subitem {Arcade\+::\+Vect}, \hyperpage{57}
+
+\end{theindex}

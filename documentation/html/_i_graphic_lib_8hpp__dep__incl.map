@@ -1,0 +1,11 @@
+<map id="/home/rectoria/projects/epitech/CPP/cpp_arcade/interfaces/IGraphicLib.hpp" name="/home/rectoria/projects/epitech/CPP/cpp_arcade/interfaces/IGraphicLib.hpp">
+<area shape="rect" id="node2" href="$_i_game_lib_8hpp.html" title="Game libraries dedicated class interface. " alt="" coords="279,109,450,165"/>
+<area shape="rect" id="node5" href="$_menu_8hpp_source.html" title="/home/rectoria/projects\l/epitech/CPP/cpp_arcade\l/src/menu/Menu.hpp" alt="" coords="402,317,573,373"/>
+<area shape="rect" id="node7" href="$_d_l_loader_8hpp_source.html" title="/home/rectoria/projects\l/epitech/CPP/cpp_arcade\l/templates/DLLoader.hpp" alt="" coords="525,213,695,269"/>
+<area shape="rect" id="node8" href="$_n_curses_8hpp_source.html" title="/home/rectoria/projects\l/epitech/CPP/cpp_arcade\l/lib/nCurses/NCurses.hpp" alt="" coords="575,109,749,165"/>
+<area shape="rect" id="node9" href="$_sdl2_8hpp_source.html" title="/home/rectoria/projects\l/epitech/CPP/cpp_arcade\l/lib/SDL2/Sdl2.hpp" alt="" coords="773,109,943,165"/>
+<area shape="rect" id="node10" href="$_sfml_8hpp_source.html" title="/home/rectoria/projects\l/epitech/CPP/cpp_arcade\l/lib/SFML/Sfml.hpp" alt="" coords="967,109,1138,165"/>
+<area shape="rect" id="node3" href="$_nibbler_8hpp_source.html" title="/home/rectoria/projects\l/epitech/CPP/cpp_arcade\l/games/nibbler/Nibbler.hpp" alt="" coords="5,213,183,269"/>
+<area shape="rect" id="node4" href="$_pacman_8hpp_source.html" title="/home/rectoria/projects\l/epitech/CPP/cpp_arcade\l/games/pacman/Pacman.hpp" alt="" coords="207,213,399,269"/>
+<area shape="rect" id="node6" href="$_core_8hpp_source.html" title="/home/rectoria/projects\l/epitech/CPP/cpp_arcade\l/src/core/Core.hpp" alt="" coords="463,421,634,477"/>
+</map>

@@ -1,0 +1,258 @@
+.TH "Arcade::PixelBox" 3 "Thu Apr 12 2018" "cpp_arcade" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Arcade::PixelBox \- \fBPixelBox\fP class\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <PixelBox\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPixelBox\fP (\fBVect\fP< size_t > size=\fBVect\fP< size_t >(), \fBVect\fP< size_t > pos=\fBVect\fP< size_t >(), \fBColor\fP col=\fBColor\fP(255, 255, 255, 255))"
+.br
+.RI "\fBPixelBox\fP class's constructor\&. "
+.ti -1c
+.RI "\fB~PixelBox\fP ()=default"
+.br
+.RI "\fBPixelBox\fP class's destructor\&. "
+.ti -1c
+.RI "size_t \fBgetHeight\fP () const"
+.br
+.RI "\fBPixelBox\fP height's getter\&. "
+.ti -1c
+.RI "size_t \fBgetY\fP () const"
+.br
+.RI "\fBPixelBox\fP Y offset's getter\&. "
+.ti -1c
+.RI "void \fBsetHeight\fP (size_t height)"
+.br
+.RI "\fBPixelBox\fP height setter\&. "
+.ti -1c
+.RI "void \fBsetY\fP (size_t y)"
+.br
+.RI "\fBPixelBox\fP Y offset's getter\&. "
+.ti -1c
+.RI "size_t \fBgetWidth\fP () const"
+.br
+.RI "\fBPixelBox\fP width's getter\&. "
+.ti -1c
+.RI "size_t \fBgetX\fP () const"
+.br
+.RI "\fBPixelBox\fP X offset's getter\&. "
+.ti -1c
+.RI "void \fBsetWidth\fP (size_t width)"
+.br
+.RI "\fBPixelBox\fP height's setter\&. "
+.ti -1c
+.RI "void \fBsetX\fP (size_t x)"
+.br
+.RI "\fBPixelBox\fP X offset's setter\&. "
+.ti -1c
+.RI "\fBVect\fP< size_t > \fBgetSize\fP () const"
+.br
+.RI "\fBPixelBox\fP dimensions's getter\&. "
+.ti -1c
+.RI "void \fBsetSize\fP (\fBVect\fP< size_t > size)"
+.br
+.RI "\fBPixelBox\fP dimensions's getter\&. "
+.ti -1c
+.RI "\fBVect\fP< size_t > \fBgetPos\fP () const"
+.br
+.RI "\fBPixelBox\fP positions's getter\&. "
+.ti -1c
+.RI "void \fBsetPos\fP (\fBVect\fP< size_t > pos)"
+.br
+.RI "\fBPixelBox\fP positions's setter\&. "
+.ti -1c
+.RI "void \fBputPixel\fP (\fBVect\fP< size_t > pos, \fBColor\fP col)"
+.br
+.RI "Sets the color of the pixel at the given position\&. "
+.ti -1c
+.RI "\fBColor\fP \fBgetPixel\fP (\fBVect\fP< size_t > pos) const"
+.br
+.RI "Getter from pixel color to given position\&. "
+.ti -1c
+.RI "void \fBputRect\fP (\fBVect\fP< size_t > pos, \fBVect\fP< size_t > size, \fBColor\fP col)"
+.br
+.RI "Sets the color of many pixels within the pixelBox pixels's array\&. "
+.ti -1c
+.RI "std::vector< \fBColor\fP > const  & \fBgetPixelArray\fP () const"
+.br
+.RI "Getter of the pixels array\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBPixelBox\fP class\&. 
+
+Class used to represent a rectangle of pixels 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Arcade::PixelBox::PixelBox (\fBArcade::Vect\fP< size_t > size = \fC\fBVect\fP<size_t>()\fP, \fBArcade::Vect\fP< size_t > pos = \fC\fBVect\fP<size_t>()\fP, \fBArcade::Color\fP col = \fC\fBColor\fP(255, 255, 255, 255)\fP)\fC [explicit]\fP"
+
+.PP
+\fBPixelBox\fP class's constructor\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsize\fP : \fBVect<size_t>\fP containing the width (x) and the height (y) of the pixelBox 
+.br
+\fIpos\fP : \fBVect<size_t>\fP containing both x and y offsets\&. Used to place the pixelBox on the rendering support 
+.br
+\fIcol\fP : the color with which the array of pixels inside the pixelBox will be created
+.RE
+.PP
+Creates a new pixelBox class instance\&. The first \fBVect<size_t>\fP size argument defines the dimensions of the pixelBox\&. The second \fBVect<size_t>\fP pos argument defines the coordinates of the pixelBox's position on the rendering support\&. It will be the offset applied when rendering it\&. The third argument defines the color in which the pixels will be created\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "size_t Arcade::PixelBox::getHeight () const"
+
+.PP
+\fBPixelBox\fP height's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the pixelBox's height 
+.RE
+.PP
+
+.SS "\fBArcade::Color\fP Arcade::PixelBox::getPixel (\fBArcade::Vect\fP< size_t > pos) const"
+
+.PP
+Getter from pixel color to given position\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpos\fP : The position of the pixel from which the color is requested 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the color of the requested pixel 
+.RE
+.PP
+
+.SS "std::vector< \fBArcade::Color\fP > const  & Arcade::PixelBox::getPixelArray () const"
+
+.PP
+Getter of the pixels array\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+a vector of all the pixels of the pixelBox\&. 
+.RE
+.PP
+
+.SS "\fBArcade::Vect\fP< size_t > Arcade::PixelBox::getPos () const"
+
+.PP
+\fBPixelBox\fP positions's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+a \fBVect<size_t>\fP containing the offsetX (x) and the offsetY (y) of the pixelBox\&. 
+.RE
+.PP
+
+.SS "\fBArcade::Vect\fP< size_t > Arcade::PixelBox::getSize () const"
+
+.PP
+\fBPixelBox\fP dimensions's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+a \fBVect<size_t>\fP containing the width (x) and the height (y) of the pixelBox\&. 
+.RE
+.PP
+
+.SS "size_t Arcade::PixelBox::getWidth () const"
+
+.PP
+\fBPixelBox\fP width's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the pixelBox's height 
+.RE
+.PP
+
+.SS "size_t Arcade::PixelBox::getX () const"
+
+.PP
+\fBPixelBox\fP X offset's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the pixelBox X's offset 
+.RE
+.PP
+
+.SS "size_t Arcade::PixelBox::getY () const"
+
+.PP
+\fBPixelBox\fP Y offset's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the pixelBox Y's offset 
+.RE
+.PP
+
+.SS "void Arcade::PixelBox::putPixel (\fBArcade::Vect\fP< size_t > pos, \fBArcade::Color\fP col)"
+
+.PP
+Sets the color of the pixel at the given position\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpos\fP : The position of the pixel to be modified 
+.br
+\fIcol\fP : The new color of the pixel to be modified 
+.RE
+.PP
+
+.SS "void Arcade::PixelBox::putRect (\fBArcade::Vect\fP< size_t > pos, \fBArcade::Vect\fP< size_t > size, \fBArcade::Color\fP col)"
+
+.PP
+Sets the color of many pixels within the pixelBox pixels's array\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpos\fP : The position from which the new color has to be applied 
+.br
+\fIsize\fP : The dimensions of the chunk of pixels to be modified 
+.br
+\fIcol\fP : The new color to apply 
+.RE
+.PP
+
+.SS "void Arcade::PixelBox::setPos (\fBArcade::Vect\fP< size_t > pos)"
+
+.PP
+\fBPixelBox\fP positions's setter\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpos\fP : new positions of the pixelBox pixels's array
+.RE
+.PP
+Takes both new positions as parameter, within a \fBVect<size_t>\fP 
+.SS "void Arcade::PixelBox::setSize (\fBArcade::Vect\fP< size_t > size)"
+
+.PP
+\fBPixelBox\fP dimensions's getter\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsize\fP : new dimensions of the pixelBox pixels's array
+.RE
+.PP
+Takes both new dimensions as parameter, within a \fBVect<size_t>\fP 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for cpp_arcade from the source code\&.

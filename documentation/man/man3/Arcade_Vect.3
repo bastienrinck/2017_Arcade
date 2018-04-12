@@ -1,0 +1,418 @@
+.TH "Arcade::Vect< T >" 3 "Thu Apr 12 2018" "cpp_arcade" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Arcade::Vect< T > \- \fBVect\fP class template\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Vect\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBVect\fP (T x=0, T y=0)"
+.br
+.RI "\fBVect\fP class template's constructor\&. "
+.ti -1c
+.RI "void \fBsetXY\fP (T x=0, T y=0)"
+.br
+.RI "\fBVect\fP class template's coordinates's setter\&. "
+.ti -1c
+.RI "void \fBsetX\fP (T x=0)"
+.br
+.RI "\fBVect\fP class template's X coordinate's setter\&. "
+.ti -1c
+.RI "void \fBsetY\fP (T y=0)"
+.br
+.RI "\fBVect\fP class template's Y coordinate's setter\&. "
+.ti -1c
+.RI "T \fBgetX\fP () const"
+.br
+.RI "\fBVect\fP class template's X coordinate's getter\&. "
+.ti -1c
+.RI "T \fBgetY\fP () const"
+.br
+.RI "\fBVect\fP class template's Y coordinate's getter\&. "
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBVect\fP< T > &other) const"
+.br
+.RI "Overloading the comparison operator\&. "
+.ti -1c
+.RI "\fBVect\fP< T > \fBoperator+\fP (const \fBVect\fP< T > &other) const"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > \fBoperator\-\fP (const \fBVect\fP< T > &other) const"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > \fBoperator*\fP (const \fBVect\fP< T > &other) const"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > \fBoperator/\fP (const \fBVect\fP< T > &other) const"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > & \fBoperator+=\fP (const \fBVect\fP< T > &other)"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > & \fBoperator\-=\fP (const \fBVect\fP< T > &other)"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > & \fBoperator*=\fP (const \fBVect\fP< T > &other)"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > & \fBoperator/=\fP (const \fBVect\fP< T > &other)"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > \fBoperator+\fP (const T &other) const"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > \fBoperator\-\fP (const T &other) const"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > \fBoperator*\fP (const T &other) const"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > \fBoperator/\fP (const T &other) const"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > & \fBoperator+=\fP (const T &other)"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > & \fBoperator\-=\fP (const T &other)"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > & \fBoperator*=\fP (const T &other)"
+.br
+.ti -1c
+.RI "\fBVect\fP< T > & \fBoperator/=\fP (const T &other)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class Arcade::Vect< T >"
+\fBVect\fP class template\&. 
+
+Mainly used to store and manage 2 coordinates 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T> \fBArcade::Vect\fP< T >::\fBVect\fP (T x = \fC0\fP, T y = \fC0\fP)\fC [inline]\fP, \fC [explicit]\fP"
+
+.PP
+\fBVect\fP class template's constructor\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIx\fP : coordinate X 
+.br
+\fIy\fP : coordinate Y 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T> T \fBArcade::Vect\fP< T >::getX () const\fC [inline]\fP"
+
+.PP
+\fBVect\fP class template's X coordinate's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the value of the X coordinate 
+.RE
+.PP
+
+.SS "template<typename T> T \fBArcade::Vect\fP< T >::getY () const\fC [inline]\fP"
+
+.PP
+\fBVect\fP class template's Y coordinate's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the value of the Y coordinate 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T> \fBArcade::Vect\fP< T >::operator* (const \fBVect\fP< T > & other) const\fC [inline]\fP"
+Overloading the multiplication operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the \fBVect\fP object to perform the multiplication with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a new object resulting from the multiplication of the \fBVect\fP 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T> \fBArcade::Vect\fP< T >::operator* (const T & other) const\fC [inline]\fP"
+Overloading the multiplication operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the T variable to perform the multiplication with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a new object resulting from the multiplication 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T>& \fBArcade::Vect\fP< T >::operator*= (const \fBVect\fP< T > & other)\fC [inline]\fP"
+Overloading the multiplication assignment operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the \fBVect\fP object to perform the multiplication with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the object from which this function was called 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T>& \fBArcade::Vect\fP< T >::operator*= (const T & other)\fC [inline]\fP"
+Overloading the multiplication assignment operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the T variable to perform the multiplication with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the object from which this function was called 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T> \fBArcade::Vect\fP< T >::operator+ (const \fBVect\fP< T > & other) const\fC [inline]\fP"
+Overloading the addition operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the \fBVect\fP object to perform the addition with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a new object resulting from the addition of the \fBVect\fP 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T> \fBArcade::Vect\fP< T >::operator+ (const T & other) const\fC [inline]\fP"
+Overloading the addition operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the T variable to perform the addition with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a new object resulting from the addition 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T>& \fBArcade::Vect\fP< T >::operator+= (const \fBVect\fP< T > & other)\fC [inline]\fP"
+Overloading the addition assignment operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the \fBVect\fP object to perform the addition with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the object from which this function was called 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T>& \fBArcade::Vect\fP< T >::operator+= (const T & other)\fC [inline]\fP"
+Overloading the addition assignment operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the T variable to perform the addition with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the object from which this function was called 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T> \fBArcade::Vect\fP< T >::operator\- (const \fBVect\fP< T > & other) const\fC [inline]\fP"
+Overloading the subtraction operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the \fBVect\fP object to perform the subtraction with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a new object resulting from the subtraction of the \fBVect\fP 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T> \fBArcade::Vect\fP< T >::operator\- (const T & other) const\fC [inline]\fP"
+Overloading the subtraction operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the T variable to perform the subtraction with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a new object resulting from the subtraction 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T>& \fBArcade::Vect\fP< T >::operator\-= (const \fBVect\fP< T > & other)\fC [inline]\fP"
+Overloading the subtraction assignment operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the \fBVect\fP object to perform the subtraction with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the object from which this function was called 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T>& \fBArcade::Vect\fP< T >::operator\-= (const T & other)\fC [inline]\fP"
+Overloading the subtraction assignment operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the T variable to perform the subtraction with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the object from which this function was called 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T> \fBArcade::Vect\fP< T >::operator/ (const \fBVect\fP< T > & other) const\fC [inline]\fP"
+Overloading the division operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the \fBVect\fP object to perform the division with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a new object resulting from the division of the \fBVect\fP 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T> \fBArcade::Vect\fP< T >::operator/ (const T & other) const\fC [inline]\fP"
+Overloading the division operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the T variable to perform the division with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a new object resulting from the division 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T>& \fBArcade::Vect\fP< T >::operator/= (const \fBVect\fP< T > & other)\fC [inline]\fP"
+Overloading the division assignment operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the \fBVect\fP object to perform the division with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the object from which this function was called 
+.RE
+.PP
+
+.SS "template<typename T> \fBVect\fP<T>& \fBArcade::Vect\fP< T >::operator/= (const T & other)\fC [inline]\fP"
+Overloading the division assignment operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the T variable to perform the division with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the object from which this function was called 
+.RE
+.PP
+
+.SS "template<typename T> bool \fBArcade::Vect\fP< T >::operator== (const \fBVect\fP< T > & other) const\fC [inline]\fP"
+
+.PP
+Overloading the comparison operator\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the \fBVect\fP object to compare with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if equal, otherwise returns false 
+.RE
+.PP
+
+.SS "template<typename T> void \fBArcade::Vect\fP< T >::setX (T x = \fC0\fP)\fC [inline]\fP"
+
+.PP
+\fBVect\fP class template's X coordinate's setter\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIx\fP : new X coordinate 
+.RE
+.PP
+
+.SS "template<typename T> void \fBArcade::Vect\fP< T >::setXY (T x = \fC0\fP, T y = \fC0\fP)\fC [inline]\fP"
+
+.PP
+\fBVect\fP class template's coordinates's setter\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIx\fP : new X coordinate 
+.br
+\fIy\fP : new Y coordinate 
+.RE
+.PP
+
+.SS "template<typename T> void \fBArcade::Vect\fP< T >::setY (T y = \fC0\fP)\fC [inline]\fP"
+
+.PP
+\fBVect\fP class template's Y coordinate's setter\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIx\fP : new Y coordinate 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for cpp_arcade from the source code\&.

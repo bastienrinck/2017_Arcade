@@ -1,0 +1,170 @@
+\hypertarget{class_arcade_1_1_pacman}{}\section{Arcade\+:\+:Pacman Class Reference}
+\label{class_arcade_1_1_pacman}\index{Arcade\+::\+Pacman@{Arcade\+::\+Pacman}}
+
+
+Inheritance diagram for Arcade\+:\+:Pacman\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{class_arcade_1_1_pacman__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Arcade\+:\+:Pacman\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{class_arcade_1_1_pacman__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string \hyperlink{class_arcade_1_1_pacman_abc48d59a534276889f45128fe877d5d9}{get\+Name} () const final
+\begin{DoxyCompactList}\small\item\em Game name\textquotesingle{}s getter. \end{DoxyCompactList}\item 
+bool \hyperlink{class_arcade_1_1_pacman_a27b0ecc843707c735ed1b65e7da009e1}{init} () final
+\begin{DoxyCompactList}\small\item\em Init the resources needed by the game to run. \end{DoxyCompactList}\item 
+bool \hyperlink{class_arcade_1_1_pacman_a2787800feab139ddeabb11d6ee23a80e}{stop} () final
+\begin{DoxyCompactList}\small\item\em Unloads the library. \end{DoxyCompactList}\item 
+bool \hyperlink{class_arcade_1_1_pacman_ac5fa3a4d5eaa81d37e8b63451265870d}{apply\+Event} (\hyperlink{namespace_arcade_a9b501908b20bc993e4f8226db5323c41}{Arcade\+::\+Keys}) final
+\begin{DoxyCompactList}\small\item\em Processes the key obtained by the \hyperlink{class_arcade_1_1_i_graphic_lib}{I\+Graphic\+Lib} from the user to update the game state. \end{DoxyCompactList}\item 
+bool \hyperlink{class_arcade_1_1_pacman_aacb11530e954870a6939d91794cbe356}{update} () final
+\begin{DoxyCompactList}\small\item\em Updates the game state. \end{DoxyCompactList}\item 
+void \hyperlink{class_arcade_1_1_pacman_ad0d57afab410c98d4050c030b06ad63a}{refresh} (\hyperlink{class_arcade_1_1_i_graphic_lib}{I\+Graphic\+Lib} \&) final
+\item 
+size\+\_\+t \hyperlink{class_arcade_1_1_pacman_a7683729dd33fb18673c4d77764ca1831}{get\+Score} () final
+\begin{DoxyCompactList}\small\item\em Current player score\textquotesingle{}s getter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_arcade_1_1_pacman_ac5fa3a4d5eaa81d37e8b63451265870d}\label{class_arcade_1_1_pacman_ac5fa3a4d5eaa81d37e8b63451265870d}} 
+\index{Arcade\+::\+Pacman@{Arcade\+::\+Pacman}!apply\+Event@{apply\+Event}}
+\index{apply\+Event@{apply\+Event}!Arcade\+::\+Pacman@{Arcade\+::\+Pacman}}
+\subsubsection{\texorpdfstring{apply\+Event()}{applyEvent()}}
+{\footnotesize\ttfamily bool Arcade\+::\+Pacman\+::apply\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{namespace_arcade_a9b501908b20bc993e4f8226db5323c41}{Arcade\+::\+Keys}}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Processes the key obtained by the \hyperlink{class_arcade_1_1_i_graphic_lib}{I\+Graphic\+Lib} from the user to update the game state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & \+: enum value of the obtained key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the game is still in progress, false in case of defeat 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_a3b1b66ec00899b4c9efcd6151bf2497e}{Arcade\+::\+I\+Game\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_pacman_abc48d59a534276889f45128fe877d5d9}\label{class_arcade_1_1_pacman_abc48d59a534276889f45128fe877d5d9}} 
+\index{Arcade\+::\+Pacman@{Arcade\+::\+Pacman}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!Arcade\+::\+Pacman@{Arcade\+::\+Pacman}}
+\subsubsection{\texorpdfstring{get\+Name()}{getName()}}
+{\footnotesize\ttfamily const std\+::string Arcade\+::\+Pacman\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Game name\textquotesingle{}s getter. 
+
+\begin{DoxyReturn}{Returns}
+a string containing the name of the game 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_afd2652d62ebfda4caa5d0c05ff40ed61}{Arcade\+::\+I\+Game\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_pacman_a7683729dd33fb18673c4d77764ca1831}\label{class_arcade_1_1_pacman_a7683729dd33fb18673c4d77764ca1831}} 
+\index{Arcade\+::\+Pacman@{Arcade\+::\+Pacman}!get\+Score@{get\+Score}}
+\index{get\+Score@{get\+Score}!Arcade\+::\+Pacman@{Arcade\+::\+Pacman}}
+\subsubsection{\texorpdfstring{get\+Score()}{getScore()}}
+{\footnotesize\ttfamily size\+\_\+t Arcade\+::\+Pacman\+::get\+Score (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Current player score\textquotesingle{}s getter. 
+
+\begin{DoxyReturn}{Returns}
+the player score
+\end{DoxyReturn}
+To call at the end of the execution of the game (after the player loose or win) for getting his score 
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_a00cdcad68c670aecbcc249a2995833b6}{Arcade\+::\+I\+Game\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_pacman_a27b0ecc843707c735ed1b65e7da009e1}\label{class_arcade_1_1_pacman_a27b0ecc843707c735ed1b65e7da009e1}} 
+\index{Arcade\+::\+Pacman@{Arcade\+::\+Pacman}!init@{init}}
+\index{init@{init}!Arcade\+::\+Pacman@{Arcade\+::\+Pacman}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Arcade\+::\+Pacman\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Init the resources needed by the game to run. 
+
+\begin{DoxyReturn}{Returns}
+true if succeed, otherwise returns false 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_aacc4169a98dfeb007bcaf9dfeece9e08}{Arcade\+::\+I\+Game\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_pacman_ad0d57afab410c98d4050c030b06ad63a}\label{class_arcade_1_1_pacman_ad0d57afab410c98d4050c030b06ad63a}} 
+\index{Arcade\+::\+Pacman@{Arcade\+::\+Pacman}!refresh@{refresh}}
+\index{refresh@{refresh}!Arcade\+::\+Pacman@{Arcade\+::\+Pacman}}
+\subsubsection{\texorpdfstring{refresh()}{refresh()}}
+{\footnotesize\ttfamily void Arcade\+::\+Pacman\+::refresh (\begin{DoxyParamCaption}\item[{\hyperlink{class_arcade_1_1_i_graphic_lib}{I\+Graphic\+Lib} \&}]{graphic\+Lib }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+Renders the game state to the screen. 
+\begin{DoxyParams}{Parameters}
+{\em graphic\+Lib} & \+: Loaded graphics library used for rendering.\\
+\hline
+\end{DoxyParams}
+This should call I\+Graphic\+Lib\+::refresh() to display content to the user. 
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_a00c3d335ef313e441217b33dcf7844df}{Arcade\+::\+I\+Game\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_pacman_a2787800feab139ddeabb11d6ee23a80e}\label{class_arcade_1_1_pacman_a2787800feab139ddeabb11d6ee23a80e}} 
+\index{Arcade\+::\+Pacman@{Arcade\+::\+Pacman}!stop@{stop}}
+\index{stop@{stop}!Arcade\+::\+Pacman@{Arcade\+::\+Pacman}}
+\subsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily bool Arcade\+::\+Pacman\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Unloads the library. 
+
+\begin{DoxyReturn}{Returns}
+true if succeed, otherwise returns false 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_ab9b7c1bbbea1b86e8515e8fd188fe9cb}{Arcade\+::\+I\+Game\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_pacman_aacb11530e954870a6939d91794cbe356}\label{class_arcade_1_1_pacman_aacb11530e954870a6939d91794cbe356}} 
+\index{Arcade\+::\+Pacman@{Arcade\+::\+Pacman}!update@{update}}
+\index{update@{update}!Arcade\+::\+Pacman@{Arcade\+::\+Pacman}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Arcade\+::\+Pacman\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Updates the game state. 
+
+\begin{DoxyReturn}{Returns}
+true if the game is still in progress, false in case of defeat
+\end{DoxyReturn}
+Move the player forward and/or move the N\+P\+Cs, according to the game\textquotesingle{}s rules 
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_a0be7ffaa269e2fa47146bf27ad2c511a}{Arcade\+::\+I\+Game\+Lib}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/games/pacman/Pacman.\+hpp\item 
+/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/games/pacman/Pacman.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,221 @@
+.TH "Arcade::TextBox" 3 "Thu Apr 12 2018" "cpp_arcade" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Arcade::TextBox \- \fBTextBox\fP class\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <TextBox\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTextBox\fP (std::string const &text, \fBVect\fP< size_t > pos, size_t fontSize=30, \fBColor\fP color=\fBColor\fP(255, 255, 255, 255), \fBColor\fP backgroundColor=\fBColor\fP(0, 0, 0, 255))"
+.br
+.RI "\fBTextBox\fP class's constructor\&. "
+.ti -1c
+.RI "\fB~TextBox\fP ()=default"
+.br
+.RI "\fBPixelBox\fP class's destructor\&. "
+.ti -1c
+.RI "const std::string & \fBgetValue\fP () const"
+.br
+.RI "\fBTextBox\fP text's value's getter\&. "
+.ti -1c
+.RI "void \fBsetValue\fP (std::string const &text)"
+.br
+.RI "Sets the textBox text's value\&. "
+.ti -1c
+.RI "\fBVect\fP< size_t > \fBgetPos\fP () const"
+.br
+.RI "\fBTextBox\fP positions's getter\&. "
+.ti -1c
+.RI "void \fBsetPos\fP (\fBVect\fP< size_t > pos)"
+.br
+.RI "\fBTextBox\fP positions's setter\&. "
+.ti -1c
+.RI "size_t \fBgetX\fP () const"
+.br
+.RI "\fBTextBox\fP X offset's getter\&. "
+.ti -1c
+.RI "size_t \fBgetY\fP () const"
+.br
+.RI "\fBTextBox\fP Y offset's getter\&. "
+.ti -1c
+.RI "void \fBsetX\fP (size_t x)"
+.br
+.RI "\fBTextBox\fP X offset's setter\&. "
+.ti -1c
+.RI "void \fBsetY\fP (size_t y)"
+.br
+.RI "\fBTextBox\fP Y offset's setter\&. "
+.ti -1c
+.RI "size_t \fBgetFontSize\fP () const"
+.br
+.RI "\fBTextBox\fP's font size's getter\&. "
+.ti -1c
+.RI "void \fBsetFontSize\fP (size_t size)"
+.br
+.RI "\fBTextBox\fP's font size's setter\&. "
+.ti -1c
+.RI "\fBColor\fP \fBgetColor\fP () const"
+.br
+.RI "\fBTextBox\fP's text color's getter\&. "
+.ti -1c
+.RI "void \fBsetColor\fP (\fBColor\fP color)"
+.br
+.RI "\fBTextBox\fP's text color's setter\&. "
+.ti -1c
+.RI "\fBColor\fP \fBgetBackgroundColor\fP () const"
+.br
+.RI "\fBTextBox\fP's text background color's getter\&. "
+.ti -1c
+.RI "void \fBsetBackgroundColor\fP (\fBColor\fP color)"
+.br
+.RI "\fBTextBox\fP's text background color's setter\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBTextBox\fP class\&. 
+
+Class used to represent a rectangle of text 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Arcade::TextBox::TextBox (std::string const & text, \fBArcade::Vect\fP< size_t > pos, size_t fontSize = \fC30\fP, \fBArcade::Color\fP color = \fC\fBColor\fP(255, 255, 255, 255)\fP, \fBArcade::Color\fP backgroundColor = \fC\fBColor\fP(0, 0, 0, 255)\fP)"
+
+.PP
+\fBTextBox\fP class's constructor\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItext\fP : characters to be apply on the textBox 
+.br
+\fIpos\fP : \fBVect<size_t>\fP containing both x and y offsets\&. Used to place the textBox on the rendering support 
+.br
+\fIfontSize\fP : size of the text 
+.br
+\fIcolor\fP : color of the text 
+.br
+\fIbackgroundColor\fP : background color of the text
+.RE
+.PP
+Creates a new textBox class instance\&. The first text argument defines the value of the text within the textBox\&. The \fBVect<size_t>\fP pos argument defines the coordinates of the textBox's position on the rendering support\&. It will be the offset applied when rendering it\&. The third fontSize argument defines the size in which the text should be printed\&. The color's argument defines in which color the characters will be printed\&. The backgroundColor's argument defines the background color of the characters\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBArcade::Color\fP Arcade::TextBox::getBackgroundColor () const"
+
+.PP
+\fBTextBox\fP's text background color's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the textBox's text's background color 
+.RE
+.PP
+
+.SS "\fBArcade::Color\fP Arcade::TextBox::getColor () const"
+
+.PP
+\fBTextBox\fP's text color's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the textBox's text's color 
+.RE
+.PP
+
+.SS "size_t Arcade::TextBox::getFontSize () const"
+
+.PP
+\fBTextBox\fP's font size's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the font size 
+.RE
+.PP
+
+.SS "\fBArcade::Vect\fP< size_t > Arcade::TextBox::getPos () const"
+
+.PP
+\fBTextBox\fP positions's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+a \fBVect<size_t>\fP containing the offsetX (x) and the offsetY (y) of the textBox\&. 
+.RE
+.PP
+
+.SS "const std::string & Arcade::TextBox::getValue () const"
+
+.PP
+\fBTextBox\fP text's value's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the value of the text within textBox 
+.RE
+.PP
+
+.SS "void Arcade::TextBox::setBackgroundColor (\fBArcade::Color\fP color)"
+
+.PP
+\fBTextBox\fP's text background color's setter\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcolor\fP : new background color to apply to text 
+.RE
+.PP
+
+.SS "void Arcade::TextBox::setColor (\fBArcade::Color\fP color)"
+
+.PP
+\fBTextBox\fP's text color's setter\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcolor\fP : new color to apply to text 
+.RE
+.PP
+
+.SS "void Arcade::TextBox::setFontSize (size_t size)"
+
+.PP
+\fBTextBox\fP's font size's setter\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsize\fP : new font size to be assigned 
+.RE
+.PP
+
+.SS "void Arcade::TextBox::setPos (\fBArcade::Vect\fP< size_t > pos)"
+
+.PP
+\fBTextBox\fP positions's setter\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpos\fP : new positions of the textBox
+.RE
+.PP
+Takes both new positions as parameter, within a \fBVect<size_t>\fP 
+.SS "void Arcade::TextBox::setValue (std::string const & text)"
+
+.PP
+Sets the textBox text's value\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItext\fP : new value to assign 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for cpp_arcade from the source code\&.

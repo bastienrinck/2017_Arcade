@@ -1,0 +1,232 @@
+\hypertarget{class_arcade_1_1_sfml}{}\section{Arcade\+:\+:Sfml Class Reference}
+\label{class_arcade_1_1_sfml}\index{Arcade\+::\+Sfml@{Arcade\+::\+Sfml}}
+
+
+Inheritance diagram for Arcade\+:\+:Sfml\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{class_arcade_1_1_sfml__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Arcade\+:\+:Sfml\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{class_arcade_1_1_sfml__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{class_arcade_1_1_sfml_a6c5776e27ea7466208ab4bd59395e344}{get\+Name} () const final
+\begin{DoxyCompactList}\small\item\em Graphic library name\textquotesingle{}s getter. \end{DoxyCompactList}\item 
+bool \hyperlink{class_arcade_1_1_sfml_a427b6fc608c3b52f167b1fe79f5a5009}{is\+Open} () const final
+\begin{DoxyCompactList}\small\item\em Specifies whether the window is open or not. \end{DoxyCompactList}\item 
+void \hyperlink{class_arcade_1_1_sfml_a3a2c22328c9ae1cfd7a5af03663e00d0}{close\+Renderer} () final
+\begin{DoxyCompactList}\small\item\em Closes the rendering support. \end{DoxyCompactList}\item 
+void \hyperlink{class_arcade_1_1_sfml_a9a868d1964ac2f24327329af971fdb57}{open\+Renderer} (std\+::string const \&title) final
+\begin{DoxyCompactList}\small\item\em Opens the rendering support. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_arcade_1_1_sfml_aebb824de8210e60ac67a63f6e4252f49}\label{class_arcade_1_1_sfml_aebb824de8210e60ac67a63f6e4252f49}} 
+void \hyperlink{class_arcade_1_1_sfml_aebb824de8210e60ac67a63f6e4252f49}{clear\+Window} () final
+\begin{DoxyCompactList}\small\item\em Clears the rendering support. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_arcade_1_1_sfml_afbd4c271aa922955ad0131bf7d797acb}\label{class_arcade_1_1_sfml_afbd4c271aa922955ad0131bf7d797acb}} 
+void \hyperlink{class_arcade_1_1_sfml_afbd4c271aa922955ad0131bf7d797acb}{refresh\+Window} () final
+\begin{DoxyCompactList}\small\item\em Displays the buffered frame to the screen. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_arcade_1_1_sfml_aab746ab375cb731196d8ceea9b0f627a}\label{class_arcade_1_1_sfml_aab746ab375cb731196d8ceea9b0f627a}} 
+void \hyperlink{class_arcade_1_1_sfml_aab746ab375cb731196d8ceea9b0f627a}{draw\+Pixel\+Box} (\hyperlink{class_arcade_1_1_pixel_box}{Pixel\+Box} const \&) final
+\begin{DoxyCompactList}\small\item\em Draws a \hyperlink{class_arcade_1_1_pixel_box}{Pixel\+Box}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_arcade_1_1_sfml_a9c627d2681c67a4118e6c0c167973ddc}\label{class_arcade_1_1_sfml_a9c627d2681c67a4118e6c0c167973ddc}} 
+void \hyperlink{class_arcade_1_1_sfml_a9c627d2681c67a4118e6c0c167973ddc}{draw\+Text} (\hyperlink{class_arcade_1_1_text_box}{Text\+Box} const \&) final
+\begin{DoxyCompactList}\small\item\em Draws a \hyperlink{class_arcade_1_1_text_box}{Text\+Box}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_arcade_1_1_sfml_a7b5fe6ccf84db8b3f2897805c965e607}{poll\+Events} () final
+\begin{DoxyCompactList}\small\item\em Fetches the events from the user and saves it. \end{DoxyCompactList}\item 
+\hyperlink{namespace_arcade_a9b501908b20bc993e4f8226db5323c41}{Keys} \hyperlink{class_arcade_1_1_sfml_aa31ab4c4729ee0e3ff030989bc38237b}{get\+Last\+Event} () final
+\begin{DoxyCompactList}\small\item\em Getter of the oldest command in memory. \end{DoxyCompactList}\item 
+void \hyperlink{class_arcade_1_1_sfml_a882877eba4037ffe3befd61a4b4f1d18}{clear\+Events} () final
+\begin{DoxyCompactList}\small\item\em Clears the pending commands. \end{DoxyCompactList}\item 
+\hyperlink{class_arcade_1_1_vect}{Vect}$<$ size\+\_\+t $>$ \hyperlink{class_arcade_1_1_sfml_aa2fe7257182649ba0273712d36296460}{get\+Screen\+Size} () const final
+\begin{DoxyCompactList}\small\item\em Getter from the rendering support dimensions. \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{class_arcade_1_1_sfml_a90cb12cc852a0198074f55be843d6f99}{get\+MaxY} () const final
+\begin{DoxyCompactList}\small\item\em Getter from the rendering support height. \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{class_arcade_1_1_sfml_a220fc84bb5728f79e36024fded0103ab}{get\+MaxX} () const final
+\begin{DoxyCompactList}\small\item\em Getter from the rendering support width. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_arcade_1_1_sfml_a882877eba4037ffe3befd61a4b4f1d18}\label{class_arcade_1_1_sfml_a882877eba4037ffe3befd61a4b4f1d18}} 
+\index{Arcade\+::\+Sfml@{Arcade\+::\+Sfml}!clear\+Events@{clear\+Events}}
+\index{clear\+Events@{clear\+Events}!Arcade\+::\+Sfml@{Arcade\+::\+Sfml}}
+\subsubsection{\texorpdfstring{clear\+Events()}{clearEvents()}}
+{\footnotesize\ttfamily void Arcade\+::\+Sfml\+::clear\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Clears the pending commands. 
+
+The function deletes all the commands currently stored. They wont be accessible anymore, even with the \hyperlink{class_arcade_1_1_sfml_aa31ab4c4729ee0e3ff030989bc38237b}{get\+Last\+Event()} method. 
+
+Implements \hyperlink{class_arcade_1_1_i_graphic_lib_a78691f8f9433b2af945576231534c1e3}{Arcade\+::\+I\+Graphic\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_sfml_a3a2c22328c9ae1cfd7a5af03663e00d0}\label{class_arcade_1_1_sfml_a3a2c22328c9ae1cfd7a5af03663e00d0}} 
+\index{Arcade\+::\+Sfml@{Arcade\+::\+Sfml}!close\+Renderer@{close\+Renderer}}
+\index{close\+Renderer@{close\+Renderer}!Arcade\+::\+Sfml@{Arcade\+::\+Sfml}}
+\subsubsection{\texorpdfstring{close\+Renderer()}{closeRenderer()}}
+{\footnotesize\ttfamily void Arcade\+::\+Sfml\+::close\+Renderer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Closes the rendering support. 
+
+Usually closes a window. Some graphic library uses other rendering support. 
+
+Implements \hyperlink{class_arcade_1_1_i_graphic_lib_aa7c3c8b922fbc94f5e74ecfebad52742}{Arcade\+::\+I\+Graphic\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_sfml_aa31ab4c4729ee0e3ff030989bc38237b}\label{class_arcade_1_1_sfml_aa31ab4c4729ee0e3ff030989bc38237b}} 
+\index{Arcade\+::\+Sfml@{Arcade\+::\+Sfml}!get\+Last\+Event@{get\+Last\+Event}}
+\index{get\+Last\+Event@{get\+Last\+Event}!Arcade\+::\+Sfml@{Arcade\+::\+Sfml}}
+\subsubsection{\texorpdfstring{get\+Last\+Event()}{getLastEvent()}}
+{\footnotesize\ttfamily \hyperlink{namespace_arcade_a9b501908b20bc993e4f8226db5323c41}{Arcade\+::\+Keys} Arcade\+::\+Sfml\+::get\+Last\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Getter of the oldest command in memory. 
+
+\begin{DoxyReturn}{Returns}
+the first event of the list.
+\end{DoxyReturn}
+The function deletes the command if it succeed to retrieves one, using front() and pop\+\_\+front() methods 
+
+Implements \hyperlink{class_arcade_1_1_i_graphic_lib_a801ebd3cff2c861e4b2a1e664c123da7}{Arcade\+::\+I\+Graphic\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_sfml_a220fc84bb5728f79e36024fded0103ab}\label{class_arcade_1_1_sfml_a220fc84bb5728f79e36024fded0103ab}} 
+\index{Arcade\+::\+Sfml@{Arcade\+::\+Sfml}!get\+MaxX@{get\+MaxX}}
+\index{get\+MaxX@{get\+MaxX}!Arcade\+::\+Sfml@{Arcade\+::\+Sfml}}
+\subsubsection{\texorpdfstring{get\+Max\+X()}{getMaxX()}}
+{\footnotesize\ttfamily size\+\_\+t Arcade\+::\+Sfml\+::get\+MaxX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Getter from the rendering support width. 
+
+\begin{DoxyReturn}{Returns}
+the width of the rendering support 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_arcade_1_1_i_graphic_lib_a41a3c00970ecd16e1893105de2091a55}{Arcade\+::\+I\+Graphic\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_sfml_a90cb12cc852a0198074f55be843d6f99}\label{class_arcade_1_1_sfml_a90cb12cc852a0198074f55be843d6f99}} 
+\index{Arcade\+::\+Sfml@{Arcade\+::\+Sfml}!get\+MaxY@{get\+MaxY}}
+\index{get\+MaxY@{get\+MaxY}!Arcade\+::\+Sfml@{Arcade\+::\+Sfml}}
+\subsubsection{\texorpdfstring{get\+Max\+Y()}{getMaxY()}}
+{\footnotesize\ttfamily size\+\_\+t Arcade\+::\+Sfml\+::get\+MaxY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Getter from the rendering support height. 
+
+\begin{DoxyReturn}{Returns}
+the height of the rendering support 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_arcade_1_1_i_graphic_lib_ae8701e702b51189c84b1900dd624912e}{Arcade\+::\+I\+Graphic\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_sfml_a6c5776e27ea7466208ab4bd59395e344}\label{class_arcade_1_1_sfml_a6c5776e27ea7466208ab4bd59395e344}} 
+\index{Arcade\+::\+Sfml@{Arcade\+::\+Sfml}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!Arcade\+::\+Sfml@{Arcade\+::\+Sfml}}
+\subsubsection{\texorpdfstring{get\+Name()}{getName()}}
+{\footnotesize\ttfamily std\+::string Arcade\+::\+Sfml\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Graphic library name\textquotesingle{}s getter. 
+
+\begin{DoxyReturn}{Returns}
+a string containing the name of the graphic library 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_arcade_1_1_i_graphic_lib_aecc266c4ac10f07f4cdca023e74e843d}{Arcade\+::\+I\+Graphic\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_sfml_aa2fe7257182649ba0273712d36296460}\label{class_arcade_1_1_sfml_aa2fe7257182649ba0273712d36296460}} 
+\index{Arcade\+::\+Sfml@{Arcade\+::\+Sfml}!get\+Screen\+Size@{get\+Screen\+Size}}
+\index{get\+Screen\+Size@{get\+Screen\+Size}!Arcade\+::\+Sfml@{Arcade\+::\+Sfml}}
+\subsubsection{\texorpdfstring{get\+Screen\+Size()}{getScreenSize()}}
+{\footnotesize\ttfamily \hyperlink{class_arcade_1_1_vect}{Arcade\+::\+Vect}$<$ size\+\_\+t $>$ Arcade\+::\+Sfml\+::get\+Screen\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Getter from the rendering support dimensions. 
+
+\begin{DoxyReturn}{Returns}
+a two dimensions vector containing the width and the height of the rendering support 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_arcade_1_1_i_graphic_lib_a0ce5eb4661d55b6e729fc1c16566dd9f}{Arcade\+::\+I\+Graphic\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_sfml_a427b6fc608c3b52f167b1fe79f5a5009}\label{class_arcade_1_1_sfml_a427b6fc608c3b52f167b1fe79f5a5009}} 
+\index{Arcade\+::\+Sfml@{Arcade\+::\+Sfml}!is\+Open@{is\+Open}}
+\index{is\+Open@{is\+Open}!Arcade\+::\+Sfml@{Arcade\+::\+Sfml}}
+\subsubsection{\texorpdfstring{is\+Open()}{isOpen()}}
+{\footnotesize\ttfamily bool Arcade\+::\+Sfml\+::is\+Open (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Specifies whether the window is open or not. 
+
+\begin{DoxyReturn}{Returns}
+true if open, otherwise returns false 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_arcade_1_1_i_graphic_lib_adf9e107fbcfbd91e5a3daa9a2db76b4b}{Arcade\+::\+I\+Graphic\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_sfml_a9a868d1964ac2f24327329af971fdb57}\label{class_arcade_1_1_sfml_a9a868d1964ac2f24327329af971fdb57}} 
+\index{Arcade\+::\+Sfml@{Arcade\+::\+Sfml}!open\+Renderer@{open\+Renderer}}
+\index{open\+Renderer@{open\+Renderer}!Arcade\+::\+Sfml@{Arcade\+::\+Sfml}}
+\subsubsection{\texorpdfstring{open\+Renderer()}{openRenderer()}}
+{\footnotesize\ttfamily void Arcade\+::\+Sfml\+::open\+Renderer (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{title }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Opens the rendering support. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & \+: Title of the rendering support if supported\\
+\hline
+\end{DoxyParams}
+Usually opens a window. Some graphic library uses other rendering support. 
+
+Implements \hyperlink{class_arcade_1_1_i_graphic_lib_a71f7f51bdd61b02377c4a9ec330eabb1}{Arcade\+::\+I\+Graphic\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_sfml_a7b5fe6ccf84db8b3f2897805c965e607}\label{class_arcade_1_1_sfml_a7b5fe6ccf84db8b3f2897805c965e607}} 
+\index{Arcade\+::\+Sfml@{Arcade\+::\+Sfml}!poll\+Events@{poll\+Events}}
+\index{poll\+Events@{poll\+Events}!Arcade\+::\+Sfml@{Arcade\+::\+Sfml}}
+\subsubsection{\texorpdfstring{poll\+Events()}{pollEvents()}}
+{\footnotesize\ttfamily bool Arcade\+::\+Sfml\+::poll\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Fetches the events from the user and saves it. 
+
+\begin{DoxyReturn}{Returns}
+true if at least one command has been fetched, otherwise returns false
+\end{DoxyReturn}
+Fetched commands are usually stored inside a std\+::vector$<$\+Arcade\+::\+Keys$>$ or std\+::list$<$\+Arcade\+::\+Keys$>$ 
+
+Implements \hyperlink{class_arcade_1_1_i_graphic_lib_a6be852f0395f08943f988c6823b80937}{Arcade\+::\+I\+Graphic\+Lib}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/lib/\+S\+F\+M\+L/Sfml.\+hpp\item 
+/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/lib/\+S\+F\+M\+L/Sfml.\+cpp\end{DoxyCompactItemize}

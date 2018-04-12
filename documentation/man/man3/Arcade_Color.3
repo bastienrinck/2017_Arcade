@@ -1,0 +1,191 @@
+.TH "Arcade::Color" 3 "Thu Apr 12 2018" "cpp_arcade" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Arcade::Color \- \fBColor\fP class\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Color\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBColor\fP (unsigned char red=0, unsigned char green=0, unsigned char blue=0, unsigned char alpha=0)"
+.br
+.RI "\fBColor\fP class's constructor\&. "
+.ti -1c
+.RI "void \fBsetColor\fP (unsigned char red=0, unsigned char green=0, unsigned char blue=0, unsigned char alpha=0)"
+.br
+.RI "Sets the color's subpixels value\&. "
+.ti -1c
+.RI "unsigned char \fBgetRed\fP () const"
+.br
+.RI "Red subpixel's getter\&. "
+.ti -1c
+.RI "unsigned char \fBgetGreen\fP () const"
+.br
+.RI "Green subpixel's getter\&. "
+.ti -1c
+.RI "unsigned char \fBgetBlue\fP () const"
+.br
+.RI "Blue subpixel's getter\&. "
+.ti -1c
+.RI "unsigned char \fBgetAlpha\fP () const"
+.br
+.RI "Alpha subpixel's getter\&. "
+.ti -1c
+.RI "void \fBsetRed\fP (unsigned char red)"
+.br
+.RI "Red subpixel's setter\&. "
+.ti -1c
+.RI "void \fBsetGreen\fP (unsigned char green)"
+.br
+.RI "Green subpixel's setter\&. "
+.ti -1c
+.RI "void \fBsetBlue\fP (unsigned char blue)"
+.br
+.RI "Blue subpixel's setter\&. "
+.ti -1c
+.RI "void \fBsetAlpha\fP (unsigned char alpha)"
+.br
+.RI "Alpha subpixel's setter\&. "
+.ti -1c
+.RI "\fBoperator unsigned char *\fP ()"
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBArcade::Color\fP &other) const"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBColor\fP class\&. 
+
+Class used to represent a pixel 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Arcade::Color::Color (unsigned char red = \fC0\fP, unsigned char green = \fC0\fP, unsigned char blue = \fC0\fP, unsigned char alpha = \fC0\fP)\fC [explicit]\fP"
+
+.PP
+\fBColor\fP class's constructor\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIred\fP 
+.br
+\fIgreen\fP 
+.br
+\fIblue\fP 
+.br
+\fIalpha\fP Creates a new color class instance, each argument being a value between 0-255, representing the value of one of the subpixels (red, green, blue and alpha)\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "unsigned char Arcade::Color::getAlpha () const"
+
+.PP
+Alpha subpixel's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the alpha subpixel's value 
+.RE
+.PP
+
+.SS "unsigned char Arcade::Color::getBlue () const"
+
+.PP
+Blue subpixel's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the blue subpixel's value 
+.RE
+.PP
+
+.SS "unsigned char Arcade::Color::getGreen () const"
+
+.PP
+Green subpixel's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the green subpixel's value 
+.RE
+.PP
+
+.SS "unsigned char Arcade::Color::getRed () const"
+
+.PP
+Red subpixel's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the red subpixel's value 
+.RE
+.PP
+
+.SS "Arcade::Color::operator unsigned char * ()\fC [explicit]\fP"
+Overloading the cast operator to unsigned char * 
+.PP
+\fBReturns:\fP
+.RS 4
+an array of unsigned char * composed of 4 elements, each representing one of the subpixels 
+.RE
+.PP
+
+.SS "bool Arcade::Color::operator== (const \fBArcade::Color\fP & other) const"
+Overloading the comparison operator 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP : the color object to compare with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if equal, otherwise returns false 
+.RE
+.PP
+
+.SS "void Arcade::Color::setAlpha (unsigned char alpha)"
+
+.PP
+Alpha subpixel's setter\&. Sets the value of the alpha's subpixel 
+.SS "void Arcade::Color::setBlue (unsigned char blue)"
+
+.PP
+Blue subpixel's setter\&. Sets the value of the blue's subpixel 
+.SS "void Arcade::Color::setColor (unsigned char red = \fC0\fP, unsigned char green = \fC0\fP, unsigned char blue = \fC0\fP, unsigned char alpha = \fC0\fP)"
+
+.PP
+Sets the color's subpixels value\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIred\fP 
+.br
+\fIgreen\fP 
+.br
+\fIblue\fP 
+.br
+\fIalpha\fP Sets the color's object subpixels value, each argument being a value between 0-255, representing the value of one of the subpixels (red, green, blue and alpha)\&. 
+.RE
+.PP
+
+.SS "void Arcade::Color::setGreen (unsigned char green)"
+
+.PP
+Green subpixel's setter\&. Sets the value of the green's subpixel 
+.SS "void Arcade::Color::setRed (unsigned char red)"
+
+.PP
+Red subpixel's setter\&. Sets the value of the red's subpixel 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for cpp_arcade from the source code\&.

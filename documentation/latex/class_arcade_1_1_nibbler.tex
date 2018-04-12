@@ -1,0 +1,170 @@
+\hypertarget{class_arcade_1_1_nibbler}{}\section{Arcade\+:\+:Nibbler Class Reference}
+\label{class_arcade_1_1_nibbler}\index{Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}}
+
+
+Inheritance diagram for Arcade\+:\+:Nibbler\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{class_arcade_1_1_nibbler__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Arcade\+:\+:Nibbler\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{class_arcade_1_1_nibbler__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string \hyperlink{class_arcade_1_1_nibbler_abbd3cd2246448056bc84b5b893f325d4}{get\+Name} () const final
+\begin{DoxyCompactList}\small\item\em Game name\textquotesingle{}s getter. \end{DoxyCompactList}\item 
+bool \hyperlink{class_arcade_1_1_nibbler_a244e3c4751d74cab7e4e6ef7b80d0b36}{init} () final
+\begin{DoxyCompactList}\small\item\em Init the resources needed by the game to run. \end{DoxyCompactList}\item 
+bool \hyperlink{class_arcade_1_1_nibbler_ab88c7e92e23e603b6bd1ccbb6c1ab844}{stop} () final
+\begin{DoxyCompactList}\small\item\em Unloads the library. \end{DoxyCompactList}\item 
+bool \hyperlink{class_arcade_1_1_nibbler_a979cdf9080be6cb60bf1b4e757029845}{apply\+Event} (\hyperlink{namespace_arcade_a9b501908b20bc993e4f8226db5323c41}{Keys} key) final
+\begin{DoxyCompactList}\small\item\em Processes the key obtained by the \hyperlink{class_arcade_1_1_i_graphic_lib}{I\+Graphic\+Lib} from the user to update the game state. \end{DoxyCompactList}\item 
+bool \hyperlink{class_arcade_1_1_nibbler_a13199140bc927065b1c59ae2c70e06cf}{update} () final
+\begin{DoxyCompactList}\small\item\em Updates the game state. \end{DoxyCompactList}\item 
+void \hyperlink{class_arcade_1_1_nibbler_a69a64ec51964772a03cf7d4bb9088b5b}{refresh} (\hyperlink{class_arcade_1_1_i_graphic_lib}{I\+Graphic\+Lib} \&graphic\+Lib) final
+\item 
+size\+\_\+t \hyperlink{class_arcade_1_1_nibbler_a861f3bebe3b7f5efe1f3a46eb71957bb}{get\+Score} () final
+\begin{DoxyCompactList}\small\item\em Current player score\textquotesingle{}s getter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_arcade_1_1_nibbler_a979cdf9080be6cb60bf1b4e757029845}\label{class_arcade_1_1_nibbler_a979cdf9080be6cb60bf1b4e757029845}} 
+\index{Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}!apply\+Event@{apply\+Event}}
+\index{apply\+Event@{apply\+Event}!Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}}
+\subsubsection{\texorpdfstring{apply\+Event()}{applyEvent()}}
+{\footnotesize\ttfamily bool Arcade\+::\+Nibbler\+::apply\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{namespace_arcade_a9b501908b20bc993e4f8226db5323c41}{Keys}}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Processes the key obtained by the \hyperlink{class_arcade_1_1_i_graphic_lib}{I\+Graphic\+Lib} from the user to update the game state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & \+: enum value of the obtained key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the game is still in progress, false in case of defeat 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_a3b1b66ec00899b4c9efcd6151bf2497e}{Arcade\+::\+I\+Game\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_nibbler_abbd3cd2246448056bc84b5b893f325d4}\label{class_arcade_1_1_nibbler_abbd3cd2246448056bc84b5b893f325d4}} 
+\index{Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}}
+\subsubsection{\texorpdfstring{get\+Name()}{getName()}}
+{\footnotesize\ttfamily const std\+::string Arcade\+::\+Nibbler\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Game name\textquotesingle{}s getter. 
+
+\begin{DoxyReturn}{Returns}
+a string containing the name of the game 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_afd2652d62ebfda4caa5d0c05ff40ed61}{Arcade\+::\+I\+Game\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_nibbler_a861f3bebe3b7f5efe1f3a46eb71957bb}\label{class_arcade_1_1_nibbler_a861f3bebe3b7f5efe1f3a46eb71957bb}} 
+\index{Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}!get\+Score@{get\+Score}}
+\index{get\+Score@{get\+Score}!Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}}
+\subsubsection{\texorpdfstring{get\+Score()}{getScore()}}
+{\footnotesize\ttfamily size\+\_\+t Arcade\+::\+Nibbler\+::get\+Score (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Current player score\textquotesingle{}s getter. 
+
+\begin{DoxyReturn}{Returns}
+the player score
+\end{DoxyReturn}
+To call at the end of the execution of the game (after the player loose or win) for getting his score 
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_a00cdcad68c670aecbcc249a2995833b6}{Arcade\+::\+I\+Game\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_nibbler_a244e3c4751d74cab7e4e6ef7b80d0b36}\label{class_arcade_1_1_nibbler_a244e3c4751d74cab7e4e6ef7b80d0b36}} 
+\index{Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}!init@{init}}
+\index{init@{init}!Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Arcade\+::\+Nibbler\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Init the resources needed by the game to run. 
+
+\begin{DoxyReturn}{Returns}
+true if succeed, otherwise returns false 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_aacc4169a98dfeb007bcaf9dfeece9e08}{Arcade\+::\+I\+Game\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_nibbler_a69a64ec51964772a03cf7d4bb9088b5b}\label{class_arcade_1_1_nibbler_a69a64ec51964772a03cf7d4bb9088b5b}} 
+\index{Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}!refresh@{refresh}}
+\index{refresh@{refresh}!Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}}
+\subsubsection{\texorpdfstring{refresh()}{refresh()}}
+{\footnotesize\ttfamily void Arcade\+::\+Nibbler\+::refresh (\begin{DoxyParamCaption}\item[{\hyperlink{class_arcade_1_1_i_graphic_lib}{I\+Graphic\+Lib} \&}]{graphic\+Lib }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+Renders the game state to the screen. 
+\begin{DoxyParams}{Parameters}
+{\em graphic\+Lib} & \+: Loaded graphics library used for rendering.\\
+\hline
+\end{DoxyParams}
+This should call I\+Graphic\+Lib\+::refresh() to display content to the user. 
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_a00c3d335ef313e441217b33dcf7844df}{Arcade\+::\+I\+Game\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_nibbler_ab88c7e92e23e603b6bd1ccbb6c1ab844}\label{class_arcade_1_1_nibbler_ab88c7e92e23e603b6bd1ccbb6c1ab844}} 
+\index{Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}!stop@{stop}}
+\index{stop@{stop}!Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}}
+\subsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily bool Arcade\+::\+Nibbler\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Unloads the library. 
+
+\begin{DoxyReturn}{Returns}
+true if succeed, otherwise returns false 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_ab9b7c1bbbea1b86e8515e8fd188fe9cb}{Arcade\+::\+I\+Game\+Lib}.
+
+\mbox{\Hypertarget{class_arcade_1_1_nibbler_a13199140bc927065b1c59ae2c70e06cf}\label{class_arcade_1_1_nibbler_a13199140bc927065b1c59ae2c70e06cf}} 
+\index{Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}!update@{update}}
+\index{update@{update}!Arcade\+::\+Nibbler@{Arcade\+::\+Nibbler}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Arcade\+::\+Nibbler\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+Updates the game state. 
+
+\begin{DoxyReturn}{Returns}
+true if the game is still in progress, false in case of defeat
+\end{DoxyReturn}
+Move the player forward and/or move the N\+P\+Cs, according to the game\textquotesingle{}s rules 
+
+Implements \hyperlink{class_arcade_1_1_i_game_lib_a0be7ffaa269e2fa47146bf27ad2c511a}{Arcade\+::\+I\+Game\+Lib}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/games/nibbler/Nibbler.\+hpp\item 
+/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/games/nibbler/Nibbler.\+cpp\end{DoxyCompactItemize}

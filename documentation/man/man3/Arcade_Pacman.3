@@ -1,0 +1,141 @@
+.TH "Arcade::Pacman" 3 "Thu Apr 12 2018" "cpp_arcade" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Arcade::Pacman
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBArcade::IGameLib\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "const std::string \fBgetName\fP () const final"
+.br
+.RI "Game name's getter\&. "
+.ti -1c
+.RI "bool \fBinit\fP () final"
+.br
+.RI "Init the resources needed by the game to run\&. "
+.ti -1c
+.RI "bool \fBstop\fP () final"
+.br
+.RI "Unloads the library\&. "
+.ti -1c
+.RI "bool \fBapplyEvent\fP (\fBArcade::Keys\fP) final"
+.br
+.RI "Processes the key obtained by the \fBIGraphicLib\fP from the user to update the game state\&. "
+.ti -1c
+.RI "bool \fBupdate\fP () final"
+.br
+.RI "Updates the game state\&. "
+.ti -1c
+.RI "void \fBrefresh\fP (\fBIGraphicLib\fP &) final"
+.br
+.ti -1c
+.RI "size_t \fBgetScore\fP () final"
+.br
+.RI "Current player score's getter\&. "
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "bool Arcade::Pacman::applyEvent (\fBArcade::Keys\fP key)\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Processes the key obtained by the \fBIGraphicLib\fP from the user to update the game state\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP : enum value of the obtained key 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if the game is still in progress, false in case of defeat 
+.RE
+.PP
+
+.PP
+Implements \fBArcade::IGameLib\fP\&.
+.SS "const std::string Arcade::Pacman::getName () const\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Game name's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+a string containing the name of the game 
+.RE
+.PP
+
+.PP
+Implements \fBArcade::IGameLib\fP\&.
+.SS "size_t Arcade::Pacman::getScore ()\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Current player score's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the player score
+.RE
+.PP
+To call at the end of the execution of the game (after the player loose or win) for getting his score 
+.PP
+Implements \fBArcade::IGameLib\fP\&.
+.SS "bool Arcade::Pacman::init ()\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Init the resources needed by the game to run\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+true if succeed, otherwise returns false 
+.RE
+.PP
+
+.PP
+Implements \fBArcade::IGameLib\fP\&.
+.SS "void Arcade::Pacman::refresh (\fBIGraphicLib\fP & graphicLib)\fC [final]\fP, \fC [virtual]\fP"
+Renders the game state to the screen\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgraphicLib\fP : Loaded graphics library used for rendering\&.
+.RE
+.PP
+This should call IGraphicLib::refresh() to display content to the user\&. 
+.PP
+Implements \fBArcade::IGameLib\fP\&.
+.SS "bool Arcade::Pacman::stop ()\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Unloads the library\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+true if succeed, otherwise returns false 
+.RE
+.PP
+
+.PP
+Implements \fBArcade::IGameLib\fP\&.
+.SS "bool Arcade::Pacman::update ()\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Updates the game state\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+true if the game is still in progress, false in case of defeat
+.RE
+.PP
+Move the player forward and/or move the NPCs, according to the game's rules 
+.PP
+Implements \fBArcade::IGameLib\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for cpp_arcade from the source code\&.

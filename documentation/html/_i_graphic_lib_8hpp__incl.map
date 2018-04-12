@@ -1,0 +1,7 @@
+<map id="/home/rectoria/projects/epitech/CPP/cpp_arcade/interfaces/IGraphicLib.hpp" name="/home/rectoria/projects/epitech/CPP/cpp_arcade/interfaces/IGraphicLib.hpp">
+<area shape="rect" id="node3" href="$_vect_8hpp.html" title="Project&#45;specific vector template. " alt="" coords="270,184,345,211"/>
+<area shape="rect" id="node4" href="$_pixel_box_8hpp.html" title="PixelBox class, similar to a rectangle of pixels. " alt="" coords="171,109,270,136"/>
+<area shape="rect" id="node7" href="$_text_box_8hpp.html" title="TextBox class, similar to a text rectangle. " alt="" coords="51,109,147,136"/>
+<area shape="rect" id="node8" href="$_keys_8hpp.html" title="Keys enum. " alt="" coords="345,109,422,136"/>
+<area shape="rect" id="node6" href="$_color_8hpp.html" title="Color class, pixel&#45;like. " alt="" coords="84,184,163,211"/>
+</map>

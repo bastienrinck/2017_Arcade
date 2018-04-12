@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_arcade_1_1_i_graphic_lib.html" title="Graphic libraries virtual class. " alt="" coords="5,56,143,83"/>
+<area shape="rect" id="node2" href="$class_arcade_1_1_n_curses.html" title="Arcade::NCurses" alt="" coords="191,5,313,32"/>
+<area shape="rect" id="node3" href="$class_arcade_1_1_sdl2.html" title="Arcade::Sdl2" alt="" coords="203,56,301,83"/>
+<area shape="rect" id="node4" href="$class_arcade_1_1_sfml.html" title="Arcade::Sfml" alt="" coords="203,107,301,133"/>
+</map>

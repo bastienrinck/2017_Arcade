@@ -1,0 +1,188 @@
+\hypertarget{class_arcade_1_1_i_game_lib}{}\section{Arcade\+:\+:I\+Game\+Lib Class Reference}
+\label{class_arcade_1_1_i_game_lib}\index{Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}}
+
+
+Game libraries virtual class.  
+
+
+
+
+{\ttfamily \#include $<$I\+Game\+Lib.\+hpp$>$}
+
+
+
+Inheritance diagram for Arcade\+:\+:I\+Game\+Lib\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{class_arcade_1_1_i_game_lib__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{class_arcade_1_1_i_game_lib_a3243f08b84930f3ff29d82d9a2a43582}{$\sim$\+I\+Game\+Lib} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual const std\+::string \hyperlink{class_arcade_1_1_i_game_lib_afd2652d62ebfda4caa5d0c05ff40ed61}{get\+Name} () const =0
+\begin{DoxyCompactList}\small\item\em Game name\textquotesingle{}s getter. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_arcade_1_1_i_game_lib_aacc4169a98dfeb007bcaf9dfeece9e08}{init} ()=0
+\begin{DoxyCompactList}\small\item\em Init the resources needed by the game to run. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_arcade_1_1_i_game_lib_ab9b7c1bbbea1b86e8515e8fd188fe9cb}{stop} ()=0
+\begin{DoxyCompactList}\small\item\em Unloads the library. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_arcade_1_1_i_game_lib_a3b1b66ec00899b4c9efcd6151bf2497e}{apply\+Event} (\hyperlink{namespace_arcade_a9b501908b20bc993e4f8226db5323c41}{Arcade\+::\+Keys} key)=0
+\begin{DoxyCompactList}\small\item\em Processes the key obtained by the \hyperlink{class_arcade_1_1_i_graphic_lib}{I\+Graphic\+Lib} from the user to update the game state. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_arcade_1_1_i_game_lib_a0be7ffaa269e2fa47146bf27ad2c511a}{update} ()=0
+\begin{DoxyCompactList}\small\item\em Updates the game state. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_arcade_1_1_i_game_lib_a00c3d335ef313e441217b33dcf7844df}{refresh} (\hyperlink{class_arcade_1_1_i_graphic_lib}{I\+Graphic\+Lib} \&graphic\+Lib)=0
+\item 
+virtual size\+\_\+t \hyperlink{class_arcade_1_1_i_game_lib_a00cdcad68c670aecbcc249a2995833b6}{get\+Score} ()=0
+\begin{DoxyCompactList}\small\item\em Current player score\textquotesingle{}s getter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Game libraries virtual class. 
+
+Purely virtual class that serves as the basis for all game libraries 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_arcade_1_1_i_game_lib_a3243f08b84930f3ff29d82d9a2a43582}\label{class_arcade_1_1_i_game_lib_a3243f08b84930f3ff29d82d9a2a43582}} 
+\index{Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}!````~I\+Game\+Lib@{$\sim$\+I\+Game\+Lib}}
+\index{````~I\+Game\+Lib@{$\sim$\+I\+Game\+Lib}!Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}}
+\subsubsection{\texorpdfstring{$\sim$\+I\+Game\+Lib()}{~IGameLib()}}
+{\footnotesize\ttfamily virtual Arcade\+::\+I\+Game\+Lib\+::$\sim$\+I\+Game\+Lib (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Destructor. 
+
+\hyperlink{class_arcade_1_1_i_game_lib}{I\+Game\+Lib} class\textquotesingle{}s destructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_arcade_1_1_i_game_lib_a3b1b66ec00899b4c9efcd6151bf2497e}\label{class_arcade_1_1_i_game_lib_a3b1b66ec00899b4c9efcd6151bf2497e}} 
+\index{Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}!apply\+Event@{apply\+Event}}
+\index{apply\+Event@{apply\+Event}!Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}}
+\subsubsection{\texorpdfstring{apply\+Event()}{applyEvent()}}
+{\footnotesize\ttfamily virtual bool Arcade\+::\+I\+Game\+Lib\+::apply\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{namespace_arcade_a9b501908b20bc993e4f8226db5323c41}{Arcade\+::\+Keys}}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Processes the key obtained by the \hyperlink{class_arcade_1_1_i_graphic_lib}{I\+Graphic\+Lib} from the user to update the game state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & \+: enum value of the obtained key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the game is still in progress, false in case of defeat 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_arcade_1_1_nibbler_a979cdf9080be6cb60bf1b4e757029845}{Arcade\+::\+Nibbler}, and \hyperlink{class_arcade_1_1_pacman_ac5fa3a4d5eaa81d37e8b63451265870d}{Arcade\+::\+Pacman}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_game_lib_afd2652d62ebfda4caa5d0c05ff40ed61}\label{class_arcade_1_1_i_game_lib_afd2652d62ebfda4caa5d0c05ff40ed61}} 
+\index{Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}}
+\subsubsection{\texorpdfstring{get\+Name()}{getName()}}
+{\footnotesize\ttfamily virtual const std\+::string Arcade\+::\+I\+Game\+Lib\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Game name\textquotesingle{}s getter. 
+
+\begin{DoxyReturn}{Returns}
+a string containing the name of the game 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_arcade_1_1_nibbler_abbd3cd2246448056bc84b5b893f325d4}{Arcade\+::\+Nibbler}, and \hyperlink{class_arcade_1_1_pacman_abc48d59a534276889f45128fe877d5d9}{Arcade\+::\+Pacman}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_game_lib_a00cdcad68c670aecbcc249a2995833b6}\label{class_arcade_1_1_i_game_lib_a00cdcad68c670aecbcc249a2995833b6}} 
+\index{Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}!get\+Score@{get\+Score}}
+\index{get\+Score@{get\+Score}!Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}}
+\subsubsection{\texorpdfstring{get\+Score()}{getScore()}}
+{\footnotesize\ttfamily virtual size\+\_\+t Arcade\+::\+I\+Game\+Lib\+::get\+Score (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Current player score\textquotesingle{}s getter. 
+
+\begin{DoxyReturn}{Returns}
+the player score
+\end{DoxyReturn}
+To call at the end of the execution of the game (after the player loose or win) for getting his score 
+
+Implemented in \hyperlink{class_arcade_1_1_nibbler_a861f3bebe3b7f5efe1f3a46eb71957bb}{Arcade\+::\+Nibbler}, and \hyperlink{class_arcade_1_1_pacman_a7683729dd33fb18673c4d77764ca1831}{Arcade\+::\+Pacman}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_game_lib_aacc4169a98dfeb007bcaf9dfeece9e08}\label{class_arcade_1_1_i_game_lib_aacc4169a98dfeb007bcaf9dfeece9e08}} 
+\index{Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}!init@{init}}
+\index{init@{init}!Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily virtual bool Arcade\+::\+I\+Game\+Lib\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Init the resources needed by the game to run. 
+
+\begin{DoxyReturn}{Returns}
+true if succeed, otherwise returns false 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_arcade_1_1_nibbler_a244e3c4751d74cab7e4e6ef7b80d0b36}{Arcade\+::\+Nibbler}, and \hyperlink{class_arcade_1_1_pacman_a27b0ecc843707c735ed1b65e7da009e1}{Arcade\+::\+Pacman}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_game_lib_a00c3d335ef313e441217b33dcf7844df}\label{class_arcade_1_1_i_game_lib_a00c3d335ef313e441217b33dcf7844df}} 
+\index{Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}!refresh@{refresh}}
+\index{refresh@{refresh}!Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}}
+\subsubsection{\texorpdfstring{refresh()}{refresh()}}
+{\footnotesize\ttfamily virtual void Arcade\+::\+I\+Game\+Lib\+::refresh (\begin{DoxyParamCaption}\item[{\hyperlink{class_arcade_1_1_i_graphic_lib}{I\+Graphic\+Lib} \&}]{graphic\+Lib }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Renders the game state to the screen. 
+\begin{DoxyParams}{Parameters}
+{\em graphic\+Lib} & \+: Loaded graphics library used for rendering.\\
+\hline
+\end{DoxyParams}
+This should call I\+Graphic\+Lib\+::refresh() to display content to the user. 
+
+Implemented in \hyperlink{class_arcade_1_1_nibbler_a69a64ec51964772a03cf7d4bb9088b5b}{Arcade\+::\+Nibbler}, and \hyperlink{class_arcade_1_1_pacman_ad0d57afab410c98d4050c030b06ad63a}{Arcade\+::\+Pacman}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_game_lib_ab9b7c1bbbea1b86e8515e8fd188fe9cb}\label{class_arcade_1_1_i_game_lib_ab9b7c1bbbea1b86e8515e8fd188fe9cb}} 
+\index{Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}!stop@{stop}}
+\index{stop@{stop}!Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}}
+\subsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily virtual bool Arcade\+::\+I\+Game\+Lib\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Unloads the library. 
+
+\begin{DoxyReturn}{Returns}
+true if succeed, otherwise returns false 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_arcade_1_1_nibbler_ab88c7e92e23e603b6bd1ccbb6c1ab844}{Arcade\+::\+Nibbler}, and \hyperlink{class_arcade_1_1_pacman_a2787800feab139ddeabb11d6ee23a80e}{Arcade\+::\+Pacman}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_game_lib_a0be7ffaa269e2fa47146bf27ad2c511a}\label{class_arcade_1_1_i_game_lib_a0be7ffaa269e2fa47146bf27ad2c511a}} 
+\index{Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}!update@{update}}
+\index{update@{update}!Arcade\+::\+I\+Game\+Lib@{Arcade\+::\+I\+Game\+Lib}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily virtual bool Arcade\+::\+I\+Game\+Lib\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Updates the game state. 
+
+\begin{DoxyReturn}{Returns}
+true if the game is still in progress, false in case of defeat
+\end{DoxyReturn}
+Move the player forward and/or move the N\+P\+Cs, according to the game\textquotesingle{}s rules 
+
+Implemented in \hyperlink{class_arcade_1_1_nibbler_a13199140bc927065b1c59ae2c70e06cf}{Arcade\+::\+Nibbler}, and \hyperlink{class_arcade_1_1_pacman_aacb11530e954870a6939d91794cbe356}{Arcade\+::\+Pacman}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/interfaces/\hyperlink{_i_game_lib_8hpp}{I\+Game\+Lib.\+hpp}\end{DoxyCompactItemize}

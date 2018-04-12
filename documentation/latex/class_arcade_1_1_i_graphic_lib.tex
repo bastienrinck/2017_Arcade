@@ -1,0 +1,250 @@
+\hypertarget{class_arcade_1_1_i_graphic_lib}{}\section{Arcade\+:\+:I\+Graphic\+Lib Class Reference}
+\label{class_arcade_1_1_i_graphic_lib}\index{Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}}
+
+
+Graphic libraries virtual class.  
+
+
+
+
+{\ttfamily \#include $<$I\+Graphic\+Lib.\+hpp$>$}
+
+
+
+Inheritance diagram for Arcade\+:\+:I\+Graphic\+Lib\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_arcade_1_1_i_graphic_lib__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{class_arcade_1_1_i_graphic_lib_a57fc39424aebb606cc64ee8d7e40afd5}{$\sim$\+I\+Graphic\+Lib} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{class_arcade_1_1_i_graphic_lib_aecc266c4ac10f07f4cdca023e74e843d}{get\+Name} () const =0
+\begin{DoxyCompactList}\small\item\em Graphic library name\textquotesingle{}s getter. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_arcade_1_1_i_graphic_lib_adf9e107fbcfbd91e5a3daa9a2db76b4b}{is\+Open} () const =0
+\begin{DoxyCompactList}\small\item\em Specifies whether the window is open or not. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_arcade_1_1_i_graphic_lib_aa7c3c8b922fbc94f5e74ecfebad52742}{close\+Renderer} ()=0
+\begin{DoxyCompactList}\small\item\em Closes the rendering support. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_arcade_1_1_i_graphic_lib_a71f7f51bdd61b02377c4a9ec330eabb1}{open\+Renderer} (std\+::string const \&title)=0
+\begin{DoxyCompactList}\small\item\em Opens the rendering support. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_a24be73062bfc9bb79f7656568cc744d5}\label{class_arcade_1_1_i_graphic_lib_a24be73062bfc9bb79f7656568cc744d5}} 
+virtual void \hyperlink{class_arcade_1_1_i_graphic_lib_a24be73062bfc9bb79f7656568cc744d5}{clear\+Window} ()=0
+\begin{DoxyCompactList}\small\item\em Clears the rendering support. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_a58246883702914f057d36de24a33f8e1}\label{class_arcade_1_1_i_graphic_lib_a58246883702914f057d36de24a33f8e1}} 
+virtual void \hyperlink{class_arcade_1_1_i_graphic_lib_a58246883702914f057d36de24a33f8e1}{refresh\+Window} ()=0
+\begin{DoxyCompactList}\small\item\em Displays the buffered frame to the screen. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_af183213a30dacc943d32027cb784fe93}\label{class_arcade_1_1_i_graphic_lib_af183213a30dacc943d32027cb784fe93}} 
+virtual void \hyperlink{class_arcade_1_1_i_graphic_lib_af183213a30dacc943d32027cb784fe93}{draw\+Pixel\+Box} (\hyperlink{class_arcade_1_1_pixel_box}{Pixel\+Box} const \&)=0
+\begin{DoxyCompactList}\small\item\em Draws a \hyperlink{class_arcade_1_1_pixel_box}{Pixel\+Box}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_aae06f5719d6557d70c1c4f7ec5acf9c3}\label{class_arcade_1_1_i_graphic_lib_aae06f5719d6557d70c1c4f7ec5acf9c3}} 
+virtual void \hyperlink{class_arcade_1_1_i_graphic_lib_aae06f5719d6557d70c1c4f7ec5acf9c3}{draw\+Text} (\hyperlink{class_arcade_1_1_text_box}{Text\+Box} const \&)=0
+\begin{DoxyCompactList}\small\item\em Draws a \hyperlink{class_arcade_1_1_text_box}{Text\+Box}. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_arcade_1_1_i_graphic_lib_a6be852f0395f08943f988c6823b80937}{poll\+Events} ()=0
+\begin{DoxyCompactList}\small\item\em Fetches the events from the user and saves it. \end{DoxyCompactList}\item 
+virtual \hyperlink{namespace_arcade_a9b501908b20bc993e4f8226db5323c41}{Keys} \hyperlink{class_arcade_1_1_i_graphic_lib_a801ebd3cff2c861e4b2a1e664c123da7}{get\+Last\+Event} ()=0
+\begin{DoxyCompactList}\small\item\em Getter of the oldest command in memory. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_arcade_1_1_i_graphic_lib_a78691f8f9433b2af945576231534c1e3}{clear\+Events} ()=0
+\begin{DoxyCompactList}\small\item\em Clears the pending commands. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_arcade_1_1_vect}{Vect}$<$ size\+\_\+t $>$ \hyperlink{class_arcade_1_1_i_graphic_lib_a0ce5eb4661d55b6e729fc1c16566dd9f}{get\+Screen\+Size} () const =0
+\begin{DoxyCompactList}\small\item\em Getter from the rendering support dimensions. \end{DoxyCompactList}\item 
+virtual size\+\_\+t \hyperlink{class_arcade_1_1_i_graphic_lib_ae8701e702b51189c84b1900dd624912e}{get\+MaxY} () const =0
+\begin{DoxyCompactList}\small\item\em Getter from the rendering support height. \end{DoxyCompactList}\item 
+virtual size\+\_\+t \hyperlink{class_arcade_1_1_i_graphic_lib_a41a3c00970ecd16e1893105de2091a55}{get\+MaxX} () const =0
+\begin{DoxyCompactList}\small\item\em Getter from the rendering support width. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Graphic libraries virtual class. 
+
+Purely virtual class that serves as the basis for all graphic libraries 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_a57fc39424aebb606cc64ee8d7e40afd5}\label{class_arcade_1_1_i_graphic_lib_a57fc39424aebb606cc64ee8d7e40afd5}} 
+\index{Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}!````~I\+Graphic\+Lib@{$\sim$\+I\+Graphic\+Lib}}
+\index{````~I\+Graphic\+Lib@{$\sim$\+I\+Graphic\+Lib}!Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}}
+\subsubsection{\texorpdfstring{$\sim$\+I\+Graphic\+Lib()}{~IGraphicLib()}}
+{\footnotesize\ttfamily virtual Arcade\+::\+I\+Graphic\+Lib\+::$\sim$\+I\+Graphic\+Lib (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Destructor. 
+
+\hyperlink{class_arcade_1_1_i_graphic_lib}{I\+Graphic\+Lib} class\textquotesingle{}s destructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_a78691f8f9433b2af945576231534c1e3}\label{class_arcade_1_1_i_graphic_lib_a78691f8f9433b2af945576231534c1e3}} 
+\index{Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}!clear\+Events@{clear\+Events}}
+\index{clear\+Events@{clear\+Events}!Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}}
+\subsubsection{\texorpdfstring{clear\+Events()}{clearEvents()}}
+{\footnotesize\ttfamily virtual void Arcade\+::\+I\+Graphic\+Lib\+::clear\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Clears the pending commands. 
+
+The function deletes all the commands currently stored. They wont be accessible anymore, even with the \hyperlink{class_arcade_1_1_i_graphic_lib_a801ebd3cff2c861e4b2a1e664c123da7}{get\+Last\+Event()} method. 
+
+Implemented in \hyperlink{class_arcade_1_1_n_curses_a01dd738afe5e5546e165b911091b32cc}{Arcade\+::\+N\+Curses}, \hyperlink{class_arcade_1_1_sfml_a882877eba4037ffe3befd61a4b4f1d18}{Arcade\+::\+Sfml}, and \hyperlink{class_arcade_1_1_sdl2_a92f016d43686b195673aea7f3446d0a1}{Arcade\+::\+Sdl2}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_aa7c3c8b922fbc94f5e74ecfebad52742}\label{class_arcade_1_1_i_graphic_lib_aa7c3c8b922fbc94f5e74ecfebad52742}} 
+\index{Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}!close\+Renderer@{close\+Renderer}}
+\index{close\+Renderer@{close\+Renderer}!Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}}
+\subsubsection{\texorpdfstring{close\+Renderer()}{closeRenderer()}}
+{\footnotesize\ttfamily virtual void Arcade\+::\+I\+Graphic\+Lib\+::close\+Renderer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Closes the rendering support. 
+
+Usually closes a window. Some graphic library uses other rendering support. 
+
+Implemented in \hyperlink{class_arcade_1_1_n_curses_a1bbac59bdaa841d17439d01a06d9f5c3}{Arcade\+::\+N\+Curses}, \hyperlink{class_arcade_1_1_sfml_a3a2c22328c9ae1cfd7a5af03663e00d0}{Arcade\+::\+Sfml}, and \hyperlink{class_arcade_1_1_sdl2_a312397e628bbf14d8532e2a13575c7ab}{Arcade\+::\+Sdl2}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_a801ebd3cff2c861e4b2a1e664c123da7}\label{class_arcade_1_1_i_graphic_lib_a801ebd3cff2c861e4b2a1e664c123da7}} 
+\index{Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}!get\+Last\+Event@{get\+Last\+Event}}
+\index{get\+Last\+Event@{get\+Last\+Event}!Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}}
+\subsubsection{\texorpdfstring{get\+Last\+Event()}{getLastEvent()}}
+{\footnotesize\ttfamily virtual \hyperlink{namespace_arcade_a9b501908b20bc993e4f8226db5323c41}{Keys} Arcade\+::\+I\+Graphic\+Lib\+::get\+Last\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Getter of the oldest command in memory. 
+
+\begin{DoxyReturn}{Returns}
+the first event of the list.
+\end{DoxyReturn}
+The function deletes the command if it succeed to retrieves one, using front() and pop\+\_\+front() methods 
+
+Implemented in \hyperlink{class_arcade_1_1_n_curses_a0c00b4aede0c9345f525fcb812fe8f78}{Arcade\+::\+N\+Curses}, \hyperlink{class_arcade_1_1_sfml_aa31ab4c4729ee0e3ff030989bc38237b}{Arcade\+::\+Sfml}, and \hyperlink{class_arcade_1_1_sdl2_a6d5bda09e7705c6ccef7451694621247}{Arcade\+::\+Sdl2}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_a41a3c00970ecd16e1893105de2091a55}\label{class_arcade_1_1_i_graphic_lib_a41a3c00970ecd16e1893105de2091a55}} 
+\index{Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}!get\+MaxX@{get\+MaxX}}
+\index{get\+MaxX@{get\+MaxX}!Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}}
+\subsubsection{\texorpdfstring{get\+Max\+X()}{getMaxX()}}
+{\footnotesize\ttfamily virtual size\+\_\+t Arcade\+::\+I\+Graphic\+Lib\+::get\+MaxX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Getter from the rendering support width. 
+
+\begin{DoxyReturn}{Returns}
+the width of the rendering support 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_arcade_1_1_n_curses_a9f561bd405af76689763819794382ef1}{Arcade\+::\+N\+Curses}, \hyperlink{class_arcade_1_1_sfml_a220fc84bb5728f79e36024fded0103ab}{Arcade\+::\+Sfml}, and \hyperlink{class_arcade_1_1_sdl2_a9e9e70db8a77c2dee10e2227c70415e3}{Arcade\+::\+Sdl2}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_ae8701e702b51189c84b1900dd624912e}\label{class_arcade_1_1_i_graphic_lib_ae8701e702b51189c84b1900dd624912e}} 
+\index{Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}!get\+MaxY@{get\+MaxY}}
+\index{get\+MaxY@{get\+MaxY}!Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}}
+\subsubsection{\texorpdfstring{get\+Max\+Y()}{getMaxY()}}
+{\footnotesize\ttfamily virtual size\+\_\+t Arcade\+::\+I\+Graphic\+Lib\+::get\+MaxY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Getter from the rendering support height. 
+
+\begin{DoxyReturn}{Returns}
+the height of the rendering support 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_arcade_1_1_n_curses_a00c879117a1de6752acd376bfd59e94d}{Arcade\+::\+N\+Curses}, \hyperlink{class_arcade_1_1_sfml_a90cb12cc852a0198074f55be843d6f99}{Arcade\+::\+Sfml}, and \hyperlink{class_arcade_1_1_sdl2_a958b3611cb0f7db90eeca5c9c4eaed59}{Arcade\+::\+Sdl2}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_aecc266c4ac10f07f4cdca023e74e843d}\label{class_arcade_1_1_i_graphic_lib_aecc266c4ac10f07f4cdca023e74e843d}} 
+\index{Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}}
+\subsubsection{\texorpdfstring{get\+Name()}{getName()}}
+{\footnotesize\ttfamily virtual std\+::string Arcade\+::\+I\+Graphic\+Lib\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Graphic library name\textquotesingle{}s getter. 
+
+\begin{DoxyReturn}{Returns}
+a string containing the name of the graphic library 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_arcade_1_1_n_curses_a8674fcd61c00e65897db3435f31dfcc2}{Arcade\+::\+N\+Curses}, \hyperlink{class_arcade_1_1_sfml_a6c5776e27ea7466208ab4bd59395e344}{Arcade\+::\+Sfml}, and \hyperlink{class_arcade_1_1_sdl2_aa1d9e278616747b87d868fadb0272d43}{Arcade\+::\+Sdl2}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_a0ce5eb4661d55b6e729fc1c16566dd9f}\label{class_arcade_1_1_i_graphic_lib_a0ce5eb4661d55b6e729fc1c16566dd9f}} 
+\index{Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}!get\+Screen\+Size@{get\+Screen\+Size}}
+\index{get\+Screen\+Size@{get\+Screen\+Size}!Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}}
+\subsubsection{\texorpdfstring{get\+Screen\+Size()}{getScreenSize()}}
+{\footnotesize\ttfamily virtual \hyperlink{class_arcade_1_1_vect}{Vect}$<$size\+\_\+t$>$ Arcade\+::\+I\+Graphic\+Lib\+::get\+Screen\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Getter from the rendering support dimensions. 
+
+\begin{DoxyReturn}{Returns}
+a two dimensions vector containing the width and the height of the rendering support 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_arcade_1_1_n_curses_ae7a4eb70b4a07dc2d65f135c6f7ceb50}{Arcade\+::\+N\+Curses}, \hyperlink{class_arcade_1_1_sfml_aa2fe7257182649ba0273712d36296460}{Arcade\+::\+Sfml}, and \hyperlink{class_arcade_1_1_sdl2_ae54d60076b915de4fce36ace576ea01d}{Arcade\+::\+Sdl2}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_adf9e107fbcfbd91e5a3daa9a2db76b4b}\label{class_arcade_1_1_i_graphic_lib_adf9e107fbcfbd91e5a3daa9a2db76b4b}} 
+\index{Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}!is\+Open@{is\+Open}}
+\index{is\+Open@{is\+Open}!Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}}
+\subsubsection{\texorpdfstring{is\+Open()}{isOpen()}}
+{\footnotesize\ttfamily virtual bool Arcade\+::\+I\+Graphic\+Lib\+::is\+Open (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Specifies whether the window is open or not. 
+
+\begin{DoxyReturn}{Returns}
+true if open, otherwise returns false 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_arcade_1_1_n_curses_a04a81ada3532d84f6369479c0779dd1a}{Arcade\+::\+N\+Curses}, \hyperlink{class_arcade_1_1_sfml_a427b6fc608c3b52f167b1fe79f5a5009}{Arcade\+::\+Sfml}, and \hyperlink{class_arcade_1_1_sdl2_a44772ea99509adde0a1c8779265ce260}{Arcade\+::\+Sdl2}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_a71f7f51bdd61b02377c4a9ec330eabb1}\label{class_arcade_1_1_i_graphic_lib_a71f7f51bdd61b02377c4a9ec330eabb1}} 
+\index{Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}!open\+Renderer@{open\+Renderer}}
+\index{open\+Renderer@{open\+Renderer}!Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}}
+\subsubsection{\texorpdfstring{open\+Renderer()}{openRenderer()}}
+{\footnotesize\ttfamily virtual void Arcade\+::\+I\+Graphic\+Lib\+::open\+Renderer (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{title }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Opens the rendering support. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & \+: Title of the rendering support if supported\\
+\hline
+\end{DoxyParams}
+Usually opens a window. Some graphic library uses other rendering support. 
+
+Implemented in \hyperlink{class_arcade_1_1_n_curses_a2bebb6d17c26471866a4403c64cda006}{Arcade\+::\+N\+Curses}, \hyperlink{class_arcade_1_1_sfml_a9a868d1964ac2f24327329af971fdb57}{Arcade\+::\+Sfml}, and \hyperlink{class_arcade_1_1_sdl2_aa7000a687e79acf5e5ff99ae6e71194b}{Arcade\+::\+Sdl2}.
+
+\mbox{\Hypertarget{class_arcade_1_1_i_graphic_lib_a6be852f0395f08943f988c6823b80937}\label{class_arcade_1_1_i_graphic_lib_a6be852f0395f08943f988c6823b80937}} 
+\index{Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}!poll\+Events@{poll\+Events}}
+\index{poll\+Events@{poll\+Events}!Arcade\+::\+I\+Graphic\+Lib@{Arcade\+::\+I\+Graphic\+Lib}}
+\subsubsection{\texorpdfstring{poll\+Events()}{pollEvents()}}
+{\footnotesize\ttfamily virtual bool Arcade\+::\+I\+Graphic\+Lib\+::poll\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Fetches the events from the user and saves it. 
+
+\begin{DoxyReturn}{Returns}
+true if at least one command has been fetched, otherwise returns false
+\end{DoxyReturn}
+Fetched commands are usually stored inside a std\+::vector$<$\+Arcade\+::\+Keys$>$ or std\+::list$<$\+Arcade\+::\+Keys$>$ 
+
+Implemented in \hyperlink{class_arcade_1_1_n_curses_ae250fb39f3e256bef0492fd54ebdaee7}{Arcade\+::\+N\+Curses}, \hyperlink{class_arcade_1_1_sfml_a7b5fe6ccf84db8b3f2897805c965e607}{Arcade\+::\+Sfml}, and \hyperlink{class_arcade_1_1_sdl2_af794699db9401d1be49566908ec7bced}{Arcade\+::\+Sdl2}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/rectoria/projects/epitech/\+C\+P\+P/cpp\+\_\+arcade/interfaces/\hyperlink{_i_graphic_lib_8hpp}{I\+Graphic\+Lib.\+hpp}\end{DoxyCompactItemize}

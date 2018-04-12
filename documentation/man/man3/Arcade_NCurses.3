@@ -1,0 +1,192 @@
+.TH "Arcade::NCurses" 3 "Thu Apr 12 2018" "cpp_arcade" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Arcade::NCurses
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBArcade::IGraphicLib\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "std::string \fBgetName\fP () const final"
+.br
+.RI "Graphic library name's getter\&. "
+.ti -1c
+.RI "bool \fBisOpen\fP () const final"
+.br
+.RI "Specifies whether the window is open or not\&. "
+.ti -1c
+.RI "void \fBcloseRenderer\fP () final"
+.br
+.RI "Closes the rendering support\&. "
+.ti -1c
+.RI "void \fBopenRenderer\fP (std::string const &title) final"
+.br
+.RI "Opens the rendering support\&. "
+.ti -1c
+.RI "void \fBclearWindow\fP () final"
+.br
+.RI "Clears the rendering support\&. "
+.ti -1c
+.RI "void \fBrefreshWindow\fP () final"
+.br
+.RI "Displays the buffered frame to the screen\&. "
+.ti -1c
+.RI "void \fBdrawPixelBox\fP (\fBPixelBox\fP const &) final"
+.br
+.RI "Draws a \fBPixelBox\fP\&. "
+.ti -1c
+.RI "void \fBdrawText\fP (\fBTextBox\fP const &) final"
+.br
+.RI "Draws a \fBTextBox\fP\&. "
+.ti -1c
+.RI "bool \fBpollEvents\fP () final"
+.br
+.RI "Fetches the events from the user and saves it\&. "
+.ti -1c
+.RI "\fBKeys\fP \fBgetLastEvent\fP () final"
+.br
+.RI "Getter of the oldest command in memory\&. "
+.ti -1c
+.RI "void \fBclearEvents\fP () final"
+.br
+.RI "Clears the pending commands\&. "
+.ti -1c
+.RI "\fBVect\fP< size_t > \fBgetScreenSize\fP () const final"
+.br
+.RI "Getter from the rendering support dimensions\&. "
+.ti -1c
+.RI "size_t \fBgetMaxY\fP () const final"
+.br
+.RI "Getter from the rendering support height\&. "
+.ti -1c
+.RI "size_t \fBgetMaxX\fP () const final"
+.br
+.RI "Getter from the rendering support width\&. "
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "void Arcade::NCurses::clearEvents ()\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Clears the pending commands\&. The function deletes all the commands currently stored\&. They wont be accessible anymore, even with the \fBgetLastEvent()\fP method\&. 
+.PP
+Implements \fBArcade::IGraphicLib\fP\&.
+.SS "void Arcade::NCurses::closeRenderer ()\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Closes the rendering support\&. Usually closes a window\&. Some graphic library uses other rendering support\&. 
+.PP
+Implements \fBArcade::IGraphicLib\fP\&.
+.SS "\fBArcade::Keys\fP Arcade::NCurses::getLastEvent ()\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Getter of the oldest command in memory\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the first event of the list\&.
+.RE
+.PP
+The function deletes the command if it succeed to retrieves one, using front() and pop_front() methods 
+.PP
+Implements \fBArcade::IGraphicLib\fP\&.
+.SS "size_t Arcade::NCurses::getMaxX () const\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Getter from the rendering support width\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the width of the rendering support 
+.RE
+.PP
+
+.PP
+Implements \fBArcade::IGraphicLib\fP\&.
+.SS "size_t Arcade::NCurses::getMaxY () const\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Getter from the rendering support height\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the height of the rendering support 
+.RE
+.PP
+
+.PP
+Implements \fBArcade::IGraphicLib\fP\&.
+.SS "std::string Arcade::NCurses::getName () const\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Graphic library name's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+a string containing the name of the graphic library 
+.RE
+.PP
+
+.PP
+Implements \fBArcade::IGraphicLib\fP\&.
+.SS "\fBArcade::Vect\fP< size_t > Arcade::NCurses::getScreenSize () const\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Getter from the rendering support dimensions\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+a two dimensions vector containing the width and the height of the rendering support 
+.RE
+.PP
+
+.PP
+Implements \fBArcade::IGraphicLib\fP\&.
+.SS "bool Arcade::NCurses::isOpen () const\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Specifies whether the window is open or not\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+true if open, otherwise returns false 
+.RE
+.PP
+
+.PP
+Implements \fBArcade::IGraphicLib\fP\&.
+.SS "void Arcade::NCurses::openRenderer (std::string const & title)\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Opens the rendering support\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItitle\fP : Title of the rendering support if supported
+.RE
+.PP
+Usually opens a window\&. Some graphic library uses other rendering support\&. 
+.PP
+Implements \fBArcade::IGraphicLib\fP\&.
+.SS "bool Arcade::NCurses::pollEvents ()\fC [final]\fP, \fC [virtual]\fP"
+
+.PP
+Fetches the events from the user and saves it\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+true if at least one command has been fetched, otherwise returns false
+.RE
+.PP
+Fetched commands are usually stored inside a std::vector<Arcade::Keys> or std::list<Arcade::Keys> 
+.PP
+Implements \fBArcade::IGraphicLib\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for cpp_arcade from the source code\&.

@@ -1,0 +1,159 @@
+.TH "Arcade::IGameLib" 3 "Thu Apr 12 2018" "cpp_arcade" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Arcade::IGameLib \- Game libraries virtual class\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <IGameLib\&.hpp>\fP
+.PP
+Inherited by \fBArcade::Nibbler\fP, and \fBArcade::Pacman\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~IGameLib\fP ()=default"
+.br
+.RI "Destructor\&. "
+.ti -1c
+.RI "virtual const std::string \fBgetName\fP () const =0"
+.br
+.RI "Game name's getter\&. "
+.ti -1c
+.RI "virtual bool \fBinit\fP ()=0"
+.br
+.RI "Init the resources needed by the game to run\&. "
+.ti -1c
+.RI "virtual bool \fBstop\fP ()=0"
+.br
+.RI "Unloads the library\&. "
+.ti -1c
+.RI "virtual bool \fBapplyEvent\fP (\fBArcade::Keys\fP key)=0"
+.br
+.RI "Processes the key obtained by the \fBIGraphicLib\fP from the user to update the game state\&. "
+.ti -1c
+.RI "virtual bool \fBupdate\fP ()=0"
+.br
+.RI "Updates the game state\&. "
+.ti -1c
+.RI "virtual void \fBrefresh\fP (\fBIGraphicLib\fP &graphicLib)=0"
+.br
+.ti -1c
+.RI "virtual size_t \fBgetScore\fP ()=0"
+.br
+.RI "Current player score's getter\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Game libraries virtual class\&. 
+
+Purely virtual class that serves as the basis for all game libraries 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "virtual Arcade::IGameLib::~IGameLib ()\fC [virtual]\fP, \fC [default]\fP"
+
+.PP
+Destructor\&. \fBIGameLib\fP class's destructor 
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual bool Arcade::IGameLib::applyEvent (\fBArcade::Keys\fP key)\fC [pure virtual]\fP"
+
+.PP
+Processes the key obtained by the \fBIGraphicLib\fP from the user to update the game state\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP : enum value of the obtained key 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if the game is still in progress, false in case of defeat 
+.RE
+.PP
+
+.PP
+Implemented in \fBArcade::Nibbler\fP, and \fBArcade::Pacman\fP\&.
+.SS "virtual const std::string Arcade::IGameLib::getName () const\fC [pure virtual]\fP"
+
+.PP
+Game name's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+a string containing the name of the game 
+.RE
+.PP
+
+.PP
+Implemented in \fBArcade::Nibbler\fP, and \fBArcade::Pacman\fP\&.
+.SS "virtual size_t Arcade::IGameLib::getScore ()\fC [pure virtual]\fP"
+
+.PP
+Current player score's getter\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the player score
+.RE
+.PP
+To call at the end of the execution of the game (after the player loose or win) for getting his score 
+.PP
+Implemented in \fBArcade::Nibbler\fP, and \fBArcade::Pacman\fP\&.
+.SS "virtual bool Arcade::IGameLib::init ()\fC [pure virtual]\fP"
+
+.PP
+Init the resources needed by the game to run\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+true if succeed, otherwise returns false 
+.RE
+.PP
+
+.PP
+Implemented in \fBArcade::Nibbler\fP, and \fBArcade::Pacman\fP\&.
+.SS "virtual void Arcade::IGameLib::refresh (\fBIGraphicLib\fP & graphicLib)\fC [pure virtual]\fP"
+Renders the game state to the screen\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgraphicLib\fP : Loaded graphics library used for rendering\&.
+.RE
+.PP
+This should call IGraphicLib::refresh() to display content to the user\&. 
+.PP
+Implemented in \fBArcade::Nibbler\fP, and \fBArcade::Pacman\fP\&.
+.SS "virtual bool Arcade::IGameLib::stop ()\fC [pure virtual]\fP"
+
+.PP
+Unloads the library\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+true if succeed, otherwise returns false 
+.RE
+.PP
+
+.PP
+Implemented in \fBArcade::Nibbler\fP, and \fBArcade::Pacman\fP\&.
+.SS "virtual bool Arcade::IGameLib::update ()\fC [pure virtual]\fP"
+
+.PP
+Updates the game state\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+true if the game is still in progress, false in case of defeat
+.RE
+.PP
+Move the player forward and/or move the NPCs, according to the game's rules 
+.PP
+Implemented in \fBArcade::Nibbler\fP, and \fBArcade::Pacman\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for cpp_arcade from the source code\&.

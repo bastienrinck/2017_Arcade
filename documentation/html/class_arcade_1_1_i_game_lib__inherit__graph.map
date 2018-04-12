@@ -1,0 +1,4 @@
+<map id="Arcade::IGameLib" name="Arcade::IGameLib">
+<area shape="rect" id="node2" href="$class_arcade_1_1_nibbler.html" title="Arcade::Nibbler" alt="" coords="5,80,117,107"/>
+<area shape="rect" id="node3" href="$class_arcade_1_1_pacman.html" title="Arcade::Pacman" alt="" coords="141,80,259,107"/>
+</map>
