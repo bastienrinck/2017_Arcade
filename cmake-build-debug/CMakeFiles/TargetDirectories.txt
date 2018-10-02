@@ -1,3 +1,0 @@
-/home/rectoria/projects/epitech/CPP/cpp_arcade/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/rectoria/projects/epitech/CPP/cpp_arcade/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/rectoria/projects/epitech/CPP/cpp_arcade/cmake-build-debug/CMakeFiles/cpp_arcade.dir
