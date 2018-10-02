@@ -16,6 +16,11 @@ Pacman - [wikipedia](https://en.wikipedia.org/wiki/Pac-Man)
 
 Nibbler - [wikipedia](https://en.wikipedia.org/wiki/Nibbler_(video_game))
 
+## Adding libraries
+```
+In order for the program to load your library, you must ensure that it meets the specifications listed in /2017_Arcade-Spec
+```
+
 ![Menu](https://imgur.com/5dMRhxi.png)
 Main menu
 
@@ -45,7 +50,7 @@ ESC: Exit game/Exit program
 ```
 ## Ingame commands
 ```
-Each games controls his inputs, exepect for those listed bellow.
+Each game controls its inputs, except for the keys listed below.
 ex: Spacebar -> Reset on stock games.
 ```
 
